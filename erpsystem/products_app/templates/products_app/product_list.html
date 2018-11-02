@@ -1,0 +1,15 @@
+{% extends "products_app/products_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+
+    <h1>List of Products</h1>
+      <ol>
+        {% for product in product_list %}
+          <h2><li><a href="{{product.id}}/">{{product.name}} </a></li></h2>
+        {% endfor %}
+      </ol>
+
+  </div>
+
+
+{% endblock %}

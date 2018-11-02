@@ -1,0 +1,20 @@
+{% extends "products_app/products_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h2>Product Details:</h2>
+    <p>Id_num: {{product_details.id}}</p>
+    <p>Name: {{product_details.name}}</p>
+    <p>Genre: {{product_details.genre}}</p>
+    <p>Price: {{product_details.price}}</p>
+    <p>Amount: {{product_details.amount}}</p>
+
+
+
+  </div>
+  <div class="container">
+    <p><a class='btn btn-warning' href="{% url 'products_app:update' pk=product_details.pk %}">Update</a></p>
+    <p><a class='btn btn-danger' href="{% url 'products_app:delete' pk=product_details.pk %}">Delete</a></p>
+
+  </div>
+
+{% endblock %}
