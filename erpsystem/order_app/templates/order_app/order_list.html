@@ -1,0 +1,33 @@
+{% extends "order_app/order_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+
+    <h1>List of orders</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Order</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead
+
+      <tbody>
+        {% for order in order_list %}
+
+        <tr>
+          <th>  <a href="{{order.id}}/">{{order.name}}</a></th>
+  
+          <td>{{order.amount}}kg</td>
+
+        </tr>
+            {% endfor %}
+
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+{% endblock %}

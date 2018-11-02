@@ -1,0 +1,20 @@
+{% extends "order_app/order_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h2>Order Details:</h2>
+    <p>Id_num: {{order_details.id}}</p>
+    <p>Name: {{order_details.name}}</p>
+    <p>Genre: {{order_details.genre}}</p>
+    <p>Price: {{order_details.price}}</p>
+    <p>Amount: {{order_details.amount}}</p>
+
+
+
+  </div>
+  <div class="container">
+    <p><a class='btn btn-warning' href="{% url 'order_app:update' pk=order_details.pk %}">Update</a></p>
+    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=order_details.pk %}">Delete</a></p>
+
+  </div>
+
+{% endblock %}

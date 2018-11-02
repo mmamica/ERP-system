@@ -1,0 +1,13 @@
+{% extends "order_app/order_app_base.html" %}
+
+{% block body_block %}
+<h1>Delete {{order.name }}?</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" class="btn btn-danger" value="Delete">
+  <a href="{% url 'order_app:detail' pk=order.pk%} ">Cancel</a>
+
+</form>
+
+{% endblock %}

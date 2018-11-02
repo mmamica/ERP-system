@@ -15,37 +15,37 @@ class IndexView(TemplateView):
 
     def get_context_data(self,**kwargs):
         context  = super().get_context_data(**kwargs)
-        context['injectme'] = "products"
+        context['injectme'] = "Orders"
         return context
-class ProductListView(ListView):
+class OrderListView(ListView):
     # If you don't pass in this attribute,
     # Django will auto create a context name
     # for you with object_list!
-    # Default would be 'product_list'
+    # Default would be 'Order_list'
 
     # Example of making your own:
-    # context_object_name = 'Products'
-    model = models.Product
+    # context_object_name = 'Orders'
+    model = models.Order
 
 
-class ProductDetailView(DetailView):
-    context_object_name = 'product_details'
-    model = models.Product
-    template_name = 'products_app/product_detail.html'
+class OrderDetailView(DetailView):
+    context_object_name = 'order_details'
+    model = models.Order
+    template_name = 'order_app/order_detail.html'
 
 
-class ProductCreateView(CreateView):
-    fields = ("name","genre","id_deliever","price",)
-    model = models.Product
+class OrderCreateView(CreateView):
+    fields = ("name","genre","id_client","amount",)
+    model = models.Order
 
 
-class ProductUpdateView(UpdateView):
-    fields = ("amount","price")
-    model = models.Product
+class OrderUpdateView(UpdateView):
+    fields = ("name","price")
+    model = models.Order
 
-class ProductDeleteView(DeleteView):
-    model = models.Product
-    success_url = reverse_lazy("products_app:list")
+class OrderDeleteView(DeleteView):
+    model = models.Order
+    success_url = reverse_lazy("order_app:list")
 
 
 class CBView(View):

@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from products_app import views
+from order_app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls,name='admin'),
     url(r'^$',views.IndexView.as_view()),
     url(r'^product_app/',include('products_app.urls',namespace='products_app')),
+    url(r'^order_app/',include('order_app.urls',namespace='order_app')),
 ]
