@@ -3,11 +3,30 @@
   <div class="jumbotron">
 
     <h1>List of Products</h1>
-      <ol>
-        {% for product in product_list %}
-          <h2><li><a href="{{product.id}}/">{{product.name}} </a></li></h2>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead
+
+  <tbody>
+    {% for product in product_list %}
+
+    <tr>
+      <th>  <a href="{{product.id}}/">{{product.name}}</a></th>
+      <td>{{product.price}}zł</td>
+      <td>{{product.amount}}kg</td>
+
+    </tr>
         {% endfor %}
-      </ol>
+
+  </tbody>
+</table>
 
   </div>
 
