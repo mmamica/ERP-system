@@ -9,8 +9,10 @@
   <thead>
     <tr>
       <th scope="col">Product</th>
+      <th scope="col">Genre</th>
       <th scope="col">Price</th>
       <th scope="col">Amount</th>
+
     </tr>
   </thead
 
@@ -18,15 +20,18 @@
     {% for product in product_list %}
 
     <tr>
-      <th>  <a href="{{product.id}}/">{{product.name}}</a></th>
+      <th>  <a href="{% url 'products_app:update' pk=product.id %}">{{product.name}}</a></th>
+      <td>{{product.genre}}</td>
       <td>{{product.price}}zł</td>
       <td>{{product.amount}}kg</td>
-
     </tr>
         {% endfor %}
 
+
   </tbody>
 </table>
+<a href="{% url 'products_app:create' %}" class="btn btn-default">Add</a>
+<!-- <button  href="{% url 'products_app:create' %}" type="button" name="button">Add</button> -->
 
   </div>
 

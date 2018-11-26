@@ -35,13 +35,14 @@ class ProductDetailView(DetailView):
 
 
 class ProductCreateView(CreateView):
-    fields = ("name","genre","id_deliever","price",)
+    fields = ("name","genre","id_deliever","price","amount")
     model = models.Product
 
 
 class ProductUpdateView(UpdateView):
-    fields = ("amount","price")
+    fields = ("name","genre","amount","price")
     model = models.Product
+    success_url = reverse_lazy("products_app:list")
 
 class ProductDeleteView(DeleteView):
     model = models.Product
