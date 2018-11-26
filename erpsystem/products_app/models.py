@@ -7,7 +7,7 @@ class Product(models.Model):
     # id_product=
     name = models.CharField(max_length=256,unique=True)
     genre = models.CharField(max_length=256)
-    id_deliever= models.CharField(max_length=256) #foreign key
+    name_deliever= models.CharField(max_length=256) #foreign key
     amount=models.IntegerField()
     price =models.IntegerField()
 

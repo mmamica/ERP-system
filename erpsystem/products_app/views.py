@@ -9,8 +9,6 @@ from django.views.generic import (View,TemplateView,
 from . import models
 
 class IndexView(TemplateView):
-    # Just set this Class Object Attribute to the template page.
-    # template_name = 'app_name/site.html'
     template_name = 'index.html'
 
     def get_context_data(self,**kwargs):
@@ -18,13 +16,6 @@ class IndexView(TemplateView):
         context['injectme'] = "products"
         return context
 class ProductListView(ListView):
-    # If you don't pass in this attribute,
-    # Django will auto create a context name
-    # for you with object_list!
-    # Default would be 'product_list'
-
-    # Example of making your own:
-    # context_object_name = 'Products'
     model = models.Product
 
 

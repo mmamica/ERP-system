@@ -2,18 +2,47 @@
 {% block body_block %}
   <div class="jumbotron">
     <h2>Order Details:</h2>
-    <p>Id_num: {{order_details.id}}</p>
+      <p> {{checkout_details.id_checkout}}<p>
+  
+{% comment %} checkout_list.id_checkou {% endcomment %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      LALAL
+    {% for product in orderedproducts_list %}
+    lalal
+
+    {% comment %} może tutaj zrobić jakies block zeby w nim była lista  {% endcomment %}
+  <p> {{checkout_details.id_checkout}}<p>
+      
+      {% if product.id_checkout == checkout_details.id_checkout %}
+      <p> {{checkout_details.id_checkout}}<p>
+      {% endif %}
+
+
+
+    {% endfor %}
+
+      </tbody>
+    </table>
+
+    
+    {% comment %} <p>Id_num: {{order_details.id}}</p>
     <p>Name: {{order_details.name}}</p>
     <p>Genre: {{order_details.genre}}</p>
     <p>Price: {{order_details.price}}</p>
     <p>Amount: {{order_details.amount}}</p>
-
+ {% endcomment %}
 
 
   </div>
-  <div class="container">
+  {% comment %} <div class="container">
     <p><a class='btn btn-warning' href="{% url 'order_app:update' pk=order_details.pk %}">Update</a></p>
-    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=order_details.pk %}">Delete</a></p>
+    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=order_details.pk %}">Delete</a></p> {% endcomment %}
 
   </div>
 
