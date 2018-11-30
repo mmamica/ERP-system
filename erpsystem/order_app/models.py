@@ -46,7 +46,7 @@ class Checkout(models.Model):
 
 class OrderedProducts(models.Model):
     id_order= models.IntegerField(primary_key=True)
-    id_checkout= models.ForeignKey(Checkout, on_delete=models.CASCADE) #ForeignKey
+    id_checkout= models.ForeignKey(Checkout, on_delete=models.CASCADE,related_name='products') #ForeignKey
     name_deliver=models.CharField(max_length=256) #ForeignKey
     # id_product=models.ForeignKey(Product, on_delete=models.CASCADE)
     name_product=models.ForeignKey(Product, on_delete=models.CASCADE)

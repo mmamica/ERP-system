@@ -2,9 +2,6 @@
 {% block body_block %}
   <div class="jumbotron">
     <h2>Order Details:</h2>
-      <p> {{checkout_details.id_checkout}}<p>
-  
-{% comment %} checkout_list.id_checkou {% endcomment %}
     <table class="table">
       <thead>
         <tr>
@@ -12,17 +9,14 @@
           <th scope="col">Amount</th>
         </tr>
       </thead>
-      LALAL
-    {% for product in orderedproducts_list %}
-    lalal
+     
+    {% for product in checkout_details.products.all %}
+    <tr>
+    <th>{{ product.name_product}}</th>
+    <th>{{ product.amount}}</th>
 
-    {% comment %} może tutaj zrobić jakies block zeby w nim była lista  {% endcomment %}
-  <p> {{checkout_details.id_checkout}}<p>
-      
-      {% if product.id_checkout == checkout_details.id_checkout %}
-      <p> {{checkout_details.id_checkout}}<p>
-      {% endif %}
 
+</tr>
 
 
     {% endfor %}
