@@ -26,7 +26,7 @@ class ProductDetailView(DetailView):
 
 
 class ProductCreateView(CreateView):
-    fields = ("name","genre","id_deliever","price","amount")
+    fields = ("name","genre","name_deliever","price","amount")
     model = models.Product
 
 
