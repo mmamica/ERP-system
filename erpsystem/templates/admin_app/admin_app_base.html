@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-
+{% load staticfiles %}
 <html>
   <head>
     <meta charset="utf-8">
     <title>
-ERP-system      {# Title Extensions go inside the block#}
+      Admin Page
+      {# Title Extensions go inside the block#}
       {% block title_block %}
 
       {% endblock %}
     </title>
+
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -16,11 +18,6 @@ ERP-system      {# Title Extensions go inside the block#}
   <body>
     <nav class="navbar navbar-default navbar-static-top">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'products_app:list' %}">Products</a></li>
-          <li><a class="navbar-brand" href="{% url 'order_app:list' %}">Orders</a></li>
-
-          <li><a class="navbar-link" href="{% url 'admin_app:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="#"></a></li>
         </ul>
     </nav>
 
@@ -31,7 +28,6 @@ ERP-system      {# Title Extensions go inside the block#}
     </div>
 
   </body>
-
 
 
   <!-- Latest compiled and minified JavaScript -->

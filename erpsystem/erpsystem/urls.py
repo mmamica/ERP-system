@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$',views.IndexView.as_view()),
     url(r'^product_app/',include('products_app.urls',namespace='products_app')),
     url(r'^order_app/',include('order_app.urls',namespace='order_app')),
+    url(r'^admin_app/',include('admin_app.urls',namespace='admin_app')),
 ]
