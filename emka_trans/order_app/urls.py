@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^update/(?P<pk>\d+)/$',views.CheckoutUpdateView.as_view(),name='update'),
     #url(r'^product/(?P<pk>\d+)/$',views.OrderedProductsDetailView.as_view(),name='product_detail'),
     url(r'^update_product/(?P<pk>\d+)/$',views.ProductUpdateView.as_view(),name='update_product'),
-    url(r'^delete/(?P<pk>\d+)/$',views.CheckoutDeleteView.as_view(),name='delete')
+    url(r'^delete/(?P<pk>\d+)/$',views.CheckoutDeleteView.as_view(),name='delete'),
+    url(r'^create/(?P<pk>\d+)/add_product$', views.ProductAddView.as_view(), name='add_product'),
 ]

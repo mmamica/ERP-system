@@ -9,6 +9,7 @@
         <tr>
           <th scope="col">Order ID</th>
           <th scope="col">Data</th>
+          <th scope="col">Cena</th>
         </tr>
       </thead>
 
@@ -20,6 +21,7 @@
           {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
 
           <td>{{order.date}}</td>
+          <td>{{order.price}}</td>
 
         </tr>
             {% endfor %}
@@ -27,6 +29,7 @@
       </tbody>
     </table>
 
+    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a>
 
   </div>
 

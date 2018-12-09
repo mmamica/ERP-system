@@ -14,7 +14,8 @@
     <tr>
     <th> <a href="{% url 'order_app:update_product' pk=product.id %}">{{ product.name_product }}</a></th>
     <th>{{ product.amount}}</th>
-
+        <th>{{ product.id_checkout}}</th>
+        <th>{{ product.name_deliver}}</th>
 
 </tr>
 
@@ -38,6 +39,8 @@
     <p><a class='btn btn-warning' href="{% url 'order_app:update' pk=order_details.pk %}">Update</a></p>
     <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=order_details.pk %}">Delete</a></p> {% endcomment %}
 
+     <p><a class='btn btn-warning' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Dodaj produkt</a></p>
+    <p><a class='btn btn-success' href="{% url 'order_app:list' %}">Zatwierdź</a></p>
   </div>
 
 {% endblock %}
