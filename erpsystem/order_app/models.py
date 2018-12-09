@@ -3,38 +3,6 @@ from django.urls import reverse
 from products_app.models import Product
 from django.urls import reverse
 
-
-class Order(models.Model):
-    # id_Order=models.ForeignKey(OrderList, on_delete=models.CASCADE)
-    name = models.CharField(max_length=256,unique=True)
-    genre = models.CharField(max_length=256)
-    id_client= models.CharField(max_length=256) #foreign key
-    # amount=models.IntegerField()
-    amount =models.IntegerField()
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("order_app:detail",kwargs={'pk':self.pk})
-
-
-#
-# class Product(models.Model):
-#     # id_product=
-#     name = models.CharField(max_length=256,unique=True)
-#     genre = models.CharField(max_length=256)
-#     name_deliever= models.CharField(max_length=256) #foreign key
-#     amount=models.IntegerField()
-#     price =models.IntegerField()
-#
-#
-#     def __str__(self):
-#         return self.name
-#
-#     def get_absolute_url(self):
-#         return reverse("products_app:detail",kwargs={'pk':self.pk})
-
 class Checkout(models.Model):
     id_checkout=models.IntegerField(primary_key=True)
     name_client=models.CharField(max_length=256) #ForeignKey
