@@ -30,12 +30,10 @@ class CheckoutDetailView(DetailView):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
 
-
 class CheckoutCreateView(View):
     template_name='order_app/new_order.html'
 
     def get(self,request):
-        #product_list=models.OrderedProducts.get(id_checkout=)
         return render(request, self.template_name)
 
     def post(self,request):
@@ -53,11 +51,11 @@ class ProductAddView(CreateView):
 
     def get_success_url(self):
         checkout = self.kwargs.get('pk')
-        product_name=self.object.name_product
-        #tu też powinno wyszukiwac po id a nie po name, ale najpierw trzeba pozmieniać w modelu
-        product=models.Product.objects.get(name=product_name)
-        price=product.price
-        models.Checkout.objects.filter(id=checkout).update(price=price)
+        # product_name=self.object.name_product
+        # #tu też powinno wyszukiwac po id a nie po name, ale najpierw trzeba pozmieniać w modelu
+        # product=models.Product.objects.get(name=product_name)
+        # price=product.price
+        # models.Checkout.objects.filter(id=checkout).update(price=price)
         return reverse_lazy("order_app:detail",  kwargs={'pk': checkout})
 
     def form_valid(self, form, *args, **kwargs):
@@ -70,10 +68,16 @@ class ProductAddView(CreateView):
         return super(ProductAddView, self).form_valid(form)
 
 
-# class ProductCreateView(CreateView):
-#     fields = ("name_product","amount")
-#     model=models.OrderedProducts
-#     success_url = reverse_lazy("order_app:list")
+class ConfirmCheckoutView(View):
+
+    def get(self,request,pk):
+        return render(request,'order_app/confirm_checkout.html')
+
+    def post(self,request,pk):
+        id = pk
+        models.Checkout.objects.filter(id=id).update(confirmed=True)
+        return redirect('order_app:list')
+
 
 class CheckoutUpdateView(UpdateView):
     fields = ("name","price")
@@ -86,6 +90,7 @@ class ProductUpdateView(UpdateView):
 
 
 class CheckoutDeleteView(DeleteView):
+    context_object_name="order"
     model = models.Checkout
     success_url = reverse_lazy("order_app:list")
 

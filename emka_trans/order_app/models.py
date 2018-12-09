@@ -28,6 +28,7 @@ class Checkout(models.Model):
     route_client=models.BooleanField(default=False)
     date=models.DateField()
     magazine=models.BooleanField(default=False)
+    confirmed=models.BooleanField(default=False)
 
 
 class OrderedProducts(models.Model):

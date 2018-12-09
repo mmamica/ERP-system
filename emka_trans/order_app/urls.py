@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^update_product/(?P<pk>\d+)/$',views.ProductUpdateView.as_view(),name='update_product'),
     url(r'^delete/(?P<pk>\d+)/$',views.CheckoutDeleteView.as_view(),name='delete'),
     url(r'^create/(?P<pk>\d+)/add_product$', views.ProductAddView.as_view(), name='add_product'),
+    url(r'confirm/(?P<pk>\d+)',views.ConfirmCheckoutView.as_view(),name='confirm'),
 ]

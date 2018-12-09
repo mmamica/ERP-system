@@ -12,7 +12,11 @@
      
     {% for product in checkout_details.products.all %}
     <tr>
+        {% if checkout_details.confirmed == False %}
     <th> <a href="{% url 'order_app:update_product' pk=product.id %}">{{ product.name_product }}</a></th>
+        {% else %}
+        <th>{{ product.name_product }}</th>
+        {% endif %}
     <th>{{ product.amount}}</th>
         <th>{{ product.id_checkout}}</th>
         <th>{{ product.name_deliver}}</th>
@@ -25,22 +29,16 @@
       </tbody>
     </table>
 
-    
-    {% comment %} <p>Id_num: {{order_details.id}}</p>
-    <p>Name: {{order_details.name}}</p>
-    <p>Genre: {{order_details.genre}}</p>
-    <p>Price: {{order_details.price}}</p>
-    <p>Amount: {{order_details.amount}}</p>
- {% endcomment %}
-
 
   </div>
-  {% comment %} <div class="container">
-    <p><a class='btn btn-warning' href="{% url 'order_app:update' pk=order_details.pk %}">Update</a></p>
-    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=order_details.pk %}">Delete</a></p> {% endcomment %}
 
+    {% if checkout_details.confirmed == False %}
      <p><a class='btn btn-warning' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Dodaj produkt</a></p>
-    <p><a class='btn btn-success' href="{% url 'order_app:list' %}">Zatwierdź</a></p>
+    <p><a class='btn btn-success' href="{% url 'order_app:confirm' pk=checkout_details.id %}">Zatwierdź</a></p>
+    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=checkout_details.id %}">Usuń zamówienie</a></p>
+    {% else %}
+    <h2>To zamówienie jest zatwierdzone i czeka na realizację</h2>
+    {% endif %}
   </div>
 
 {% endblock %}
