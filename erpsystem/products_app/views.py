@@ -18,17 +18,15 @@ class IndexView(TemplateView):
 class ProductListView(ListView):
     model = models.Product
 
-
 class ProductDetailView(DetailView):
     context_object_name = 'product_details'
     model = models.Product
     template_name = 'products_app/product_detail.html'
 
-
 class ProductCreateView(CreateView):
     fields = ("name","genre","name_deliever","price","amount")
     model = models.Product
-
+    success_url = reverse_lazy("products_app:list")
 
 class ProductUpdateView(UpdateView):
     fields = ("name","genre","amount","price")
@@ -38,7 +36,6 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = models.Product
     success_url = reverse_lazy("products_app:list")
-
 
 class CBView(View):
     def get(self,request):
