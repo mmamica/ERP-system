@@ -1,0 +1,27 @@
+{% extends "products_app/products_app_base.html" %}
+{% block body_block %}
+
+    <div class="jumbotron">
+        <form action="{% url "products_app:xls" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file"
+                   title="Upload excel file"
+                   name="excel_file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <p>
+            <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+        </form>
+
+        <p></p>
+        <hr>
+
+        {% if success %}
+            <h2>Zaktualizowano</h2>
+        {% endif %}
+
+     </div>
+
+{% endblock %}

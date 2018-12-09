@@ -1,0 +1,26 @@
+{% extends "products_app/products_app_base.html" %}
+
+{% block body_block %}
+<h1>
+  {% if not form.instance.pk %}
+  Create product
+  {% else %}
+  Details product
+  {% endif %}
+</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class='btn btn-primary' value="Submit">
+
+  </form>
+
+  {% if not form.instance.pk %}
+
+  {% else %}
+  <p><a class='btn btn-danger' href="{% url 'products_app:delete' pk=product.id %}">Delete</a></p>
+
+  {% endif %}
+
+
+{% endblock %}
