@@ -18,9 +18,10 @@
   <body>
     <nav class="navbar navbar-default navbar-static-top">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'products_app:list' %}">Products</a></li>
+          <li><a class="navbar-brand" href="{% url 'products_app:list' %}">Produkty</a></li>
+          <li><a class="navbar-link" href="{% url 'products_app:create' %}">Dodaj Produkt</a></li>
+          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">Mój Profil</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="{% url 'products_app:create' %}">Add Product</a></li>
         </ul>
     </nav>
 

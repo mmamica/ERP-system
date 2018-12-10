@@ -18,9 +18,10 @@
   <body>
     <nav class="navbar navbar-default navbar-static-top">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'order_app:list' %}">orders</a></li>
+          <li><a class="navbar-brand" href="{% url 'order_app:list' %}">Zamówienia</a></li>
+          <li><a class="navbar-link" href="{% url 'order_app:create' %}">Dodaj zamówienia</a></li>
+          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">Mój Profil</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="{% url 'order_app:create' %}">Add order</a></li>
         </ul>
     </nav>
 
