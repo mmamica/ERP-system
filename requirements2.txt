@@ -2,8 +2,12 @@ argon2-cffi==18.3.0
 bcrypt==3.1.4
 cffi==1.11.5
 Django==2.0.9
+et-xmlfile==1.0.1
+jdcal==1.4
+openpyxl==2.5.12
 Pillow==5.3.0
 pkg-resources==0.0.0
 pycparser==2.19
 pytz==2018.7
 six==1.11.0
+
