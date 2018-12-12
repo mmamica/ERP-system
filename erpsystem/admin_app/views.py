@@ -10,6 +10,7 @@ from django.views.generic import (View,TemplateView,
 
 # Create your views here.
 from . import models
+from order_app import models
 
 class IndexView(TemplateView):
     template_name = 'admin_app/admin_app_index.html'
@@ -20,5 +21,5 @@ class IndexView(TemplateView):
         return context
 
 class AdminCheckoutListView(ListView):
-    pass
-    # model = models.Checkout
+    model = models.Checkout
+    template_name = 'admin_app/orders_list.html'

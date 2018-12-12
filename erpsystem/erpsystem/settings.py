@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -24,8 +24,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 'iiicxim#r%le8sjab7u-4-=r)diks6*ll3()ezy91!n1%=arg-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=True
 
+CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = []
 
 
@@ -39,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products_app',
+    'corsheaders',
     'order_app',
     'admin_app'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from products_app.models import Product
+from admin_app.models import Route
 from django.urls import reverse
 
 class Checkout(models.Model):
@@ -20,7 +21,7 @@ class OrderedProducts(models.Model):
     name_product=models.ForeignKey(Product, on_delete=models.CASCADE)
     amount=models.IntegerField()
     route=models.BooleanField(default=False)
-    id_route=models.IntegerField() #foreignKey
+    id_route=models.ForeignKey(Route, on_delete=models.CASCADE,related_name='route')
     magazine=models.BooleanField(default=False)
 
     def __str__(self):

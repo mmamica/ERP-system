@@ -37,6 +37,7 @@ class CheckoutCreateView(CreateView):
 class CheckoutUpdateView(UpdateView):
     fields = ("id_checkout","price")
     model = models.Checkout
+    success_url = reverse_lazy("order_app:list")
 
 class CheckoutDeleteView(DeleteView):
     model = models.Checkout
