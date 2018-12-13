@@ -14,15 +14,26 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js" crossorigin></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js" crossorigin></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js" crossorigin></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js" crossorigin></script>
 
 </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">
         <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'products_app:list' %}">Products</a></li>
+          <li><a class="navbar-brand" href="{% url 'order_app:list' %}">Orders</a></li>
+
+          {% comment %} <li><a class="navbar-link" href="{% url 'admin_app:index' %}">Admin</a></li> {% endcomment %}
+          {% comment %} <li><a class="navbar-link" href="#"></a></li> {% endcomment %}
         </ul>
     </nav>
 
     <div class="container">
+    <div id="mapContainer"></div>
       {% block body_block %}
 
       {% endblock %}
@@ -37,9 +48,4 @@
   src="https://code.jquery.com/jquery-3.2.0.min.js"
   integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
   crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
-<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js" crossorigin></script>
-<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js" crossorigin></script>
-<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js" crossorigin></script>
-<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js" crossorigin></script>
-</html>
+ </html>

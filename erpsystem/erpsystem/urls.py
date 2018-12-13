@@ -17,6 +17,8 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from products_app import views
 from order_app import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls,name='admin'),
@@ -24,4 +26,4 @@ urlpatterns = [
     url(r'^product_app/',include('products_app.urls',namespace='products_app')),
     url(r'^order_app/',include('order_app.urls',namespace='order_app')),
     url(r'^admin_app/',include('admin_app.urls',namespace='admin_app')),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

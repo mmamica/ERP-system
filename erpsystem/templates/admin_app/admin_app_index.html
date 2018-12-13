@@ -1,11 +1,12 @@
 {% extends "admin_app/admin_app_base.html" %}
+{% load staticfiles %}
 
   {% block body_block %}
     <h1>Welcome to Admin Page</h1>
-    <div id="mapContainer">
-    {% load staticfiles %}</div>
-     xxx
-    <script src={%static "js/map.js"%} type="text/javascript"></script>
+    <div style="width: 640px; height: 480px" id="mapContainer"></div>
+
+    </div>
+    <script src='{% static "js/map.js" %}' type="text/javascript"></script>
   
     
   {% endblock %}
