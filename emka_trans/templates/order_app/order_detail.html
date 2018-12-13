@@ -1,12 +1,13 @@
 {% extends "order_app/order_app_base.html" %}
 {% block body_block %}
   <div class="jumbotron">
-    <h2>Order Details:</h2>
+    <h2>Zamówienie {{ checkout_details.id }} szczegóły:</h2>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Product</th>
-          <th scope="col">Amount</th>
+          <th scope="col">Produkt</th>
+          <th scope="col">Ilość</th>
+            <th scope="col">Nazwa dostawcy</th>
         </tr>
       </thead>
      
@@ -18,7 +19,6 @@
         <th>{{ product.name_product }}</th>
         {% endif %}
     <th>{{ product.amount}}</th>
-        <th>{{ product.id_checkout}}</th>
         <th>{{ product.name_deliver}}</th>
 
     </tr>

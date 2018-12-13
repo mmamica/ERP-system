@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from admin_app.models import Truck
 
 # Create your models here.
 class UserProfileInfo(models.Model):
@@ -13,6 +14,7 @@ class UserProfileInfo(models.Model):
 	location = models.CharField(max_length=100)
 	profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
 	is_client = models.BooleanField()
+	id_cluster=models.ForeignKey(Truck,on_delete=models.CASCADE,default=0)
 
 	def __str__(self):
 		return self.user.username

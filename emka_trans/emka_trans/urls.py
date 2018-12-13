@@ -22,6 +22,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #url(r'^admin/',include('admin_app.urls'), name='admin'),
+    url(r'^admin_app/',include('admin_app.urls',namespace='admin_app')),
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^logout/$',views.LogoutView.as_view(), name='logout'),

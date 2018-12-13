@@ -9,7 +9,7 @@ from accounts.models import UserProfileInfo
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
-import openpyxl
+
 # Create your views here.
 
 

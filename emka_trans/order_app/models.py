@@ -30,6 +30,9 @@ class Checkout(models.Model):
     magazine=models.BooleanField(default=False)
     confirmed=models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class OrderedProducts(models.Model):
     #id_order= models.IntegerField(primary_key=True)
