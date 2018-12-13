@@ -1,0 +1,39 @@
+{% extends "admin_app/admin_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+
+    <h1>Lista zamównień</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Numer zamównienia</th>
+          <th scope="col">Data</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Kto zamawia?</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for order in checkout_list %}
+
+        <tr>
+          <th>  <a href="{{order.id}}/">{{order.id}}</a></th>
+          {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
+
+          <td>{{order.date}}</td>
+          <td>{{order.price}}</td>
+          <td>{{order.name_client}}</td>
+
+        </tr>
+            {% endfor %}
+
+      </tbody>
+    </table>
+
+    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a>
+
+  </div>
+
+
+{% endblock %}
