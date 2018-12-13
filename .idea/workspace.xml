@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/emka_trans/admin_app/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/static/js/map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/emka_trans/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/emka_trans/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/emka_trans/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/emka_trans/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/templates/order_app/order_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/order_app/order_detail.html" afterDir="false" />
-    </list>
+    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/emka_trans/static/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+            <state relative-caret-position="1020">
+              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -272,7 +260,7 @@
       <workItem from="1544371250392" duration="19505000" />
       <workItem from="1544467099389" duration="3644000" />
       <workItem from="1544517814726" duration="372000" />
-      <workItem from="1544708388135" duration="6788000" />
+      <workItem from="1544708388135" duration="7287000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1544371411596</created>
@@ -323,15 +311,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544468999750</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="adding maps">
+      <created>1544715534699</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544715534699</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30983000" />
+    <option name="totallyTimeSpent" value="31482000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2659091" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -346,8 +340,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32956383" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007576" side_tool="true" weight="0.32956383" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49924242" visible="true" weight="0.32956383" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -366,7 +360,8 @@
     <MESSAGE value="adding to git" />
     <MESSAGE value="commit" />
     <MESSAGE value="update requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="update requirements" />
+    <MESSAGE value="adding maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding maps" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/emka_trans/manage.py">
@@ -632,8 +627,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/static/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        <state relative-caret-position="1020">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
         </state>
       </provider>
     </entry>
