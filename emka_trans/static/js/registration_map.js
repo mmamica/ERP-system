@@ -1,8 +1,10 @@
 function geocode(platform) {
   var geocoder = platform.getGeocodingService(),
+      search_text=document.getElementById('city').value+' '+
+                        document.getElementById('street').value+' '+
+                        document.getElementById('house_number').value.toString(),
     geocodingParameters = {
-      //searchText: '200 S Mathilda Sunnyvale',
-      searchText: document.getElementById('location').value,
+      searchText: search_text,
       jsonattributes : 1
     };
 

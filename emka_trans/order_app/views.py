@@ -7,6 +7,7 @@ from django.views.generic import (View,TemplateView,
                                 CreateView,DeleteView,
                                 UpdateView)
 from . import models
+from . import forms
 import datetime
 
 
@@ -46,7 +47,8 @@ class CheckoutCreateView(View):
 
 
 class ProductAddView(CreateView):
-    fields = ("name_product", "amount")
+    #fields = ("name_product", "amount")
+    form_class = forms.OrderedProductsForm
     model = models.OrderedProducts
 
     def get_success_url(self):
@@ -60,10 +62,13 @@ class ProductAddView(CreateView):
 
     def form_valid(self, form, *args, **kwargs):
         checkout=self.kwargs.get('pk')
+        prod=models.Product.objects.get(name=form.cleaned_data['name'], genre=form.cleaned_data['genre'])
+        form.instance.name_product=prod
         form.instance.id_checkout = models.Checkout.objects.get(id=checkout)
         form.instance.route = False
         form.instance.id_route = 0
         form.instance.magazine = False
+        form.instance.name_deliver=prod.name_deliver
 
         return super(ProductAddView, self).form_valid(form)
 
@@ -77,6 +82,14 @@ class ConfirmCheckoutView(View):
         id = pk
         models.Checkout.objects.filter(id=id).update(confirmed=True)
         return redirect('order_app:list')
+
+def load_genres(request):
+    product = request.GET.get('product')
+    print(product)
+    genres = models.Product.objects.filter(name=product).order_by('name')
+    return render(request, 'order_app/genres_dropdown_list_options.html', {'genres': genres})
+
+
 
 
 class CheckoutUpdateView(UpdateView):
