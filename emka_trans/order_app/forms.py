@@ -8,14 +8,12 @@ class OrderedProductsForm(forms.ModelForm):
     name=forms.ChoiceField(choices=iquery_choices, widget=forms.Select())
     iquery2=Product.objects.values_list('genre',flat=True).distinct()
     iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
-    genre=forms.ChoiceField(choices=iquery_choices2, widget=forms.Select())
+    genre=forms.ChoiceField(choices=iquery_choices2, widget=forms.Select(attrs={'style': 'display:none;'}))
 
     class Meta():
         model=OrderedProducts
         fields=('name','genre','amount')
-
+    #
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
-    #     iquery2 = Product.objects.values_list('genre', flat=True).distinct()
-    #     iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
-    #     self.fields['genre'] = forms.ChoiceField(choices=iquery_choices2, widget=forms.Select())
+    #     self.fields['genre'].widget = forms.HiddenInput()

@@ -6,7 +6,9 @@
       <thead>
         <tr>
           <th scope="col">Produkt</th>
+          <th scope="col">Gatunek</th>
           <th scope="col">Ilość</th>
+          <th scope="col">Cena</th>
             <th scope="col">Nazwa dostawcy</th>
         </tr>
       </thead>
@@ -18,7 +20,9 @@
         {% else %}
         <th>{{ product.name_product }}</th>
         {% endif %}
+      <th>{{ product.name_product.genre }}</th>
     <th>{{ product.amount}}</th>
+      <th>{{ product.name_product.price }}</th>
         <th>{{ product.name_deliver}}</th>
 
     </tr>

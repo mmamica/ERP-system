@@ -31,33 +31,50 @@ class CheckoutDetailView(DetailView):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
 
-class CheckoutCreateView(View):
-    template_name='order_app/new_order.html'
+# class CheckoutCreateView(View):
+#     template_name='order_app/new_order.html'
+#
+#     def get(self,request):
+#         return render(request, self.template_name)
+#
+#     def post(self,request):
+#         new_checkout = models.Checkout.objects.create(name_client=self.request.user, price=0, weigth=0,
+#                                                       route_client=False,
+#                                                       date=datetime.date.today(), magazine=False)
+#         new_checkout.save()
+#         order = new_checkout.id
+#         return redirect('order_app:detail', pk=order)
 
-    def get(self,request):
-        return render(request, self.template_name)
+class CheckoutCreateView(CreateView):
+    fields = ('date',)
+    model=models.Checkout
 
-    def post(self,request):
-        new_checkout = models.Checkout.objects.create(name_client=self.request.user, price=0, weigth=0,
-                                                      route_client=False,
-                                                      date=datetime.date.today(), magazine=False)
-        new_checkout.save()
-        order = new_checkout.id
-        return redirect('order_app:detail', pk=order)
+    def get_success_url(self):
+        checkout = self.object.id
+        print(checkout)
+        return reverse_lazy("order_app:detail",  kwargs={'pk': checkout})
+
+    def form_valid(self, form, *args, **kwargs):
+        form.instance.name_client=self.request.user
+        form.instance.price=0
+        form.instance.weigth=0
+        form.instance.route_client=False
+        form.instance.magazine = False
+
+        return super(CheckoutCreateView, self).form_valid(form)
 
 
 class ProductAddView(CreateView):
-    #fields = ("name_product", "amount")
     form_class = forms.OrderedProductsForm
     model = models.OrderedProducts
 
     def get_success_url(self):
         checkout = self.kwargs.get('pk')
-        # product_name=self.object.name_product
-        # #tu też powinno wyszukiwac po id a nie po name, ale najpierw trzeba pozmieniać w modelu
-        # product=models.Product.objects.get(name=product_name)
-        # price=product.price
-        # models.Checkout.objects.filter(id=checkout).update(price=price)
+        product_name=self.object.name_product
+        product=models.Product.objects.get(id=product_name.id)
+        old_price=models.Checkout.objects.get(id=checkout)
+        price=(product.price*self.object.amount)+old_price.price
+        models.Checkout.objects.filter(id=checkout).update(price=price)
         return reverse_lazy("order_app:detail",  kwargs={'pk': checkout})
 
     def form_valid(self, form, *args, **kwargs):

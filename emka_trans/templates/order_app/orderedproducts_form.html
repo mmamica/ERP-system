@@ -19,6 +19,7 @@
   <script>
     $("#id_name").change(function () {
       var url = $("#productForm").attr("data-genres-url");  // get the url of the `load_cities` view
+        document.getElementById("id_genre").style.display = "";
       var productId = $(this).val();  // get the selected country ID from the HTML input
 
       $.ajax({                       // initialize an AJAX request

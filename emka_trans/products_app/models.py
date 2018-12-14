@@ -7,10 +7,8 @@ from accounts.models import User
 
 
 class Product(models.Model):
-    # id_product=
     name = models.CharField(max_length=256)
     genre = models.CharField(max_length=256)
-    #name_deliever= models.CharField(max_length=256) #foreign key
     name_deliver=models.ForeignKey(User,on_delete=models.CASCADE,default=0)
     amount=models.IntegerField()
     price =models.IntegerField()
