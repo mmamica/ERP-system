@@ -30,14 +30,15 @@ class Checkout(models.Model):
     magazine=models.BooleanField(default=False)
     confirmed=models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class OrderedProducts(models.Model):
     #id_order= models.IntegerField(primary_key=True)
     id_checkout= models.ForeignKey(Checkout, on_delete=models.CASCADE,related_name='products',default=0) #ForeignKey
     name_deliver=models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     # id_product=models.ForeignKey(Product, on_delete=models.CASCADE)
-
-    #tu zamiast name powinno być chyba id
     name_product=models.ForeignKey(Product, on_delete=models.CASCADE)
     amount=models.IntegerField()
     route=models.BooleanField(default=False)

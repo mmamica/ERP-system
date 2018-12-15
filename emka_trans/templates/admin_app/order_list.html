@@ -1,15 +1,16 @@
-{% extends "order_app/order_app_base.html" %}
+{% extends "admin_app/admin_app_base.html" %}
 {% block body_block %}
   <div class="jumbotron">
 
-    <h1>Lista zamówień</h1>
+    <h1>Lista zamównień</h1>
 
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Order ID</th>
+          <th scope="col">Numer zamównienia</th>
           <th scope="col">Data</th>
           <th scope="col">Cena</th>
+          <th scope="col">Kto zamawia?</th>
         </tr>
       </thead>
 
@@ -22,6 +23,7 @@
 
           <td>{{order.date}}</td>
           <td>{{order.price}}</td>
+          <td>{{order.name_client}}</td>
 
         </tr>
             {% endfor %}

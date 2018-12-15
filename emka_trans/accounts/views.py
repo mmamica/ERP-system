@@ -9,7 +9,10 @@ from accounts.models import UserProfileInfo
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
-import openpyxl
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+import requests
 # Create your views here.
 
 
@@ -135,14 +138,34 @@ class RegisterView(View):
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
 			user.set_password(user.password)
-			user.save()
+
 
 			profile = profile_form.save(commit=False)
 			profile.user = user
+			profile.id_cluster=None
+
+			#make query from form fields
+			city=profile_form.cleaned_data['city']
+			street=profile_form.cleaned_data['street']
+			house_number=profile_form.cleaned_data['house_number']
+			search_text=city+' '+street+' '+' '+str(house_number)
+
+			message = requests.get('https://geocoder.api.here.com/6.2/geocode.json',
+								   {'app_id': 'Z7uukAiQbHvHZ43KIBKW', 'app_code': 'nadFSh5EHBHkTdUQ3YnTEg',
+									'searchtext': search_text})
+
+			data = message.json()
+			latitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude']
+			longitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude']
+
+			profile.latitude = float(latitude)
+			profile.longitude = float(longitude)
+
 
 			if 'profile_pic' in request.FILES:
 				profile.profile_pic = request.FILES['profile_pic']
 
+			user.save()
 			profile.save()
 
 			self.registered = True
