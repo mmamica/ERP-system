@@ -27,6 +27,7 @@ class Checkout(models.Model):
     weigth=models.IntegerField()
     route_client=models.BooleanField(default=False)
     date=models.DateField()
+    hour=models.IntegerField()
     magazine=models.BooleanField(default=False)
     confirmed=models.BooleanField(default=False)
 
