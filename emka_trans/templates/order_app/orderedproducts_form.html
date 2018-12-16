@@ -8,12 +8,32 @@
   Update order
   {% endif %}
 </h1>
-  <form method="POST">
+  <form method="POST" id="productForm" data-genres-url="{% url 'order_app:ajax_load_genres' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" class='btn btn-primary' value="Submit">
 
   </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_name").change(function () {
+      var url = $("#productForm").attr("data-genres-url");  // get the url of the `load_cities` view
+        document.getElementById("id_genre").style.display = "";
+      var productId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'product': productId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_genre").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
 
 
 {% endblock %}

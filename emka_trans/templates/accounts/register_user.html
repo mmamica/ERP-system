@@ -19,5 +19,12 @@
 
 	{% endif %}
 
+	<!--<input id="location" type="text" maxlength="30"/>-->
+	<!--<button onclick="geocode(platform)">Click me!</button>-->
+
+	<div id="map" style="position:absolute; width:49%; height:80%; background:grey" ></div>
+  <div id="panel" style="position:absolute; width:49%; left:51%; height:80%; background:inherit" ></div>
+	<script  src='{% static "js/registration_map.js" %}' type="text/javascript" charset="UTF-8" ></script>
+
 </div>
 {% endblock %}

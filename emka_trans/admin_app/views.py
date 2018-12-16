@@ -20,9 +20,11 @@ class IndexView(TemplateView):
         context['injectme'] = "admin_app"
         return context
 
+
 class AdminCheckoutListView(ListView):
     model = Checkout
     template_name = 'admin_app/order_list.html'
+
 
 class AdminCheckoutDetailView(DetailView):
     context_object_name = 'order_details'
@@ -30,9 +32,9 @@ class AdminCheckoutDetailView(DetailView):
     template_name = 'admin_app/order_detail.html'
     # un_success_url = reverse_lazy("admin_app:order_list")
 
-
     def get_queryset(self):
         return Checkout.objects.filter(name_client=self.request.user)
+
 
 class AdminProductListView(ListView):
     template_name = 'admin_app/product_list.html'

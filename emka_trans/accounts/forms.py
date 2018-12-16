@@ -15,9 +15,12 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileInfoForm(forms.ModelForm):
+	city=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'id':'city'}))
+	street = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'id':'street'}))
+	house_number = forms.IntegerField(widget=forms.TextInput(attrs={'id':'house_number','onchange':'geocode(platform)'}))
 	class Meta():
 		model=UserProfileInfo
-		fields = ('company_name','phone_number','location','profile_pic',
+		fields = ('company_name','phone_number','city','street','house_number','profile_pic',
 														'is_client')
 
 
