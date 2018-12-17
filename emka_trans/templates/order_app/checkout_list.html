@@ -9,6 +9,7 @@
         <tr>
           <th scope="col">Order ID</th>
           <th scope="col">Data</th>
+          <th scope="col">Godzina</th>
           <th scope="col">Cena</th>
         </tr>
       </thead>
@@ -21,6 +22,7 @@
           {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
 
           <td>{{order.date}}</td>
+          <td>{{ order.hour }}</td>
           <td>{{order.price}}</td>
 
         </tr>

@@ -31,22 +31,8 @@ class CheckoutDetailView(DetailView):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
 
-# class CheckoutCreateView(View):
-#     template_name='order_app/new_order.html'
-#
-#     def get(self,request):
-#         return render(request, self.template_name)
-#
-#     def post(self,request):
-#         new_checkout = models.Checkout.objects.create(name_client=self.request.user, price=0, weigth=0,
-#                                                       route_client=False,
-#                                                       date=datetime.date.today(), magazine=False)
-#         new_checkout.save()
-#         order = new_checkout.id
-#         return redirect('order_app:detail', pk=order)
-
 class CheckoutCreateView(CreateView):
-    fields = ('date',)
+    form_class = forms.CheckoutCreateForm
     model=models.Checkout
 
     def get_success_url(self):
