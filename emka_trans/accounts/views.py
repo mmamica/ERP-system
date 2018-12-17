@@ -278,4 +278,3 @@ def isBigger(latitude, longitude,latitude_point, longitude_point):
         return True
     else:
         return False
-

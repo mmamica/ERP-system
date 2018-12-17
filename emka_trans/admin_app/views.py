@@ -41,3 +41,7 @@ class AdminProductListView(ListView):
 
     def get_queryset(self):
         return Product.objects.filter(name_deliver=self.request.user)
+
+
+def VRP():
+    print('Kupaa')
