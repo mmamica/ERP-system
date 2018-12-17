@@ -5,10 +5,10 @@ class Truck(models.Model):
     id_truck=models.IntegerField(primary_key=True)
     capacity=models.IntegerField()
     return_date=models.DateField()
-    start_longitude = models.FloatField()
-    start_latitude = models.FloatField()
-    end_longitude = models.FloatField()
-    end_latitude = models.FloatField()
+    start_longitude = models.FloatField(default=0)
+    start_latitude = models.FloatField(default=0)
+    end_longitude = models.FloatField(default=0)
+    end_latitude = models.FloatField(default=0)
 
 
 class Route(models.Model):

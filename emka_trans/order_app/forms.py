@@ -1,6 +1,9 @@
 from django import forms
 from order_app.models import OrderedProducts
 from products_app.models import Product
+from order_app.models import Checkout
+import datetime
+
 
 class OrderedProductsForm(forms.ModelForm):
     iquery=Product.objects.values_list('name',flat=True).distinct()
@@ -17,3 +20,34 @@ class OrderedProductsForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self.fields['genre'].widget = forms.HiddenInput()
+
+
+class CheckoutCreateForm(forms.ModelForm):
+
+    class Meta():
+        model=Checkout
+        fields=('date','hour')
+
+    def clean(self):
+        cd = self.cleaned_data
+        chosen_date=cd.get('date')
+        chosen_hour=cd.get('hour')
+        checkouts=Checkout.objects.filter(date=chosen_date)
+        slots=Checkout.objects.filter(date=chosen_date, hour=chosen_hour)
+        times=checkouts.count()
+        if (times>=3):
+            self.add_error('date', "Wyczerpano limit zamówień na ten dzień!")
+
+        elif(cd.get('date')<datetime.date.today()):
+            self.add_error('date', "Wybierz przyszłą datę!")
+
+        elif(slots.count()>0):
+            self.add_error('hour',"Ten slot jest już zajety!")
+
+        return cd
+
+    def __init__(self, *args, **kwargs):
+        super(CheckoutCreateForm, self).__init__(*args, **kwargs)
+        self.fields['hour'].label = "Preferowana godzina"
+        self.fields['date'].label = "Data dostarczenia"
+
