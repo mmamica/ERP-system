@@ -56,7 +56,7 @@ class CheckoutListViewTest(OrderAppTestCase):
         response=self.c.get(reverse('order_app:list'))
 
         self.assertEqual(response.status_code,200)
-        self.assertEqual(list(response.context['checkout_list']),[self.checkout])
+        self.assertEqual(list(response.context['checkout_list']),[self.checkout, self.checkout3])
 
     def test_list_not_logged(self):
         response = self.c.get(reverse('order_app:list'))
@@ -96,7 +96,7 @@ class CheckoutCreateViewTest(OrderAppTestCase):
         self.assertEqual(response.status_code,302)
         self.assertRedirects(response,reverse('order_app:detail',kwargs={'pk':new_checkout.id}))
         self.assertEqual(new_checkout.name_client,self.user1)
-        self.assertEqual(Checkout.objects.count(),3)
+        self.assertEqual(Checkout.objects.count(),4)
 
 
     def test_create_checkout_too_many_orders(self):
@@ -162,7 +162,7 @@ class DeleteCheckoutViewTest(OrderAppTestCase):
 
         self.assertEqual(response.status_code,302)
         self.assertRedirects(response,reverse('order_app:list'))
-        self.assertEqual(Checkout.objects.count(),1)
+        self.assertEqual(Checkout.objects.count(),2)
 
 
 class ConfirmCheckoutViewTest(OrderAppTestCase):
@@ -175,7 +175,7 @@ class ConfirmCheckoutViewTest(OrderAppTestCase):
 
     def test_confirm_checkout_bad_id(self):
         self.c.login(username='user1', password='pass1')
-        response = self.c.get(reverse('order_app:confirm', kwargs={'pk': 3}))
+        response = self.c.get(reverse('order_app:confirm', kwargs={'pk': 5}))
         self.assertEqual(response.status_code, 404)
 
     def test_confirm_checkout_post(self):

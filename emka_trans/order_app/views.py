@@ -133,12 +133,6 @@ class ProductUpdateView(UpdateView):
 
 class ProductDeleteView(DeleteView):
     context_object_name = "order"
-    model = models.Checkout
-    success_url = reverse_lazy("order_app:list")
-
-
-class CheckoutDeleteView(DeleteView):
-    context_object_name="order"
     model = models.OrderedProducts
 
     def get_success_url(self):
@@ -146,9 +140,15 @@ class CheckoutDeleteView(DeleteView):
         checkout = self.object.id_checkout
         product = models.Product.objects.get(id=product_name.id)
         old_price = models.Checkout.objects.get(id=checkout.id)
-        price = old_price.price-(product.price * self.object.amount)
+        price = old_price.price - (product.price * self.object.amount)
         models.Checkout.objects.filter(id=checkout.id).update(price=price)
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
+
+
+class CheckoutDeleteView(DeleteView):
+    context_object_name="order"
+    model = models.Checkout
+    success_url = reverse_lazy("order_app:list")
 
 
 class OrderedProductsListView(ListView):
