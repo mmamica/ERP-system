@@ -47,6 +47,7 @@ class AdminCheckoutDetailView(DetailView):
     context_object_name = 'order_details'
     model=Checkout
     template_name = 'admin_app/order_detail.html'
+    # un_success_url = reverse_lazy("admin_app:order_list")
 
 
 @method_decorator(login_required, name='dispatch')
@@ -55,3 +56,7 @@ class AdminProductListView(ListView):
     template_name = 'admin_app/product_list.html'
     model=Product
 
+
+
+def VRP():
+    print('Kupaa')

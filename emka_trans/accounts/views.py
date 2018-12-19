@@ -83,6 +83,26 @@ def get_user_profile(request, username):
     return render(request, 'accounts/profile.html', {"user": user, "user_profile": user_profile, "status": status})
 
 
+#
+# class ShowProfileView(View):
+# 	template_name = 'accounts/profile.html'
+#
+# 	def get_context_data(self, **kwargs):
+# 		context = super().get_context_data(**kwargs)
+# 		user = self.request.user
+# 		status = False
+# 		user_id = user.id
+# 		user_profile = UserProfileInfo.objects.get(user=user_id)
+#
+# 		if user_profile.is_client:
+# 			status = True
+#
+# 		context['status'] = status
+# 		context['user'] = user
+# 		context['user_profile'] = user_profile
+# 		return context
+
+
 class IndexView(TemplateView):
     template_name = 'accounts/index.html'
 
@@ -260,3 +280,4 @@ def isBigger(latitude, longitude,latitude_point, longitude_point):
         return True
     else:
         return False
+
