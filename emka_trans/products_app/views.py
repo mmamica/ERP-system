@@ -8,7 +8,8 @@ from django.views.generic import (View,TemplateView,
 
 from . import models
 import openpyxl
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 #przeglądanie własnych produktów
 class ProductListView(ListView):
@@ -22,6 +23,16 @@ class ProductDetailView(DetailView):
     context_object_name = 'product_details'
     model = models.Product
     template_name = 'products_app/product_detail.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        user = request.user
+
+        try:
+            models.Product.objects.get(id=pk, name_deliver=user)
+            return super(ProductDetailView, self).dispatch(request, *args, **kwargs)
+        except models.Product.DoesNotExist:
+            return HttpResponseForbidden()
 
 
 class ProductCreateView(CreateView):
@@ -71,6 +82,7 @@ class ProductDeleteView(DeleteView):
             return HttpResponseForbidden()
 
 
+@method_decorator(login_required, name='dispatch')
 class UploadXlsView(View):
     template_name = 'products_app/xls.html'
 
@@ -113,7 +125,7 @@ class UploadXlsView(View):
                 continue
             else:
 
-                new_product=new_product=models.Product.objects.create(name=str(row[name].value), genre=str(row[genre].value),
+                new_product=models.Product.objects.create(name=str(row[name].value), genre=str(row[genre].value),
                                                 name_deliver=request.user, amount=int(str(row[amount].value)),
                                                 price=int(str(row[price].value)))
                 new_product.save()

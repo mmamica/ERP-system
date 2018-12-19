@@ -6,15 +6,18 @@ from django.views.generic import (View,TemplateView,
                                 ListView,DetailView,
                                 CreateView,DeleteView,
                                 UpdateView)
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from . import models
 from . import forms
+from django.http import Http404
 import datetime
 
 
 class CheckoutView(ListView):
     model = models.Checkout
 
-
+@method_decorator(login_required, name='dispatch')
 class CheckoutListView(ListView):
     model = models.Checkout
 
@@ -22,6 +25,7 @@ class CheckoutListView(ListView):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
 class CheckoutDetailView(DetailView):
     context_object_name = 'checkout_details'
     model=models.Checkout
@@ -31,6 +35,7 @@ class CheckoutDetailView(DetailView):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
@@ -79,7 +84,10 @@ class ProductAddView(CreateView):
 class ConfirmCheckoutView(View):
 
     def get(self,request,pk):
-        return render(request,'order_app/confirm_checkout.html')
+        if  models.Checkout.objects.filter(id=pk):
+            return render(request,'order_app/confirm_checkout.html')
+        else:
+            raise Http404
 
     def post(self,request,pk):
         id = pk
@@ -93,22 +101,54 @@ def load_genres(request):
     return render(request, 'order_app/genres_dropdown_list_options.html', {'genres': genres})
 
 
-
-
 class CheckoutUpdateView(UpdateView):
     fields = ("name","price")
     model = models.Checkout
 
 
 class ProductUpdateView(UpdateView):
-    fields = ("name_product", "amount")
+    fields = ("amount",)
     model = models.OrderedProducts
+
+    def get_success_url(self):
+        product_name = self.object.name_product
+        checkout = self.object.id_checkout
+        product = models.Product.objects.get(id=product_name.id)
+        old_price = models.Checkout.objects.get(id=checkout.id)
+        price = (product.price * self.object.amount) + old_price.price
+        models.Checkout.objects.filter(id=checkout.id).update(price=price)
+        return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
+
+    def form_valid(self, form, *args, **kwargs):
+        product_name = self.object.name_product
+        checkout = self.object.id_checkout
+        product = models.Product.objects.get(id=product_name.id)
+        old_price = models.Checkout.objects.get(id=checkout.id)
+        old_amount=models.OrderedProducts.objects.get(id_checkout=checkout.id,id=self.object.id)
+        price = old_price.price-(product.price * old_amount.amount)
+        models.Checkout.objects.filter(id=checkout.id).update(price=price)
+
+        return super(ProductUpdateView, self).form_valid(form)
+
+
+class ProductDeleteView(DeleteView):
+    context_object_name = "order"
+    model = models.Checkout
+    success_url = reverse_lazy("order_app:list")
 
 
 class CheckoutDeleteView(DeleteView):
     context_object_name="order"
-    model = models.Checkout
-    success_url = reverse_lazy("order_app:list")
+    model = models.OrderedProducts
+
+    def get_success_url(self):
+        product_name = self.object.name_product
+        checkout = self.object.id_checkout
+        product = models.Product.objects.get(id=product_name.id)
+        old_price = models.Checkout.objects.get(id=checkout.id)
+        price = old_price.price-(product.price * self.object.amount)
+        models.Checkout.objects.filter(id=checkout.id).update(price=price)
+        return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
 
 class OrderedProductsListView(ListView):

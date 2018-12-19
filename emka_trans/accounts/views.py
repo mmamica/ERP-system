@@ -83,26 +83,6 @@ def get_user_profile(request, username):
     return render(request, 'accounts/profile.html', {"user": user, "user_profile": user_profile, "status": status})
 
 
-#
-# class ShowProfileView(View):
-# 	template_name = 'accounts/profile.html'
-#
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		user = self.request.user
-# 		status = False
-# 		user_id = user.id
-# 		user_profile = UserProfileInfo.objects.get(user=user_id)
-#
-# 		if user_profile.is_client:
-# 			status = True
-#
-# 		context['status'] = status
-# 		context['user'] = user
-# 		context['user_profile'] = user_profile
-# 		return context
-
-
 class IndexView(TemplateView):
     template_name = 'accounts/index.html'
 
@@ -161,49 +141,51 @@ class RegisterView(View):
             latitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude']
             longitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude']
 
-            for t in Truck.objects.all():
-                status1=checkDiv(t.start_latitude,t.start_longitude)
-                status2=checkDiv(t.end_latitude,t.end_longitude)
-                if (status1==1):
-                    if((status2==1 and t.start_longitude>t.end_longitude) or status2==4):
-                        if(isBigger(t.start_latitude,t.start_longitude, latitude,longitude) or not isBigger(t.end_latitude,t.end_longitude, latitude,longitude)):
-                            profile.id_cluster = t
-                    if (status2 == 2 or status2==3 or (status2==1 and t.start_longitude<t.end_longitude)):
-                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
-                if (status1==2):
-                    if ((status2 == 2 and t.start_longitude < t.end_longitude) or status2 == 3):
-                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
-                    if ((status2 == 2 and t.start_longitude > t.end_longitude)):
-                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
-                    if (status2 == 4 or status2 == 1 or (status2 == 2 and t.start_longitude < t.end_longitude)):
-                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or not isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
+            if (Truck.objects.all().count() == 1):
+                profile.id_cluster = Truck.objects.get(id_truck=1)
+                for t in Truck.objects.all():
+                    status1=checkDiv(t.start_latitude,t.start_longitude)
+                    status2=checkDiv(t.end_latitude,t.end_longitude)
+                    if (status1==1):
+                        if((status2==1 and t.start_longitude>t.end_longitude) or status2==4):
+                            if(isBigger(t.start_latitude,t.start_longitude, latitude,longitude) or not isBigger(t.end_latitude,t.end_longitude, latitude,longitude)):
+                                profile.id_cluster = t
+                        if (status2 == 2 or status2==3 or (status2==1 and t.start_longitude<t.end_longitude)):
+                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
+                    if (status1==2):
+                        if ((status2 == 2 and t.start_longitude < t.end_longitude) or status2 == 3):
+                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
+                        if ((status2 == 2 and t.start_longitude > t.end_longitude)):
+                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
+                        if (status2 == 4 or status2 == 1 or (status2 == 2 and t.start_longitude < t.end_longitude)):
+                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or not isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
 
-                if (status1==3):
-                    if (status2 == 4 or status2==1 ):
-                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
-                    if (status2 == 2 or status2 == 3):
-                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
+                    if (status1==3):
+                        if (status2 == 4 or status2==1 ):
+                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
+                        if (status2 == 2 or status2 == 3):
+                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
 
-                if (status1==4):
-                    if ((status2 == 4 and t.start_longitude < t.end_longitude) or status2 == 3 or status2==2):
-                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
-                    if (status2 == 1 or (status2 == 4 and t.start_longitude > t.end_longitude)):
-                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                t.end_latitude, t.end_longitude, latitude, longitude)):
-                            profile.id_cluster = t
+                    if (status1==4):
+                        if ((status2 == 4 and t.start_longitude < t.end_longitude) or status2 == 3 or status2==2):
+                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
+                        if (status2 == 1 or (status2 == 4 and t.start_longitude > t.end_longitude)):
+                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                    t.end_latitude, t.end_longitude, latitude, longitude)):
+                                profile.id_cluster = t
 
 
             profile.latitude = float(latitude)
@@ -278,4 +260,3 @@ def isBigger(latitude, longitude,latitude_point, longitude_point):
         return True
     else:
         return False
-

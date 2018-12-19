@@ -22,16 +22,14 @@
           {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
 
           <td>{{order.date}}</td>
-          <td>{{order.price}}</td>
-          <td>{{order.name_client}}</td>
+          <td>{{order.price}}zł</td>
+          <td><a href="{% url 'accounts:show_profile' username=order.name_client %}">{{order.name_client}}</a></td>
 
         </tr>
             {% endfor %}
 
       </tbody>
     </table>
-
-    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a>
 
   </div>
 

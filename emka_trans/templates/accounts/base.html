@@ -29,7 +29,11 @@
 					<li><a class="navbar-link" href="{% url 'accounts:user_login' %}">Login</a></li>
 				{% endif %}
 				{% if user.is_authenticated %}
-				<li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">My Account</a></li>
+					{% if user.is_superuser %}
+						<li><a class="navbar-link" href="{% url 'admin_app:index' %}">Mój Profil</a></li>
+					{% else %}
+						<li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">Mój Profil</a></li>
+					{% endif %}
 				{% endif %}
 			</ul>
 		</div>

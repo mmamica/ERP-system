@@ -3,9 +3,10 @@
 {% block body_block %}
 <h1>
   {% if not form.instance.pk %}
-  Create order
+  Dodaj produkt
   {% else %}
-  Update order
+  Edytuj produkt
+  <p><a class='btn btn-danger' href="{% url 'order_app:delete_product' pk=form.instance.pk %}">Usuń zamówienie</a></p>
   {% endif %}
 </h1>
   <form method="POST" id="productForm" data-genres-url="{% url 'order_app:ajax_load_genres' %}">

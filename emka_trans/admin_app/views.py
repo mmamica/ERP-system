@@ -11,7 +11,18 @@ from django.views.generic import (View,TemplateView,
 # Create your views here.
 from . import models
 from order_app.models import Checkout
-from products_app.models import Product 
+from products_app.models import Product
+from django.http import HttpResponse, HttpResponseForbidden
+from django.http import Http404
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(),name='dispatch')
 class IndexView(TemplateView):
     template_name = 'admin_app/admin_app_index.html'
 
@@ -21,23 +32,26 @@ class IndexView(TemplateView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(),name='dispatch')
 class AdminCheckoutListView(ListView):
     model = Checkout
     template_name = 'admin_app/order_list.html'
 
+    def get_queryset(self):
+        return Checkout.objects.filter(confirmed=True)
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(),name='dispatch')
 class AdminCheckoutDetailView(DetailView):
     context_object_name = 'order_details'
     model=Checkout
     template_name = 'admin_app/order_detail.html'
-    # un_success_url = reverse_lazy("admin_app:order_list")
-
-    def get_queryset(self):
-        return Checkout.objects.filter(name_client=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(),name='dispatch')
 class AdminProductListView(ListView):
     template_name = 'admin_app/product_list.html'
+    model=Product
 
-    def get_queryset(self):
-        return Product.objects.filter(name_deliver=self.request.user)

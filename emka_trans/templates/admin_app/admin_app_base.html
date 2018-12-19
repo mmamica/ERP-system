@@ -28,7 +28,8 @@
   <body>
     <nav class="navbar navbar-default navbar-static-top">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'admin_app:index' %}">Home</a></li>
+          <li><a class="navbar-brand" href="{% url 'index' %}">Index</a></li>
+          <li><a class="navbar-brand" href="{% url 'admin_app:index' %}">Dashboard</a></li>
           <li><a class="navbar-link" href="{% url 'admin_app:order_list' %}">Zamówienia</a></li>
           <li><a class="navbar-link" href="{% url 'admin_app:product_list' %}">Produkty</a></li>
         </ul>
@@ -45,4 +46,4 @@
 
   <!-- Latest compiled and minified JavaScript -->
 
-</html>Zamówienia
+</html>
