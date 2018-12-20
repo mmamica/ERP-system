@@ -12,7 +12,7 @@ class Truck(models.Model):
 
 
 class Route(models.Model):
-    id_route=models.IntegerField(primary_key=True)
+    id_route=models.AutoField(primary_key=True)
     products_list=models.CharField(max_length=256)
     date=models.DateField()
     id_truck= models.ForeignKey(Truck, on_delete=models.CASCADE,related_name='truck')
