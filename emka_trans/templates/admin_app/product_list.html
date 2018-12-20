@@ -22,17 +22,17 @@
     {% for product in product_list %}
 
     <tr>
-      <th>  <a href="{% url 'products_app:update' pk=product.id %}">{{product.name}}</a></th>
+      <th> {{product.name}}</a></th>
       <td>{{product.genre}}</td>
       <td>{{product.price}}zł</td>
       <td>{{product.amount}}kg</td>
-      <td>{{product.name_deliver}}</td>
+      <td><a href="{% url 'accounts:show_profile' username=product.name_deliver%}">{{product.name_deliver}}</a></td>
     </tr>
-        {% endfor %}
+    {% endfor %}
 
 
   </tbody>
 </table>
 
 
-{% endblock %}
+  {% endblock %}
