@@ -13,7 +13,7 @@
     maptypes.normal.map,
     {
       zoom: 10,
-      center: { lng: 13.4, lat: 52.51 }
+      center: { lng: 20.262038, lat: 49.819856 }
     });
 
 const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));

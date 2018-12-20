@@ -33,6 +33,8 @@ class UserProfileInfoForm(forms.ModelForm):
                                 'searchtext': search_text})
 
         data = message.json()
+        if (data['Response']['View'] == []):
+            raise forms.ValidationError("Nieprawidłowy adres")
         latitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude']
         longitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude']
 
