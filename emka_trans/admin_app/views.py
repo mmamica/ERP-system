@@ -144,17 +144,22 @@ def deleteAllFromIndex(tab, index):
 
 
 def ClarkeWright(date, claster):
-    orders = None
-
+    ordersOryg = None
+    orders=[]
 
     for c in Checkout.objects.all():
         if str(c.date) == date:
-            if orders is None:
-                orders = OrderedProducts.objects.filter(id_checkout=c) #tu trzeba przefiltrować jeszcze z clastrem
+            if ordersOryg is None:
+                ordersOryg = OrderedProducts.objects.filter(id_checkout=c) #tu trzeba przefiltrować jeszcze z clastrem
             else:
-                orders = orders | OrderedProducts.objects.filter(id_checkout=c) #i tu
+                ordersOryg = ordersOryg | OrderedProducts.objects.filter(id_checkout=c) #i tu
 
-    if(orders is not None):
+    if(ordersOryg is not None):
+        print(ordersOryg)
+        for o in ordersOryg:
+            if UserProfileInfo.objects.get(user=o.name_deliver).id_cluster!=claster:
+                orders.append(o)
+        print(orders)
         tab = [None] * len(orders)
         for x in range(len(tab)):
             tab[x] = [None] * len(orders)
@@ -278,8 +283,13 @@ def ClarkeWright(date, claster):
 
 def MatchClients(date, claster,routes):
     client_date = datetime.strptime(date, "%Y-%m-%d").date()-timedelta(days=1)
-    clients_checkouts=Checkout.objects.filter(date=client_date) #tu teź claster
-    clients_checkouts = clients_checkouts[::1]
+    clients_checkouts_oryg=Checkout.objects.filter(date=client_date) #tu teź claster
+    clients_checkouts_oryg = clients_checkouts_oryg[::1]
+    clients_checkouts=[]
+    print(clients_checkouts_oryg)
+    for o in clients_checkouts_oryg:
+        if UserProfileInfo.objects.get(user=o.name_client).id_cluster != claster:
+            clients_checkouts.append(o)
     print(clients_checkouts)
     tab = [None] * len(routes)
     for x in range(len(routes)):
