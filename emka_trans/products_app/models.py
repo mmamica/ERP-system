@@ -12,7 +12,7 @@ class Product(models.Model):
     name_deliver=models.ForeignKey(User,on_delete=models.CASCADE,default=0)
     amount=models.IntegerField()
     price =models.IntegerField()
-
+    weight=models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

@@ -1,7 +1,7 @@
 from _decimal import Decimal
 
 from django.shortcuts import render
-from accounts.forms import UserForm, UserProfileInfoForm, EditUserProfileForm, LoginForm
+from accounts.forms import UserForm, UserProfileInfoForm, EditUserForm, LoginForm, EditProfileForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -41,8 +41,8 @@ class ChangePasswordView(View):
 @method_decorator(login_required, name='dispatch')
 class EditProfileView(View):
     template_name = 'accounts/edit_my_profile.html'
-    profile_form_class = UserProfileInfoForm
-    user_form_class = EditUserProfileForm
+    profile_form_class = EditProfileForm
+    user_form_class = EditUserForm
 
     def get(self, request, *args, **kwargs):
         instance_form = UserProfileInfo.objects.get(user=request.user)
@@ -56,7 +56,6 @@ class EditProfileView(View):
         user_form = self.user_form_class(request.POST, instance=request.user)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
@@ -64,6 +63,7 @@ class EditProfileView(View):
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
 
+            user.save()
             profile.save()
 
             return HttpResponseRedirect(reverse('accounts:my_profile'))
@@ -161,51 +161,49 @@ class RegisterView(View):
             latitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude']
             longitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude']
 
-            if (Truck.objects.all().count() == 1):
-                profile.id_cluster = Truck.objects.get(id_truck=1)
-                for t in Truck.objects.all():
-                    status1=checkDiv(t.start_latitude,t.start_longitude)
-                    status2=checkDiv(t.end_latitude,t.end_longitude)
-                    if (status1==1):
-                        if((status2==1 and t.start_longitude>t.end_longitude) or status2==4):
-                            if(isBigger(t.start_latitude,t.start_longitude, latitude,longitude) or not isBigger(t.end_latitude,t.end_longitude, latitude,longitude)):
-                                profile.id_cluster = t
-                        if (status2 == 2 or status2==3 or (status2==1 and t.start_longitude<t.end_longitude)):
-                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
-                    if (status1==2):
-                        if ((status2 == 2 and t.start_longitude < t.end_longitude) or status2 == 3):
-                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
-                        if ((status2 == 2 and t.start_longitude > t.end_longitude)):
-                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
-                        if (status2 == 4 or status2 == 1 or (status2 == 2 and t.start_longitude < t.end_longitude)):
-                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or not isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
+            for t in Truck.objects.all():
+                status1=checkDiv(t.start_latitude,t.start_longitude)
+                status2=checkDiv(t.end_latitude,t.end_longitude)
+                if (status1==1):
+                    if((status2==1 and t.start_longitude>t.end_longitude) or status2==4):
+                        if(isBigger(t.start_latitude,t.start_longitude, latitude,longitude) or not isBigger(t.end_latitude,t.end_longitude, latitude,longitude)):
+                            profile.id_cluster = t
+                    if (status2 == 2 or status2==3 or (status2==1 and t.start_longitude<t.end_longitude)):
+                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
+                if (status1==2):
+                    if ((status2 == 2 and t.start_longitude < t.end_longitude) or status2 == 3):
+                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
+                    if ((status2 == 2 and t.start_longitude > t.end_longitude)):
+                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
+                    if (status2 == 4 or status2 == 1 or (status2 == 2 and t.start_longitude < t.end_longitude)):
+                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or not isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
 
-                    if (status1==3):
-                        if (status2 == 4 or status2==1 ):
-                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
-                        if (status2 == 2 or status2 == 3):
-                            if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
+                if (status1==3):
+                    if (status2 == 4 or status2==1 ):
+                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
+                    if (status2 == 2 or status2 == 3):
+                        if (not isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
 
-                    if (status1==4):
-                        if ((status2 == 4 and t.start_longitude < t.end_longitude) or status2 == 3 or status2==2):
-                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
-                        if (status2 == 1 or (status2 == 4 and t.start_longitude > t.end_longitude)):
-                            if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
-                                    t.end_latitude, t.end_longitude, latitude, longitude)):
-                                profile.id_cluster = t
+                if (status1==4):
+                    if ((status2 == 4 and t.start_longitude < t.end_longitude) or status2 == 3 or status2==2):
+                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) and not isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
+                    if (status2 == 1 or (status2 == 4 and t.start_longitude > t.end_longitude)):
+                        if (isBigger(t.start_latitude, t.start_longitude, latitude, longitude) or isBigger(
+                                t.end_latitude, t.end_longitude, latitude, longitude)):
+                            profile.id_cluster = t
 
 
             profile.latitude = float(latitude)

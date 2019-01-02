@@ -62,10 +62,15 @@ class UserProfileInfoForm(forms.ModelForm):
                   'is_client')
 
 
-class EditUserProfileForm(UserChangeForm):
+class EditUserForm(UserChangeForm):
     class Meta():
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
+class EditProfileForm(forms.ModelForm):
+    class Meta():
+        model=UserProfileInfo
+        fields = ('company_name','phone_number','profile_pic')
 
 
 class LoginForm(forms.Form):

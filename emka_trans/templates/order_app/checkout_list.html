@@ -11,6 +11,7 @@
           <th scope="col">Data</th>
           <th scope="col">Godzina</th>
           <th scope="col">Cena</th>
+          <th scope="col">Waga</th>
         </tr>
       </thead>
 
@@ -24,6 +25,7 @@
           <td>{{order.date}}</td>
           <td>{{ order.hour }}</td>
           <td>{{order.price}}</td>
+          <td>{{ order.weigth }}</td>
 
         </tr>
             {% endfor %}
@@ -31,7 +33,8 @@
       </tbody>
     </table>
 
-    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a>
+    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a><br>
+    <a href="{% url 'order_app:all_products' %}" class="btn btn-default">Przeglądaj produkty</a>
 
   </div>
 

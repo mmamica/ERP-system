@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . import models
 from . import forms
+from django.forms import ValidationError
 from django.http import Http404
 import datetime
 
@@ -40,6 +41,18 @@ class CheckoutCreateView(CreateView):
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
 
+    def get(self, *args, **kwargs):
+        all_dates=models.Checkout.objects.all().values_list('date', flat=True)
+        dates_list=[]
+        for date in all_dates:
+            checkouts = models.Checkout.objects.filter(date=date)
+            times = checkouts.count()
+            if (times >= 3):
+                dates_list.append(date)
+
+        dates=list(set(dates_list))
+        return render(self.request, 'order_app/checkout_form.html',{'form':self.form_class,'unavailable_dates':dates})
+
     def get_success_url(self):
         checkout = self.object.id
         print(checkout)
@@ -64,8 +77,10 @@ class ProductAddView(CreateView):
         product_name=self.object.name_product
         product=models.Product.objects.get(id=product_name.id)
         old_price=models.Checkout.objects.get(id=checkout)
+        old_weight=models.Checkout.objects.get(id=checkout).weigth
         price=(product.price*self.object.amount)+old_price.price
-        models.Checkout.objects.filter(id=checkout).update(price=price)
+        weight=(self.object.amount)+old_weight
+        models.Checkout.objects.filter(id=checkout).update(price=price,weigth=weight)
         return reverse_lazy("order_app:detail",  kwargs={'pk': checkout})
 
     def form_valid(self, form, *args, **kwargs):
@@ -82,7 +97,6 @@ class ProductAddView(CreateView):
 
 
 class ConfirmCheckoutView(View):
-
     def get(self,request,pk):
         if  models.Checkout.objects.filter(id=pk):
             return render(request,'order_app/confirm_checkout.html')
@@ -115,8 +129,10 @@ class ProductUpdateView(UpdateView):
         checkout = self.object.id_checkout
         product = models.Product.objects.get(id=product_name.id)
         old_price = models.Checkout.objects.get(id=checkout.id)
+        old_weight=models.Checkout.objects.get(id=checkout.id).weigth
         price = (product.price * self.object.amount) + old_price.price
-        models.Checkout.objects.filter(id=checkout.id).update(price=price)
+        weight = (self.object.amount) + old_weight
+        models.Checkout.objects.filter(id=checkout.id).update(price=price,weigth=weight)
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
     def form_valid(self, form, *args, **kwargs):
@@ -124,10 +140,14 @@ class ProductUpdateView(UpdateView):
         checkout = self.object.id_checkout
         product = models.Product.objects.get(id=product_name.id)
         old_price = models.Checkout.objects.get(id=checkout.id)
+        old_weight=models.Checkout.objects.get(id=checkout.id).weigth
         old_amount=models.OrderedProducts.objects.get(id_checkout=checkout.id,id=self.object.id)
+        if (form.cleaned_data['amount'] > product.amount):
+            form.add_error('amount','Ilość produktu niedostępna!')
+            return render(self.request,template_name='order_app/orderedproducts_form.html',context={'form':form})
         price = old_price.price-(product.price * old_amount.amount)
-        models.Checkout.objects.filter(id=checkout.id).update(price=price)
-
+        weight=old_weight-old_amount.amount
+        models.Checkout.objects.filter(id=checkout.id).update(price=price,weigth=weight)
         return super(ProductUpdateView, self).form_valid(form)
 
 
@@ -140,8 +160,10 @@ class ProductDeleteView(DeleteView):
         checkout = self.object.id_checkout
         product = models.Product.objects.get(id=product_name.id)
         old_price = models.Checkout.objects.get(id=checkout.id)
+        old_weight=models.Checkout.objects.get(id=checkout.id).weigth
         price = old_price.price - (product.price * self.object.amount)
-        models.Checkout.objects.filter(id=checkout.id).update(price=price)
+        weight=old_weight-(self.object.amount)
+        models.Checkout.objects.filter(id=checkout.id).update(price=price,weigth=weight)
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
 
@@ -160,6 +182,12 @@ class OrderedProductsDetailView(DetailView):
     context_object_name = 'orderedproducts_details'
     model=models.Checkout
     template_name = 'order_app/order_detail.html'
+
+
+class AllProductsView(View):
+    def get(self,request):
+        products=models.Product.objects.all()
+        return render(request,'order_app/all_products_list.html',{'product_list':products})
 
 
 class CBView(View):
