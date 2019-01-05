@@ -9,6 +9,7 @@ class Truck(models.Model):
     start_latitude = models.FloatField(default=0)
     end_longitude = models.FloatField(default=0)
     end_latitude = models.FloatField(default=0)
+    colour = models.CharField(max_length=10)
 
 
 class Route(models.Model):
@@ -17,6 +18,21 @@ class Route(models.Model):
     date=models.DateField()
     id_truck= models.ForeignKey(Truck, on_delete=models.CASCADE,related_name='truck')
     client=models.BooleanField(default=False)
+    colour = models.CharField(max_length=10)
+
+
+    def routes_as_list(self):
+        list = self.products_list.split(', ')
+        return_list=[]
+        for i in range(len(list)-1):
+            if(list[i]=="['m'"):
+                return_list.append((list[i], int(list[i+1])))
+            elif(list[i+1]=="'m']"):
+                return_list.append((int(list[i]), list[i + 1]))
+            elif(list[i]!="['m'" and list[i+1]!="'m']"):
+                return_list.append((int(list[i]), int(list[i + 1])))
+        return return_list
+
 
 
 class Magazine(models.Model):

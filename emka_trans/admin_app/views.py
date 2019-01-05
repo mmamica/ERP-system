@@ -1,9 +1,12 @@
-from datetime import timedelta
+from datetime import timedelta, date
 
 from django.shortcuts import render
+from django.template.defaulttags import csrf_token
 from django.urls import reverse_lazy
 import itertools
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic import (View, TemplateView,
                                   ListView, DetailView,
                                   CreateView, DeleteView,
@@ -24,7 +27,10 @@ from admin_app.models import Magazine, Route
 from admin_app.models import Truck
 from accounts.models import UserProfileInfo
 from datetime import datetime
+from django.shortcuts import render
+from django.template import Context, Template, loader
 import requests
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -35,6 +41,11 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(date=date.today()-timedelta(days=17)) #później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(date=date.today()-timedelta(days=16)) #później do obcięcia ten minus
         return context
 
 
@@ -64,6 +75,7 @@ class AdminProductListView(ListView):
     model = Product
 
 
+@csrf_exempt
 def areAllConsidered(tab):
     for i in range(0, len(tab)):
         if (tab[i] is not None):
@@ -71,6 +83,7 @@ def areAllConsidered(tab):
     return True
 
 
+@csrf_exempt
 def onNotConsidered(tab):
     iter = 0
     for i in range(0, len(tab)):
@@ -94,6 +107,7 @@ def areAllConsideredIJ(tab):
 """
 
 
+@csrf_exempt
 def maxCell(tab):
     max = 0
     imax = None
@@ -108,6 +122,7 @@ def maxCell(tab):
     return (imax, jmax)
 
 
+@csrf_exempt
 def wasCondidered(orders, ordersConsidered):
     for i in range(0, len(orders)):
         for j in range(0, len(ordersConsidered)):
@@ -116,6 +131,7 @@ def wasCondidered(orders, ordersConsidered):
     return False
 
 
+@csrf_exempt
 def maxFromI(tab, i):
     max = 0
     jmax = None
@@ -126,6 +142,7 @@ def maxFromI(tab, i):
     return j
 
 
+@csrf_exempt
 def maxFromJ(tab, j):
     max = 0
     imax = None
@@ -135,7 +152,7 @@ def maxFromJ(tab, j):
             imax = i
     return i
 
-
+@csrf_exempt
 def deleteAllFromIndex(tab, index):
     for i in range(0, len(tab)):
         for j in range(0, len(tab)):
@@ -143,6 +160,8 @@ def deleteAllFromIndex(tab, index):
                 tab[i][j] = None
 
 
+
+@csrf_exempt
 def ClarkeWright(date, claster):
     ordersOryg = None
     orders=[]
@@ -157,7 +176,9 @@ def ClarkeWright(date, claster):
     if(ordersOryg is not None):
         print(ordersOryg)
         for o in ordersOryg:
-            if UserProfileInfo.objects.get(user=o.name_deliver).id_cluster!=claster:
+            if (UserProfileInfo.objects.get(user=o.name_deliver).id_cluster.id_truck==claster and o.route==False):
+                o.route=True
+                o.save()
                 orders.append(o)
         print(orders)
         tab = [None] * len(orders)
@@ -281,6 +302,9 @@ def ClarkeWright(date, claster):
         MatchClients(date,claster,allRoutes)
 
 
+
+
+@csrf_exempt
 def MatchClients(date, claster,routes):
     client_date = datetime.strptime(date, "%Y-%m-%d").date()-timedelta(days=1)
     clients_checkouts_oryg=Checkout.objects.filter(date=client_date) #tu teź claster
@@ -288,7 +312,9 @@ def MatchClients(date, claster,routes):
     clients_checkouts=[]
     print(clients_checkouts_oryg)
     for o in clients_checkouts_oryg:
-        if UserProfileInfo.objects.get(user=o.name_client).id_cluster != claster:
+        if UserProfileInfo.objects.get(user=o.name_client).id_cluster.id_truck == claster and o.route_client==False:
+            o.route_client = True
+            o.save()
             clients_checkouts.append(o)
     print(clients_checkouts)
     tab = [None] * len(routes)
@@ -322,22 +348,41 @@ def MatchClients(date, claster,routes):
                     index=c
         if(client is None):
             print(routes[r])
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
             Route.objects.create(products_list=str(routes[r]), date=date, id_truck=Truck.objects.get(id_truck=claster))
         else:
             clients_checkouts[index]=None
             routes[r].reverse()
             routes[r].append(client.id)
             routes[r].reverse()
-            #routes[r].index(0,client.id)
             print(routes[r])
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
             Route.objects.create(products_list=str(routes[r]), date=date, id_truck=Truck.objects.get(id_truck=claster),client=True)
     for i in range (0, len(clients_checkouts)):
         if(clients_checkouts[i] is not None):
             route=[clients_checkouts[i].id]
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
             print(route)
             Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster),client=True)
 
 
+
+@csrf_exempt
+def runClarkeWright(request):
+    date=datetime.today()-timedelta(14) #moje testowe dane są na 20.12.2018 dlatego tak to robię
+    date=str(date.strftime('%Y-%m-%d'))
+    for t in Truck.objects.all():
+        ClarkeWright(date,t.id_truck)
+    return HttpResponse()
 
 
 

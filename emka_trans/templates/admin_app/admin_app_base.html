@@ -23,6 +23,24 @@
   <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js" crossorigin></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      {% csrf_token %}
+      <script>
+            function call_alg() {
+                $.ajax({
+                type: 'POST',
+                url: '/admin_app/runClarkeWright/',
+                success: function () {
+                    alert("wygenerowano");
+                },
+                error: function() {
+                    alert("nie wygenerowano");
+                }
+    });}
+        </script>
+
+
+
 
 </head>
   <body>
@@ -37,7 +55,7 @@
 
     <div class="container">
       {% block body_block %}
-
+      <h1> LO L</h1>
       {% endblock %}
     </div>
 

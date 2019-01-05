@@ -5,8 +5,128 @@
     <h1>Welcome to Admin Page</h1>
     <div style="width: 640px; height: 480px" id="mapContainer"></div>
 
+<h1>Trasy na dzień:</h1>
+<script type="text/javascript">
+    var today = new Date();
+    var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+}
+
+if(mm<10) {
+    mm = '0'+mm
+}
+
+today = yyyy+'-'+mm+'-'+dd;
+
+document.write(today);
+
+    document.getElementById('date').innerHTML = today.toDateString(); </script>
+
+<p id = 'date'></p>
+
+          <button onclick="call_alg('2018-12-20', '2');">
+            {%csrf_token%}
+            Generuj nowe trasy
+        </button>
     </div>
-    <script src='{% static "js/map.js" %}' type="text/javascript"></script>
-  
+    <script src='{% static "js/map.js" %}' type="text/javascript">
+    </script>
+
+
+{% block content2 %}
+	{% for r in routes_today%}
+        {% ifequal r.id_route 139 %}
+        {% for ri in r.routes_as_list%}
+            {% if ri.0 == "['m'" and r.client%}
+                {% for c in checkout%}
+                    {% ifequal ri.1 c.id %}
+                        {% for p in profile%}
+                            {% ifequal p.user c.name_client %}
+                                <script>
+                                    my_cool_js_function("{{magazine}}","geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","{{ r.colour }}",true, "{{p.company_name}}");
+                                </script>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endifequal %}
+                {% endfor %}
+            {% endif %}
+            {% if r.routes_as_list.1 == ri and r.client%}
+                {% for c in checkout%}
+                    {% ifequal ri.0 c.id %}
+                        {% for p in profile%}
+                            {% ifequal p.user c.name_client %}
+                                {% if ri.1 == "'m']" %}
+                                    <script>
+                                        my_cool_js_function("geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","{{magazine}}","{{ r.colour }}",true,"{{p.company_name}}");
+                                    </script>
+                                {% else %}
+                                    {% for o in ordered_products%}
+                                        {% ifequal ri.1 o.id %}
+                                            {% for p2 in profile%}
+                                                {% ifequal p2.user o.name_deliver %}
+                                                    <script>
+                                                        my_cool_js_function("geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","geo!"+"{{p2.latitude}}"+","+"{{p2.longitude}}","{{ r.colour }}",true, "{{p.company_name}}");
+                                                    </script>
+                                                {% endifequal %}
+                                            {% endfor %}
+                                        {% endifequal %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endifequal %}
+                {% endfor %}
+            {% elif ri.0 == "['m'" and not r.client%}
+                {% for o in ordered_products%}
+                    {% ifequal ri.1 o.id %}
+                        {% for p in profile%}
+                            {% ifequal p.user o.name_deliver %}
+                                    <script>
+                                        my_cool_js_function("{{magazine}}","geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","{{ r.colour }}", false, "{{p.company_name}}");
+                                    </script>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endifequal %}
+                {% endfor %}
+
+            {%else%}
+                {% for o in ordered_products%}
+                    {% ifequal ri.0 o.id %}
+                        {% for p in profile%}
+                            {% ifequal p.user o.name_deliver %}
+                                {% if ri.1 == "'m']" %}
+                                    <script>
+                                        my_cool_js_function("geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","{{magazine}}","{{ r.colour }}",false, "{{p.company_name}}");
+                                    </script>
+
+                                {% else %}
+                                    {% for o in ordered_products%}
+                                        {% ifequal ri.1 o.id %}
+                                            {% for p2 in profile%}
+                                                {% ifequal p2.user o.name_deliver %}
+                                                    <script>
+                                                        my_cool_js_function("geo!"+"{{p.latitude}}"+","+"{{p.longitude}}","geo!"+"{{p2.latitude}}"+","+"{{p2.longitude}}","{{ r.colour }}",false, "{{p.company_name}}");
+                                                    </script>
+                                                {% endifequal %}
+                                            {% endfor %}
+                                        {% endifequal %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endifequal %}
+                {% endfor %}
+
+            {% endif %}
+	    {% endfor %}
+    {%endifequal%}
+	{% endfor %}
+{% endblock %}
+
+
     
   {% endblock %}

@@ -8,4 +8,5 @@ urlpatterns = [
    url(r'^orders/$',views.AdminCheckoutListView.as_view(),name='order_list'),
    url(r'^orders/(?P<pk>\d+)/$',views.AdminCheckoutDetailView.as_view(),name='order_detail'),
    url(r'^products/$',views.AdminProductListView.as_view(),name='product_list'),
+   url(r'^runClarkeWright/$', views.runClarkeWright, name='runClarkeWright'),
 ]
