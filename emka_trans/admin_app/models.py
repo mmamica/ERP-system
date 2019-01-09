@@ -19,6 +19,8 @@ class Route(models.Model):
     id_truck= models.ForeignKey(Truck, on_delete=models.CASCADE,related_name='truck')
     client=models.BooleanField(default=False)
     colour = models.CharField(max_length=10)
+    hour=models.IntegerField(default=0)
+
 
 
     def routes_as_list(self):

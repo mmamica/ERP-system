@@ -1,0 +1,178 @@
+{% extends "admin_app/admin_app_base.html" %}
+{% load staticfiles %}
+
+  {% block body_block %}
+    <h1>Welcome to Admin Page</h1>
+    <div style="width: 640px; height: 480px" id="mapContainer"></div>
+
+<h1>Trasy na dzień:</h1>
+<script type="text/javascript">
+    var today = new Date();
+    var dd = today.getDate()+1;
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+}
+
+if(mm<10) {
+    mm = '0'+mm
+}
+
+today = yyyy+'-'+mm+'-'+dd;
+
+document.write(today);
+
+    document.getElementById('date').innerHTML = today.toDateString(); </script>
+
+<p id = 'date'></p>
+
+    </div>
+    <script src='{% static "js/map2.js" %}' type="text/javascript">
+    </script>
+
+
+<form action="/your-name/" method="post">
+    <label for="your_name">Trasa: </label>
+
+
+
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <br/>
+    <label for="your_name">Klient: </label>
+     <select>
+           <option value=null>brak</option>
+         {% for c in checkout%}
+    {% if not c.route_client%}
+        {% for p in profile%}
+            {% ifequal p.user c.name_client %}
+  <option value={{c.id}}>{{c.id}}</option>
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
+    </select>
+    <br/>
+    <label for="your_name">Tir: </label>
+    <select>
+         {% for t in truck%}
+  <option value={{t.id_truck}}>{{t.id_truck}}</option>
+    {% endfor %}
+    </select>
+    <br/>
+    <label for="your_name">Godzina: </label>
+    <select>
+  <option value=1>10:00</option>
+        <option value=1>13:00</option>
+        <option value=1>16:00</option>
+    </select>
+    <input type="submit" value="Zatwierdź">
+</form>
+
+
+{% block content2 %}
+	{% for c in checkout%}
+    {% if not c.route_client%}
+        {% for p in profile%}
+            {% ifequal p.user c.name_client %}
+                <script>
+                    markerClient("{{p.latitude}}","{{p.longitude}}","{{p.company_name}}");
+                </script>
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% for o in ordered_products %}
+        {% if o.id_checkout.date == date_ordered and not o.route%}
+        {% for p in profile%}
+            {% ifequal p.user o.name_deliver %}
+                <script>
+                    marker("{{p.latitude}}","{{p.longitude}}","{{p.company_name}}");
+                </script>
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+
+
+  <div class="row">
+  </div>
+
+
+<h1>DOSTAWCY</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Dostawca</th>
+      <th scope="col">Produkt</th>
+      <th scope="col">Ilość</th>
+      <th scope="col">Id</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for o in ordered_products %}
+        {% if o.id_checkout.date == date_ordered and not o.route%}
+
+    <tr>
+      <td><a href="{% url 'accounts:show_profile' username=o.name_deliver%}">{{o.name_deliver}}</a></td>
+      <td>{{o.name_product}}</td>
+      <td>{{o.amount}}kg</td>
+      <td>{{o.id}}</td>
+
+    </tr>
+
+    {%endif%}
+    {% endfor %}
+
+  </tbody>
+</table>
+
+
+<h1>KLIENCI</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Klient</th>
+      <th scope="col">Cena</th>
+      <th scope="col">Ilość</th>
+        <th scope="col">Id</th>
+
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for c in checkout %}
+    {% if not c.route_client%}
+    <tr>
+      <td><a href="{% url 'accounts:show_profile' username=c.name_client%}">{{c.name_client}}</a></td>
+      <td>{{c.price}}zł</td>
+      <td>{{c.weight}}kg</td>
+      <td>{{c.id}}</td>
+
+    </tr>
+    {%endif%}
+    {% endfor %}
+
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+    
+  {% endblock %}

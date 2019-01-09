@@ -126,9 +126,8 @@ var svgMarkupClient = '<svg width="24" height="24" ' +
             // language=HTML
 
 
-            startMarker.setData('<div><a href=\'http://www.mcfc.co.uk\' ><div id="name">name</div></a>' +
-    '                           </div><div >City of Manchester Stadium<br><div id="param1">lol</div></div>');
-
+            startMarker.setData('<div><a href=\'{% url accounts:profile username:Elka %}\' ><div id="name">'+String(name)+'</div></a>' +
+                                    '</div><div >'+ String(startPoint.latitude) +'<br><div id="param1">'+String(startPoint.longitude)+'</div></div>');
             startMarker.addEventListener('tap', function (evt) {
 
                 let bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
@@ -141,39 +140,15 @@ var svgMarkupClient = '<svg width="24" height="24" ' +
                 });
                 var ui = H.ui.UI.createDefault(map, defaultLayers);
                 ui.addBubble(bubble);
-                document.getElementById("param1").innerHTML = "param1";
-                document.getElementById("name").innerHTML = "name";
 
                 }, false);
 
-
-            startMarker.setData('<div><a href=\'http://www.mcfc.co.uk\' ><div id="nameContainer">name</div></a>' +
-    '                           </div><div >City of Manchester Stadium<br><div id="paramContainer">lol</div></div>');
-
-                //document.getElementById("param1").innerHTML = param1;
-                //document.getElementById("name").innerHTML = name;
-
-        //     startMarker.addEventListener('tap', function (evt) {
-        //         let bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
-        //                         content: evt.target.getData()});
-        //
-        //         let pixelRatio = window.devicePixelRatio || 1;
-        //         let defaultLayers = platform.createDefaultLayers({
-        //                             tileSize: pixelRatio === 1 ? 256 : 512,
-        //                             ppi: pixelRatio === 1 ? undefined : 320
-        //         });
-        //         var ui = H.ui.UI.createDefault(map, defaultLayers);
-        //         ui.addBubble(bubble);
-		// let tmpContainer = "";
-		// if(document.getElementById("nameContainer")==="name"){
-		// 	tmpContainer = "eloziomek";
-		// 	document.getElementById("nameContainer").innerHTML = tmpContainer;
-		// }
-        //
-        //         }, false);
                 map.addObjects([routeLine, startMarker, endMarker]);
-            // Set the map's viewport to make the whole route visible:
                 map.setViewBounds(routeLine.getBounds());
+                          //      map.addObjects(startMarker);
+
+
+            // Set the map's viewport to make the whole route visible:
 
         }
     };
