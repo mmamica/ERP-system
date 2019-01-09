@@ -36,7 +36,7 @@ class ProductDetailView(DetailView):
 
 
 class ProductCreateView(CreateView):
-    fields = ("name","genre","price","amount")
+    fields = ("name","genre","price","amount","weight")
     model = models.Product
     success_url = reverse_lazy("products_app:list")
 
@@ -48,7 +48,7 @@ class ProductCreateView(CreateView):
 
 
 class ProductUpdateView(UpdateView):
-    fields = ("name","genre","amount","price")
+    fields = ("name","genre","amount","price","weight")
     model = models.Product
     success_url = reverse_lazy("products_app:list")
 
@@ -104,6 +104,7 @@ class UploadXlsView(View):
         genre=0
         amount=0
         price=0
+        weight=0
         it=0
 
         for cell in first_row:
@@ -116,21 +117,29 @@ class UploadXlsView(View):
                 price=it
             elif title.lower() == 'ilość':
                 amount=it
+            elif title.lower() == 'waga':
+                weight=it
             it = it + 1
-
+        success=False
         i=0
         for row in worksheet.iter_rows():
             i=i+1
             if i==1:
                 continue
             else:
-
-                new_product=models.Product.objects.create(name=str(row[name].value), genre=str(row[genre].value),
+                existing_product=models.Product.objects.filter(name=str(row[name].value),
+                                                               genre=str(row[genre].value), name_deliver=request.user).count()
+                if existing_product==0:
+                    new_product=models.Product.objects.create(name=str(row[name].value), genre=str(row[genre].value),
                                                 name_deliver=request.user, amount=int(str(row[amount].value)),
-                                                price=int(str(row[price].value)))
-                new_product.save()
-                success=True
-
+                                                price=int(str(row[price].value)),weight=int(str(row[weight].value)))
+                    new_product.save()
+                    success=True
+                else:
+                    models.Product.objects.filter(name=str(row[name].value), genre=str(row[genre].value),
+                                                  name_deliver=request.user).update(amount=int(str(row[amount].value)),
+                                                price=int(str(row[price].value)),weight=int(str(row[weight].value)))
+                    success = True
         return render(request, self.template_name , {'success':success})
 
 

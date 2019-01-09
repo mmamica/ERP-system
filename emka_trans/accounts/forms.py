@@ -33,8 +33,9 @@ class UserProfileInfoForm(forms.ModelForm):
                                 'searchtext': search_text})
 
         data = message.json()
-        if (data['Response']['View'] == []):
+        if (data['Response']['View']==[]):
             raise forms.ValidationError("Nieprawidłowy adres")
+
         latitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude']
         longitude = data['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude']
 
@@ -61,10 +62,15 @@ class UserProfileInfoForm(forms.ModelForm):
                   'is_client')
 
 
-class EditUserProfileForm(UserChangeForm):
+class EditUserForm(UserChangeForm):
     class Meta():
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
+class EditProfileForm(forms.ModelForm):
+    class Meta():
+        model=UserProfileInfo
+        fields = ('company_name','phone_number','profile_pic')
 
 
 class LoginForm(forms.Form):

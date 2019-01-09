@@ -16,17 +16,20 @@ class OrderedProductsForm(forms.ModelForm):
     class Meta():
         model=OrderedProducts
         fields=('name','genre','amount')
-    #
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['genre'].widget = forms.HiddenInput()
 
+    def clean(self):
+        cd = self.cleaned_data
+        prod = Product.objects.get(name=cd.get('name'), genre=cd.get('genre'))
+        if prod.amount<cd.get('amount'):
+            self.add_error('amount','Niedostępna ilość produktu!')
+
+        return cd
 
 class CheckoutCreateForm(forms.ModelForm):
-
     class Meta():
         model=Checkout
         fields=('date','hour')
+        widgets = {'date': forms.DateInput(attrs={'id': 'datepicker'})}
 
     def clean(self):
         cd = self.cleaned_data

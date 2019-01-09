@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^create/(?P<pk>\d+)/add_product$', views.ProductAddView.as_view(), name='add_product'),
     url(r'confirm/(?P<pk>\d+)',views.ConfirmCheckoutView.as_view(),name='confirm'),
     url(r'ajax/load_genres/', views.load_genres, name='ajax_load_genres'),
+    url(r'all_products/$',views.AllProductsView.as_view(),name='all_products'),
 ]

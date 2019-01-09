@@ -1,8 +1,8 @@
-{% extends "products_app/products_app_base.html" %}
+{% extends "order_app/order_app_base.html" %}
 {% block body_block %}
   <div class="jumbotron">
 
-    <h1>List of Products</h1>
+    <h1>Dostępne produkty</h1>
 
 
 <table class="table">
@@ -21,7 +21,7 @@
     {% for product in product_list %}
 
     <tr>
-      <th>  <a href="{% url 'products_app:update' pk=product.id %}">{{product.name}}</a></th>
+      <th>{{product.name}}</th>
       <td>{{product.genre}}</td>
       <td>{{product.price}}zł</td>
       <td>{{product.amount}}kg</td>
@@ -32,9 +32,7 @@
 
   </tbody>
 </table>
-<a href="{% url 'products_app:create' %}" class="btn btn-default">Add</a>
-<!-- <button  href="{% url 'products_app:create' %}" type="button" name="button">Add</button> -->
-<a href="{% url 'products_app:xls' %}" class="btn btn-default">Upload xls</a>
+
   </div>
 
 
