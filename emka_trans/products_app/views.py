@@ -13,18 +13,41 @@ from django.utils.decorators import method_decorator
 
 #przeglądanie własnych produktów
 class ProductListView(ListView):
+    """
+    Display a list :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_list.html`
+    """
     template_name = 'products_app/product_list.html'
 
     def get_queryset(self):
+        """
+        Return the list of items for this view.
+        """
         return models.Product.objects.filter(name_deliver=self.request.user)
 
 
 class ProductDetailView(DetailView):
+    """"
+    ``mymodel``
+        An instance of :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_detail.html`
+    """
     context_object_name = 'product_details'
     model = models.Product
     template_name = 'products_app/product_detail.html'
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        Try to dispatch to the right method; if a method doesn't exist,
+        defer to the error handler. Also defer to the error handler if the
+        request method isn't on the approved list.
+        """
         pk = kwargs.get('pk')
         user = request.user
 
