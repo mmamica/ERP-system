@@ -1,40 +1,25 @@
 from datetime import timedelta, date
-
-from django.shortcuts import render
-from django.template.defaulttags import csrf_token
-from django.urls import reverse_lazy
-import itertools
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-from django.views.generic import (View, TemplateView,
-                                  ListView, DetailView,
-                                  CreateView, DeleteView,
-                                  UpdateView)
-
-# Create your views here.
-from . import models
-from django.http import HttpResponse, HttpResponseForbidden
-from django.http import Http404
-from django.urls import reverse
+from django.views.generic import TemplateView, ListView, DetailView
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required
-from . import models
 from order_app.models import Checkout, OrderedProducts
 from products_app.models import Product
 from admin_app.models import Magazine, Route
 from admin_app.models import Truck
 from accounts.models import UserProfileInfo
 from datetime import datetime
-from django.shortcuts import render
-from django.template import Context, Template, loader
 import requests
-from order_app.forms import OrderedProductsForm
-from django.template.loader import render_to_string
-from admin_app.forms import RouteForm
 
 
+
+"""
+
+A view for displaying a form and rendering a template response.
+
+"""
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class Manual(TemplateView):
@@ -53,7 +38,6 @@ class Manual(TemplateView):
         context['profile'] = UserProfileInfo.objects.all()
         context['routes_today'] = Route.objects.filter(
             date=date.today())
-        # później do obcięcia ten minus
         return context
 
 
