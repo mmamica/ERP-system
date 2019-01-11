@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.urls import reverse
-
 from django.http import HttpResponse
 from django.views.generic import (View,TemplateView,
                                 ListView,DetailView,
@@ -21,14 +20,12 @@ import datetime
 class CheckoutView(ListView):
     model = models.Checkout
 
-
 @method_decorator(login_required, name='dispatch')
 class CheckoutListView(ListView):
     model = models.Checkout
 
     def get_queryset(self):
         return models.Checkout.objects.filter(name_client=self.request.user)
-
 
 @method_decorator(login_required, name='dispatch')
 class CheckoutDetailView(DetailView):
@@ -39,8 +36,6 @@ class CheckoutDetailView(DetailView):
     def get_queryset(self):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
-
-@method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
@@ -68,9 +63,7 @@ class CheckoutCreateView(CreateView):
         form.instance.weigth=0
         form.instance.route_client=False
         form.instance.magazine = False
-
         return super(CheckoutCreateView, self).form_valid(form)
-
 
 class ProductAddView(CreateView):
     form_class = forms.OrderedProductsForm
@@ -100,7 +93,6 @@ class ProductAddView(CreateView):
                                                      name_deliver=deliver.user).count()
             if check_product!=0:
                 prod=models.Product.objects.get(name=form.cleaned_data['name'], genre=form.cleaned_data['genre'],
-                                                     name_deliver=deliver.user)
 
         form.instance.name_product=prod
         message=None
@@ -115,9 +107,7 @@ class ProductAddView(CreateView):
         form.instance.id_route = 0
         form.instance.magazine = False
         form.instance.name_deliver=prod.name_deliver
-
         return super(ProductAddView, self).form_valid(form)
-
 
 class ConfirmCheckoutView(View):
     def get(self,request,pk):
@@ -150,23 +140,19 @@ class ConfirmCheckoutView(View):
         else:
             return render(request, 'order_app/confirm_checkout.html',context={'missing_products':missing_products, 'checkout':id})
 
-
 def load_genres(request):
     product = request.GET.get('product')
     cluster = UserProfileInfo.objects.get(user=request.user).id_cluster
     delivers = UserProfileInfo.objects.filter(id_cluster=cluster, is_client=False)
-    #deliver = delivers.user.username
     genres=[]
     for deliver in delivers:
         name=deliver.user
         genres = genres+list(models.Product.objects.filter(name=product, name_deliver=name).order_by('name'))
     return render(request, 'order_app/genres_dropdown_list_options.html', {'genres': genres})
 
-
 class CheckoutUpdateView(UpdateView):
     fields = ("name","price")
     model = models.Checkout
-
 
 class ProductUpdateView(UpdateView):
     fields = ("amount",)
@@ -198,7 +184,6 @@ class ProductUpdateView(UpdateView):
         models.Checkout.objects.filter(id=checkout.id).update(price=price,weigth=weight)
         return super(ProductUpdateView, self).form_valid(form)
 
-
 class ProductDeleteView(DeleteView):
     context_object_name = "order"
     model = models.OrderedProducts
@@ -214,23 +199,19 @@ class ProductDeleteView(DeleteView):
         models.Checkout.objects.filter(id=checkout.id).update(price=price,weigth=weight)
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
-
 class CheckoutDeleteView(DeleteView):
     context_object_name="order"
     model = models.Checkout
     success_url = reverse_lazy("order_app:list")
 
-
 class OrderedProductsListView(ListView):
     context_object_name = 'orderedproducts_list'
     model = models.OrderedProducts
-
 
 class OrderedProductsDetailView(DetailView):
     context_object_name = 'orderedproducts_details'
     model=models.Checkout
     template_name = 'order_app/order_detail.html'
-
 
 class AllProductsView(View):
     def get(self,request):
@@ -242,7 +223,3 @@ class AllProductsView(View):
             products=products+(list(Product.objects.filter(name_deliver=deliver.user)))
         return render(request,'order_app/all_products_list.html',{'product_list':products})
 
-
-class CBView(View):
-    def get(self,request):
-        return HttpResponse('Class Based Views are Cool!')
