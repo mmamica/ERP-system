@@ -8,7 +8,7 @@
 <h1>Trasy na dzień:</h1>
 <script type="text/javascript">
     var today = new Date();
-    var dd = today.getDate();
+    var dd = today.getDate() + 1;
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
@@ -28,17 +28,24 @@ document.write(today);
 
 <p id = 'date'></p>
 
+          <button onclick="call_alg();">
+            {%csrf_token%}
+            Generuj nowe trasy automatycznie
+        </button>
+          <form>
+              <button formaction="{% url 'admin_app:manual' %}">Generuj trasy manualnie</button>
+          </form>
 
     </div>
     <script src='{% static "js/map.js" %}' type="text/javascript">
     </script>
 
-        <a href="{% url 'admin_app:index1' %}">Godzina 10</a>
-        <a href="{% url 'admin_app:index2' %}">Godzina 13</a>
-        <a href="{% url 'admin_app:index3' %}">Godzina 16</a>
+        <a href="{% url 'admin_app:index21' %}">Godzina 10</a>
+        <a href="{% url 'admin_app:index22' %}">Godzina 13</a>
+        <a href="{% url 'admin_app:index23' %}">Godzina 16</a>
 
 {% block content2 %}
-	{% for r in routes_today%}
+	{% for r in routes_tomorrow%}
         {% for ri in r.routes_as_list%}
             {% if ri.0 == "['m'" and r.client%}
                 {% for c in checkout%}
@@ -127,6 +134,8 @@ document.write(today);
 
 
 
+
+
 <h1>DOSTAWCY</h1>
 
 
@@ -152,7 +161,7 @@ document.write(today);
       <td>{{o.name_product}}</td>
       <td>{{o.amount}}kg</td>
       <td>{{o.id_route}}</td>
-        {% for r in routes_today%}
+        {% for r in routes_tomorrow%}
         {% ifequal r.id_route o.id_route %}
       <td>{{r.id_truck.id_truck}}</td>
         {%endifequal%}
@@ -191,7 +200,7 @@ document.write(today);
       <td><a href="{% url 'accounts:show_profile' username=c.name_client%}">{{c.name_client}}</a></td>
       <td>{{c.price}}</td>
       <td>{{c.weight}}kg</td>
-        {% for r in routes_today%}
+        {% for r in routes_tomorrow%}
         {% for ri in r.routes_as_list%}
         {% if r.client and ri.1 == c.id%}
       <td>{{r.id_route}}</td>
@@ -209,5 +218,5 @@ document.write(today);
   </tbody>
 </table>
 
-
+    
   {% endblock %}

@@ -47,7 +47,7 @@ var defaultLayers = platform.createDefaultLayers({
 //Step 2: initialize a map - this map is centered over California
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.normal.map,{
-  center: {lat:37.376, lng:-122.034},
+  center: {lng: 20.262038, lat: 49.819856},
   zoom: 15,
   pixelRatio: pixelRatio
 });

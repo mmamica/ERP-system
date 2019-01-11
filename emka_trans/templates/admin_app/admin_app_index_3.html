@@ -8,7 +8,7 @@
 <h1>Trasy na dzień:</h1>
 <script type="text/javascript">
     var today = new Date();
-    var dd = today.getDate();
+    var dd = today.getDate()+1;
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
@@ -35,10 +35,11 @@ document.write(today);
 
         <a href="{% url 'admin_app:index1' %}">Godzina 10</a>
         <a href="{% url 'admin_app:index2' %}">Godzina 13</a>
-        <a href="{% url 'admin_app:index3' %}">Godzina 16</a>
+        <a href="{% url 'admin_app:index' %}">Wszystko</a>
 
 {% block content2 %}
 	{% for r in routes_today%}
+    {% ifequal r.hour 3 %}
         {% for ri in r.routes_as_list%}
             {% if ri.0 == "['m'" and r.client%}
                 {% for c in checkout%}
@@ -122,6 +123,7 @@ document.write(today);
 
             {% endif %}
 	    {% endfor %}
+    {% endifequal %}
 	{% endfor %}
 {% endblock %}
 
@@ -139,14 +141,16 @@ document.write(today);
       <th scope="col">Trasa</th>
       <th scope="col">Tir</th>
       <th scope="col">Id</th>
-
-
     </tr>
   </thead>
 
   <tbody>
     {% for o in ordered_products %}
-        {% ifequal o.id_checkout.date date_ordered %}
+        {% if o.id_checkout.date == date_ordered%}
+            {%for r in routes_today%}
+            {%ifequal r.id_route o.id_route%}
+            {%if r.hour == 3%}
+
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=o.name_deliver%}">{{o.name_deliver}}</a></td>
       <td>{{o.name_product}}</td>
@@ -160,7 +164,11 @@ document.write(today);
       <td>{{o.id}}</td>
 
     </tr>
+
+    {%endif%}
     {%endifequal%}
+    {%endfor%}
+    {%endif%}
     {% endfor %}
 
 
@@ -179,7 +187,8 @@ document.write(today);
       <th scope="col">Ilość</th>
       <th scope="col">Trasa</th>
       <th scope="col">Tir</th>
-      <th scope="col">Id</th>
+        <th scope="col">Id</th>
+
 
 
     </tr>
@@ -187,6 +196,8 @@ document.write(today);
 
   <tbody>
     {% for c in checkout %}
+            {% if c.hour == 3%}
+
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=c.name_client%}">{{c.name_client}}</a></td>
       <td>{{c.price}}</td>
@@ -203,6 +214,7 @@ document.write(today);
       <td>{{c.id}}</td>
 
     </tr>
+    {%endif%}
     {% endfor %}
 
 
@@ -210,4 +222,5 @@ document.write(today);
 </table>
 
 
+    
   {% endblock %}

@@ -1,9 +1,12 @@
-from datetime import timedelta
+from datetime import timedelta, date
 
 from django.shortcuts import render
+from django.template.defaulttags import csrf_token
 from django.urls import reverse_lazy
 import itertools
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic import (View, TemplateView,
                                   ListView, DetailView,
                                   CreateView, DeleteView,
@@ -24,7 +27,34 @@ from admin_app.models import Magazine, Route
 from admin_app.models import Truck
 from accounts.models import UserProfileInfo
 from datetime import datetime
+from django.shortcuts import render
+from django.template import Context, Template, loader
 import requests
+from order_app.forms import OrderedProductsForm
+from django.template.loader import render_to_string
+from admin_app.forms import RouteForm
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class Manual(TemplateView):
+    template_name = 'admin_app/manual.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['truck'] = Truck.objects.all()
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['date_ordered'] = date.today() + timedelta(2)
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(
+            date=date.today())
+        # później do obcięcia ten minus
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -35,6 +65,164 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(
+            date=date.today())
+        context['date_ordered'] = date.today() + timedelta(1)
+
+        # później do obcięcia ten minus
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView1(TemplateView):
+    template_name = 'admin_app/admin_app_index_1.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(1)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView2(TemplateView):
+    template_name = 'admin_app/admin_app_index_2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(1)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView3(TemplateView):
+    template_name = 'admin_app/admin_app_index_3.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_today'] = Route.objects.filter(
+            date=date.today())  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(1)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView20(TemplateView):
+    template_name = 'admin_app/admin_app_index_20.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_tomorrow'] = Route.objects.filter(
+            date=date.today() + timedelta(1))
+        context['date_ordered'] = date.today() + timedelta(2)
+        # później do obcięcia ten minus
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView21(TemplateView):
+    template_name = 'admin_app/admin_app_index_21.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_tomorrow'] = Route.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(2)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView22(TemplateView):
+    template_name = 'admin_app/admin_app_index_22.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_tomorrow'] = Route.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(2)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(staff_member_required(), name='dispatch')
+class IndexView23(TemplateView):
+    template_name = 'admin_app/admin_app_index_23.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = "admin_app"
+        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
+            Magazine.objects.get(id_magazine=1).longitude)
+        context['checkout'] = Checkout.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['ordered_products'] = OrderedProducts.objects.all()
+        context['profile'] = UserProfileInfo.objects.all()
+        context['routes_tomorrow'] = Route.objects.filter(
+            date=date.today() + timedelta(1))  # później do obcięcia ten minus
+        context['date_ordered'] = date.today() + timedelta(2)
+
         return context
 
 
@@ -64,6 +252,7 @@ class AdminProductListView(ListView):
     model = Product
 
 
+@csrf_exempt
 def areAllConsidered(tab):
     for i in range(0, len(tab)):
         if (tab[i] is not None):
@@ -71,6 +260,7 @@ def areAllConsidered(tab):
     return True
 
 
+@csrf_exempt
 def onNotConsidered(tab):
     iter = 0
     for i in range(0, len(tab)):
@@ -94,6 +284,7 @@ def areAllConsideredIJ(tab):
 """
 
 
+@csrf_exempt
 def maxCell(tab):
     max = 0
     imax = None
@@ -108,6 +299,7 @@ def maxCell(tab):
     return (imax, jmax)
 
 
+@csrf_exempt
 def wasCondidered(orders, ordersConsidered):
     for i in range(0, len(orders)):
         for j in range(0, len(ordersConsidered)):
@@ -116,6 +308,7 @@ def wasCondidered(orders, ordersConsidered):
     return False
 
 
+@csrf_exempt
 def maxFromI(tab, i):
     max = 0
     jmax = None
@@ -126,6 +319,7 @@ def maxFromI(tab, i):
     return j
 
 
+@csrf_exempt
 def maxFromJ(tab, j):
     max = 0
     imax = None
@@ -136,6 +330,7 @@ def maxFromJ(tab, j):
     return i
 
 
+@csrf_exempt
 def deleteAllFromIndex(tab, index):
     for i in range(0, len(tab)):
         for j in range(0, len(tab)):
@@ -143,21 +338,24 @@ def deleteAllFromIndex(tab, index):
                 tab[i][j] = None
 
 
+@csrf_exempt
 def ClarkeWright(date, claster):
     ordersOryg = None
-    orders=[]
+    orders = []
 
     for c in Checkout.objects.all():
         if str(c.date) == date:
             if ordersOryg is None:
-                ordersOryg = OrderedProducts.objects.filter(id_checkout=c) #tu trzeba przefiltrować jeszcze z clastrem
+                ordersOryg = OrderedProducts.objects.filter(id_checkout=c)  # tu trzeba przefiltrować jeszcze z clastrem
             else:
-                ordersOryg = ordersOryg | OrderedProducts.objects.filter(id_checkout=c) #i tu
+                ordersOryg = ordersOryg | OrderedProducts.objects.filter(id_checkout=c)  # i tu
 
-    if(ordersOryg is not None):
+    if (ordersOryg is not None):
         print(ordersOryg)
         for o in ordersOryg:
-            if UserProfileInfo.objects.get(user=o.name_deliver).id_cluster!=claster:
+            if (UserProfileInfo.objects.get(user=o.name_deliver).id_cluster.id_truck == claster and o.route == False):
+                o.route = True
+                o.save()
                 orders.append(o)
         print(orders)
         tab = [None] * len(orders)
@@ -259,50 +457,56 @@ def ClarkeWright(date, claster):
                             distanceix = dataix['response']['route'][0]['summary']['distance']
                             distancejx = dataix['response']['route'][0]['summary']['distance']
                             if (distanceix > distancejx):
-                                route.index(0,orders[i].id)
+                                route.index(0, orders[i].id)
                             else:
                                 route.append(orders[i].id)
                             deleteAllFromIndex(tab, i)
                             ordersConsidered[i] = None
                 print(route)
                 allRoutes.append(route)
-                #Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
+                # Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
 
             else:
                 for i in range(0, len(ordersConsidered)):
                     if (ordersConsidered[i] is not None):
                         route = [orders[i].id]
-                        #Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
+                        # Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
                         print(route)
                         allRoutes.append(route)
                         ordersConsidered[i] = None
                         break
             print(allRoutes)
-        MatchClients(date,claster,allRoutes)
+        MatchClients(date, claster, allRoutes)
+        addHour(date)
 
 
-def MatchClients(date, claster,routes):
-    client_date = datetime.strptime(date, "%Y-%m-%d").date()-timedelta(days=1)
-    clients_checkouts_oryg=Checkout.objects.filter(date=client_date) #tu teź claster
+@csrf_exempt
+def MatchClients(date, claster, routes):
+    client_date = datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1)
+    clients_checkouts_oryg = Checkout.objects.filter(date=client_date)  # tu teź claster
     clients_checkouts_oryg = clients_checkouts_oryg[::1]
-    clients_checkouts=[]
+    clients_checkouts = []
     print(clients_checkouts_oryg)
     for o in clients_checkouts_oryg:
-        if UserProfileInfo.objects.get(user=o.name_client).id_cluster != claster:
+        if UserProfileInfo.objects.get(user=o.name_client).id_cluster.id_truck == claster and o.route_client == False:
+            o.route_client = True
+            o.save()
             clients_checkouts.append(o)
     print(clients_checkouts)
     tab = [None] * len(routes)
     for x in range(len(routes)):
         tab[x] = [None] * len(clients_checkouts)
     for r in range(len(routes)):
-        min=Magazine.objects.get(id_magazine=1).radius*1000*2
-        client=None
-        index=None
-        latituder = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=routes[r][0]).name_deliver.id).latitude
-        longituder = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=routes[r][0]).name_deliver.id).longitude
+        min = Magazine.objects.get(id_magazine=1).radius * 1000 * 2
+        client = None
+        index = None
+        latituder = UserProfileInfo.objects.get(
+            user_id=OrderedProducts.objects.get(id=routes[r][0]).name_deliver.id).latitude
+        longituder = UserProfileInfo.objects.get(
+            user_id=OrderedProducts.objects.get(id=routes[r][0]).name_deliver.id).longitude
         waypointr = 'geo!' + str(latituder) + ',' + str(longituder)
         for c in range(len(clients_checkouts)):
-            if(clients_checkouts[c] is not None):
+            if (clients_checkouts[c] is not None):
                 latitudet = UserProfileInfo.objects.get(user_id=clients_checkouts[c].name_client.id).latitude
                 longitudet = UserProfileInfo.objects.get(user_id=clients_checkouts[c].name_client.id).longitude
                 waypointt = 'geo!' + str(latitudet) + ',' + str(longitudet)
@@ -316,33 +520,83 @@ def MatchClients(date, claster,routes):
                 datart = messagert.json()
 
                 distancert = datart['response']['route'][0]['summary']['distance']
-                if(distancert<min):
-                    min=distancert
-                    client=clients_checkouts[c]
-                    index=c
-        if(client is None):
+                if (distancert < min):
+                    min = distancert
+                    client = clients_checkouts[c]
+                    index = c
+        if (client is None):
             print(routes[r])
-            Route.objects.create(products_list=str(routes[r]), date=date, id_truck=Truck.objects.get(id_truck=claster))
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
+            route = Route.objects.create(products_list=str(routes[r]), date=client_date,
+                                         id_truck=Truck.objects.get(id_truck=claster),
+                                         colour='#87a8dd')
+            route.save()
+            for i in range(1, len(routes[r]) - 1):
+                o = OrderedProducts.objects.get(id=routes[r][i])
+                o.id_route = route.id_route
+                o.save()
+
         else:
-            clients_checkouts[index]=None
+            clients_checkouts[index] = None
             routes[r].reverse()
             routes[r].append(client.id)
             routes[r].reverse()
-            #routes[r].index(0,client.id)
             print(routes[r])
-            Route.objects.create(products_list=str(routes[r]), date=date, id_truck=Truck.objects.get(id_truck=claster),client=True)
-    for i in range (0, len(clients_checkouts)):
-        if(clients_checkouts[i] is not None):
-            route=[clients_checkouts[i].id]
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
+            print(routes[r][1])
+            route = Route.objects.create(products_list=str(routes[r]), date=client_date,
+                                         id_truck=Truck.objects.get(id_truck=claster),
+                                         client=True, colour='#546b91',
+                                         hour=int(Checkout.objects.get(id=routes[r][1]).hour))
+            route.save()
+            for i in range(2, len(routes[r]) - 1):
+                o = OrderedProducts.objects.get(id=routes[r][i])
+                o.id_route = route.id_route
+                o.save()
+    for i in range(0, len(clients_checkouts)):
+        if (clients_checkouts[i] is not None):
+            route = [clients_checkouts[i].id]
+            routes[r].append('m')
+            routes[r].reverse()
+            routes[r].append('m')
+            routes[r].reverse()
             print(route)
-            Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster),client=True)
+            route = Route.objects.create(products_list=str(route), date=client_date,
+                                         id_truck=Truck.objects.get(id_truck=claster),
+                                         client=True, colour='#273244', hour=int(Checkout.objects.get(id=routes[r][1])))
+            route.save()
+            for i in range(2, len(routes[r]) - 1):
+                o = OrderedProducts.objects.get(id=routes[r][i])
+                o.id_route = route.id_route
+                o.save()
 
 
+@csrf_exempt
+def runClarkeWright(request):
+    date = datetime.today() + timedelta(2)  # moje testowe dane są na 20.12.2018 dlatego tak to robię
+    date = str(date.strftime('%Y-%m-%d'))
+    for t in Truck.objects.all():
+        ClarkeWright(date, t.id_truck)
+    return HttpResponse()
 
 
+def addHour(date):  # to trzeba jeszcze przetestować, bo coś nie pykło
+    routes = []
+    for t in Truck.objects.all():
+        routes = Route.objects.filter(date=date, id_truck=t, hour=0)
+        for r in routes:
+            for h in range(1, 6):
+                hours = Route.objects.filter(date=(datetime.strptime(date, "%Y-%m-%d").date() + timedelta(days=1)),
+                                             hour=h, id_truck=t)
+                if (len(hours) == 0):
+                    r.hour = h
+                    r.save()
+                    break
 
-
-
-#MatchClients('2018-12-20',2,[[63, 67, 62], [69, 70, 68], [71]])
-
-
+# MatchClients('2018-12-20',2,[[63, 67, 62], [69, 70, 68], [71]])
