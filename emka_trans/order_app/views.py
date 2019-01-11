@@ -36,6 +36,7 @@ class CheckoutDetailView(DetailView):
     def get_queryset(self):
         return models.Checkout.objects.filter(name_client=self.request.user)
 
+@method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
@@ -63,6 +64,7 @@ class CheckoutCreateView(CreateView):
         form.instance.weigth=0
         form.instance.route_client=False
         form.instance.magazine = False
+
         return super(CheckoutCreateView, self).form_valid(form)
 
 class ProductAddView(CreateView):
@@ -93,7 +95,7 @@ class ProductAddView(CreateView):
                                                      name_deliver=deliver.user).count()
             if check_product!=0:
                 prod=models.Product.objects.get(name=form.cleaned_data['name'], genre=form.cleaned_data['genre'],
-
+                                                     name_deliver=deliver.user)
         form.instance.name_product=prod
         message=None
         if (form.cleaned_data['amount'] > prod.amount):
@@ -107,6 +109,7 @@ class ProductAddView(CreateView):
         form.instance.id_route = 0
         form.instance.magazine = False
         form.instance.name_deliver=prod.name_deliver
+
         return super(ProductAddView, self).form_valid(form)
 
 class ConfirmCheckoutView(View):
@@ -144,11 +147,13 @@ def load_genres(request):
     product = request.GET.get('product')
     cluster = UserProfileInfo.objects.get(user=request.user).id_cluster
     delivers = UserProfileInfo.objects.filter(id_cluster=cluster, is_client=False)
+    #deliver = delivers.user.username
     genres=[]
     for deliver in delivers:
         name=deliver.user
         genres = genres+list(models.Product.objects.filter(name=product, name_deliver=name).order_by('name'))
     return render(request, 'order_app/genres_dropdown_list_options.html', {'genres': genres})
+
 
 class CheckoutUpdateView(UpdateView):
     fields = ("name","price")
