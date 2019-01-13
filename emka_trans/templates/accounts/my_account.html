@@ -8,26 +8,6 @@
 
 
 	<h1>My profile</h1>
-	<!-- Those are horizontal buttons that lets user navigate over the dashboards. -->
-	<!--
-	<div class="horizontalDivs">
-		<a href="{% url 'accounts:edit_my_profile' %}" class="editProfileBtn btn btn-info">Edytuj profil</a><br><br>
-	</div>
-
-	<div class="horizontalDivs">
-		{#{% if user_profile.is_client %}#}
-			{#<a href="{% url 'orders:order_list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>#}
-		{#{% endif %}#}
-	</div>
-	
-	<div class="horizontalDivs">
-	{% if user_profile.is_client == False %}
-    	<a href="{% url 'products_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj produkty</a><br><br>
-    {% else %}
-    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>
-	{% endif %}
-	</div>
-	-->
 	<div id="leftDivRegister">
 		<table style="width:100%">
 			<tr>
@@ -90,27 +70,7 @@
 	    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>
 		{% endif %}
 	</div>
-	
-
-	
-
 	</br>
-
-	
-		
-	
-
-	
-
-<!--
-	Username: {{ user.username }} <br>
-	First Name: {{ user.first_name }}<br>
-	Last Name: {{ user.last_name}}<br>
-	Email: {{ user.email }}<br>
-	Company: {{ user_profile.company_name }} <br>
-	Phone number: {{ user_profile.phone_number }}<br>
-	Location: {{ user_profile.latitude }} N, {{ user_profile.longitude }} E
--->
 </div>
 
 {% endblock %}
