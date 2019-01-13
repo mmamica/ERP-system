@@ -1,4 +1,8 @@
 from datetime import timedelta, date
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
@@ -9,10 +13,10 @@ from order_app.models import Checkout, OrderedProducts
 from products_app.models import Product
 from admin_app.models import Magazine, Route
 from admin_app.models import Truck
-from accounts.models import UserProfileInfo
+from accounts.models import UserProfileInfo, User
 from datetime import datetime
 import requests
-
+import re
 
 
 """
@@ -20,26 +24,6 @@ import requests
 A view for displaying a form and rendering a template response.
 
 """
-@method_decorator(login_required, name='dispatch')
-@method_decorator(staff_member_required(), name='dispatch')
-class Manual(TemplateView):
-    template_name = 'admin_app/manual.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
-        context['truck'] = Truck.objects.all()
-        context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
-            Magazine.objects.get(id_magazine=1).longitude)
-        context['checkout'] = Checkout.objects.filter(
-            date=date.today() + timedelta(1))  # później do obcięcia ten minus
-        context['ordered_products'] = OrderedProducts.objects.all()
-        context['date_ordered'] = date.today() + timedelta(2)
-        context['profile'] = UserProfileInfo.objects.all()
-        context['routes_today'] = Route.objects.filter(
-            date=date.today())
-        return context
-
 
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
@@ -58,8 +42,8 @@ class IndexView(TemplateView):
         context['routes_today'] = Route.objects.filter(
             date=date.today())
         context['date_ordered'] = date.today() + timedelta(1)
+        context['trucks'] = Truck.objects.all()
 
-        # później do obcięcia ten minus
         return context
 
 
@@ -80,6 +64,7 @@ class IndexView1(TemplateView):
         context['routes_today'] = Route.objects.filter(
             date=date.today())  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(1)
+        context['trucks'] = Truck.objects.all()
 
         return context
 
@@ -101,6 +86,7 @@ class IndexView2(TemplateView):
         context['routes_today'] = Route.objects.filter(
             date=date.today())  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(1)
+        context['trucks'] = Truck.objects.all()
 
         return context
 
@@ -122,6 +108,7 @@ class IndexView3(TemplateView):
         context['routes_today'] = Route.objects.filter(
             date=date.today())  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(1)
+        context['trucks'] = Truck.objects.all()
 
         return context
 
@@ -143,7 +130,8 @@ class IndexView20(TemplateView):
         context['routes_tomorrow'] = Route.objects.filter(
             date=date.today() + timedelta(1))
         context['date_ordered'] = date.today() + timedelta(2)
-        # później do obcięcia ten minus
+        context['trucks'] = Truck.objects.all()
+
         return context
 
 
@@ -164,6 +152,7 @@ class IndexView21(TemplateView):
         context['routes_tomorrow'] = Route.objects.filter(
             date=date.today() + timedelta(1))  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(2)
+        context['trucks'] = Truck.objects.all()
 
         return context
 
@@ -185,6 +174,8 @@ class IndexView22(TemplateView):
         context['routes_tomorrow'] = Route.objects.filter(
             date=date.today() + timedelta(1))  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(2)
+        context['trucks'] = Truck.objects.all()
+
 
         return context
 
@@ -206,6 +197,7 @@ class IndexView23(TemplateView):
         context['routes_tomorrow'] = Route.objects.filter(
             date=date.today() + timedelta(1))  # później do obcięcia ten minus
         context['date_ordered'] = date.today() + timedelta(2)
+        context['trucks'] = Truck.objects.all()
 
         return context
 
@@ -255,18 +247,6 @@ def onNotConsidered(tab):
     return False
 
 
-"""""
-def areAllConsideredIJ(tab):
-    for i in range (0, len(tab)):
-        if(tab[i][j] is not None):
-            return False
-    for j in range (0, len(tab)):
-        if(tab[i][j] is not None):
-            return False
-    return True
-
-"""
-
 
 @csrf_exempt
 def maxCell(tab):
@@ -284,16 +264,13 @@ def maxCell(tab):
 
 
 @csrf_exempt
-def wasCondidered(orders, ordersConsidered):
-    for i in range(0, len(orders)):
-        for j in range(0, len(ordersConsidered)):
-            if orders[i] == ordersConsidered[j]:
-                return True
-    return False
-
-
-@csrf_exempt
 def maxFromI(tab, i):
+    """
+    Finds the biggest value in the matrix from the row i.
+    :param tab: A saving matrix from Clarke and Wright algorithm.
+    :param i: A column in which we look for the biggest value.
+    :return: The biggest value from the row i in matrix tab.
+    """
     max = 0
     jmax = None
     for j in range(0, len(tab)):
@@ -305,6 +282,12 @@ def maxFromI(tab, i):
 
 @csrf_exempt
 def maxFromJ(tab, j):
+    """
+    Finds the biggest value in the matrix from the column j.
+    :param tab: A saving matrix from Clarke and Wright algorithm.
+    :param j: A row in which we look for the biggest value.
+    :return: The biggest value from the column j in matrix tab.
+    """
     max = 0
     imax = None
     for i in range(0, len(tab)):
@@ -316,6 +299,12 @@ def maxFromJ(tab, j):
 
 @csrf_exempt
 def deleteAllFromIndex(tab, index):
+    """
+    Deletes all cells where a number of row or a column is equal to index.
+    :param tab: A saving matrix from Clarke and Wright algorithm.
+    :param index: A number of row / column we want to delete.
+    :return:
+    """
     for i in range(0, len(tab)):
         for j in range(0, len(tab)):
             if (i == index or j == index):
@@ -324,24 +313,27 @@ def deleteAllFromIndex(tab, index):
 
 @csrf_exempt
 def ClarkeWright(date, claster):
+    """
+    For each claster it finds optimized routes using Clarke and Wright algorithm.
+    :param date: A date of the checkout for which we plan the routes.
+    :param claster: A claster for which we calculate the routes.
+    :return:
+    """
     ordersOryg = None
     orders = []
-
     for c in Checkout.objects.all():
         if str(c.date) == date:
             if ordersOryg is None:
-                ordersOryg = OrderedProducts.objects.filter(id_checkout=c)  # tu trzeba przefiltrować jeszcze z clastrem
+                ordersOryg = OrderedProducts.objects.filter(id_checkout=c)
             else:
-                ordersOryg = ordersOryg | OrderedProducts.objects.filter(id_checkout=c)  # i tu
+                ordersOryg = ordersOryg | OrderedProducts.objects.filter(id_checkout=c)
 
     if (ordersOryg is not None):
-        print(ordersOryg)
         for o in ordersOryg:
             if (UserProfileInfo.objects.get(user=o.name_deliver).id_cluster.id_truck == claster and o.route == False):
                 o.route = True
                 o.save()
                 orders.append(o)
-        print(orders)
         tab = [None] * len(orders)
         for x in range(len(tab)):
             tab[x] = [None] * len(orders)
@@ -387,17 +379,20 @@ def ClarkeWright(date, claster):
 
                 saving = distanceim + distancejm - distanceij
 
-                if ((orders[i].amount + orders[j].amount) > Truck.objects.get(id_truck=claster).capacity):
-                    tab[i][j] = None;
-                else:
-                    tab[i][j] = saving
+                #if ((orders[i].amount + orders[j].amount) > Truck.objects.get(id_truck=claster).capacity):
+                    #tab[i][j] = None;
+                #else:
+                tab[i][j] = saving
 
         allRoutes = []
         while (not areAllConsidered(ordersConsidered)):
             if (not onNotConsidered(ordersConsidered)):
+                print(tab)
                 sumAmount = 0
                 imax = maxCell(tab)[0]
                 jmax = maxCell(tab)[1]
+                print(imax)
+                print(jmax)
                 sumAmount = (orders[imax].amount + orders[jmax].amount)
                 ordersConsidered[imax] = None
                 ordersConsidered[jmax] = None
@@ -446,37 +441,38 @@ def ClarkeWright(date, claster):
                                 route.append(orders[i].id)
                             deleteAllFromIndex(tab, i)
                             ordersConsidered[i] = None
-                print(route)
                 allRoutes.append(route)
-                # Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
-
             else:
                 for i in range(0, len(ordersConsidered)):
                     if (ordersConsidered[i] is not None):
                         route = [orders[i].id]
-                        # Route.objects.create(products_list=str(route), date=date, id_truck=Truck.objects.get(id_truck=claster))
-                        print(route)
                         allRoutes.append(route)
                         ordersConsidered[i] = None
                         break
-            print(allRoutes)
         MatchClients(date, claster, allRoutes)
         addHour(date)
+        calculateHour(date)
+        sendMail(date)
 
 
 @csrf_exempt
 def MatchClients(date, claster, routes):
+    """
+    Matches routes for the date given as an attribute to the checkouts, with the date as the given one.
+    :param date: A date of the routes which we match with the checkouts.
+    :param claster: A claster of the clients and routes for which we do the matching.
+    :param routes:A list of routes for the day given as an attribute.
+    :return:
+    """
     client_date = datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1)
     clients_checkouts_oryg = Checkout.objects.filter(date=client_date)  # tu teź claster
     clients_checkouts_oryg = clients_checkouts_oryg[::1]
     clients_checkouts = []
-    print(clients_checkouts_oryg)
     for o in clients_checkouts_oryg:
         if UserProfileInfo.objects.get(user=o.name_client).id_cluster.id_truck == claster and o.route_client == False:
             o.route_client = True
             o.save()
             clients_checkouts.append(o)
-    print(clients_checkouts)
     tab = [None] * len(routes)
     for x in range(len(routes)):
         tab[x] = [None] * len(clients_checkouts)
@@ -509,7 +505,6 @@ def MatchClients(date, claster, routes):
                     client = clients_checkouts[c]
                     index = c
         if (client is None):
-            print(routes[r])
             routes[r].append('m')
             routes[r].reverse()
             routes[r].append('m')
@@ -528,12 +523,10 @@ def MatchClients(date, claster, routes):
             routes[r].reverse()
             routes[r].append(client.id)
             routes[r].reverse()
-            print(routes[r])
             routes[r].append('m')
             routes[r].reverse()
             routes[r].append('m')
             routes[r].reverse()
-            print(routes[r][1])
             route = Route.objects.create(products_list=str(routes[r]), date=client_date,
                                          id_truck=Truck.objects.get(id_truck=claster),
                                          client=True, colour='#546b91',
@@ -550,7 +543,6 @@ def MatchClients(date, claster, routes):
             routes[r].reverse()
             routes[r].append('m')
             routes[r].reverse()
-            print(route)
             route = Route.objects.create(products_list=str(route), date=client_date,
                                          id_truck=Truck.objects.get(id_truck=claster),
                                          client=True, colour='#273244', hour=int(Checkout.objects.get(id=routes[r][1])))
@@ -563,6 +555,10 @@ def MatchClients(date, claster, routes):
 
 @csrf_exempt
 def runClarkeWright(request):
+    """
+    :param request: Ajax request
+    :return: Http Response
+    """
     date = datetime.today() + timedelta(2)  # moje testowe dane są na 20.12.2018 dlatego tak to robię
     date = str(date.strftime('%Y-%m-%d'))
     for t in Truck.objects.all():
@@ -570,17 +566,218 @@ def runClarkeWright(request):
     return HttpResponse()
 
 
-def addHour(date):  # to trzeba jeszcze przetestować, bo coś nie pykło
-    routes = []
+@csrf_exempt
+def addHour(date):
+    """
+    Adds an hour to automatically generated routes for the day given as an attribute of the function
+    :param date: A date of the routes we add an hour to
+    :return:
+    """
+
+    date = (datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1))
     for t in Truck.objects.all():
         routes = Route.objects.filter(date=date, id_truck=t, hour=0)
         for r in routes:
+            print(r)
             for h in range(1, 6):
-                hours = Route.objects.filter(date=(datetime.strptime(date, "%Y-%m-%d").date() + timedelta(days=1)),
+                hours = Route.objects.filter(date=date,
                                              hour=h, id_truck=t)
                 if (len(hours) == 0):
                     r.hour = h
                     r.save()
                     break
 
-# MatchClients('2018-12-20',2,[[63, 67, 62], [69, 70, 68], [71]])
+
+@csrf_exempt
+def calculateHour(date):
+
+    date = (datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1))
+    hours=0
+    for r in Route.objects.filter(date=date):
+        list=r.products_list.split(',')
+        if(r.client):
+            latitude1=str(Magazine.objects.get(id_magazine=1).latitude)
+            longitude1=str(Magazine.objects.get(id_magazine=1).longitude)
+
+            latitude2 = UserProfileInfo.objects.get(user_id=Checkout.objects.get(id=int(list[1])).name_client).latitude
+            longitude2 = UserProfileInfo.objects.get(user_id=Checkout.objects.get(id=int(list[1])).name_client).longitude
+
+            waypoint1 = 'geo!' + str(latitude1) + ',' + str(longitude1)
+            waypoint2 = 'geo!' + str(latitude2) + ',' + str(longitude2)
+
+            message = requests.get('https://route.api.here.com/routing/7.2/calculateroute.json',
+                                    {'app_id': 'Z7uukAiQbHvHZ43KIBKW', 'app_code': 'nadFSh5EHBHkTdUQ3YnTEg',
+                                     'waypoint0': waypoint1, 'waypoint1': waypoint2,
+                                     'mode': 'fastest;car;traffic:disabled'})
+
+            data = message.json()
+            distance = data['response']['route'][0]['summary']['distance']
+            hour=distance/60000
+        else:
+            latitude1=str(Magazine.objects.get(id_magazine=1).latitude)
+            longitude1=str(Magazine.objects.get(id_magazine=1).longitude)
+
+            latitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[1])).name_deliver).latitude
+            longitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[1])).name_deliver).longitude
+
+            waypoint1 = 'geo!' + str(latitude1) + ',' + str(longitude1)
+            waypoint2 = 'geo!' + str(latitude2) + ',' + str(longitude2)
+
+            message = requests.get('https://route.api.here.com/routing/7.2/calculateroute.json',
+                                    {'app_id': 'Z7uukAiQbHvHZ43KIBKW', 'app_code': 'nadFSh5EHBHkTdUQ3YnTEg',
+                                     'waypoint0': waypoint1, 'waypoint1': waypoint2,
+                                     'mode': 'fastest;car;traffic:disabled'})
+
+            data = message.json()
+            distance = data['response']['route'][0]['summary']['distance']
+            hour=distance/60000
+
+
+        for i in range(2,len(list)-3):
+            latitude1 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[i])).name_deliver).latitude
+            longitude1 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[i])).name_deliver).longitude
+
+            latitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[i+1])).name_deliver).latitude
+            longitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[i+1])).name_deliver).longitude
+
+            waypoint1 = 'geo!' + str(latitude1) + ',' + str(longitude1)
+            waypoint2 = 'geo!' + str(latitude2) + ',' + str(longitude2)
+
+            message = requests.get('https://route.api.here.com/routing/7.2/calculateroute.json',
+                                    {'app_id': 'Z7uukAiQbHvHZ43KIBKW', 'app_code': 'nadFSh5EHBHkTdUQ3YnTEg',
+                                     'waypoint0': waypoint1, 'waypoint1': waypoint2,
+                                     'mode': 'fastest;car;traffic:disabled'})
+
+            data = message.json()
+            distance = data['response']['route'][0]['summary']['distance']
+            hour=hour+distance/60000
+
+        latitude1 = str(Magazine.objects.get(id_magazine=1).latitude)
+        longitude1 = str(Magazine.objects.get(id_magazine=1).longitude)
+
+        latitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[len(list)-2])).name_deliver).latitude
+        longitude2 = UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[len(list)-2])).name_deliver).longitude
+
+        waypoint1 = 'geo!' + str(latitude1) + ',' + str(longitude1)
+        waypoint2 = 'geo!' + str(latitude2) + ',' + str(longitude2)
+
+        message = requests.get('https://route.api.here.com/routing/7.2/calculateroute.json',
+                               {'app_id': 'Z7uukAiQbHvHZ43KIBKW', 'app_code': 'nadFSh5EHBHkTdUQ3YnTEg',
+                                'waypoint0': waypoint1, 'waypoint1': waypoint2,
+                                'mode': 'fastest;car;traffic:disabled'})
+
+        data = message.json()
+        distance = data['response']['route'][0]['summary']['distance']
+        hour = hour + distance / 60000
+        hour = hour + (len(list)-2)*0.1
+        hour = round(hour,2)
+        r.time=hour
+        r.save()
+
+
+
+@csrf_exempt
+def sendMail(date):
+
+    date = (datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1))
+    mails=set()
+    for r in Route.objects.filter(date=date):
+        list=r.products_list.split(',')
+        if(r.client):
+            mail=UserProfileInfo.objects.get(user_id=Checkout.objects.get(id=int(list[1])).name_client).user.email
+            username = UserProfileInfo.objects.get(user_id=Checkout.objects.get(id=int(list[1])).name_client).company_name
+            email = mail
+            date = r.date
+            hour = r.hour
+            if(hour==1):
+                hour="10:00"
+            elif(hour==2):
+                hour="13:00"
+            else:
+                hour="16:00"
+            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', ['maria.anna.mamica@gmail.com',
+                                                                                     'kartytko@gmail.com', 'agapekala1@wp.pl']
+            html_content = render_to_string('admin_app/mail.html',
+                                            {'user': username, 'email': email, 'date': date, 'hour': hour})  # render with dynamic value
+            text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
+
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+        else:
+            mail=UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[1])).name_deliver).user.email
+            mails.add(mail)
+
+        for i in range(2,len(list)-2):
+            mail=UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[i])).name_deliver).user.email
+            mails.add(mail)
+
+        for m in mails:
+            email = m
+            date = r.date
+            hour = r.hour
+            if(hour==1):
+                hour="10:00"
+            elif(hour==2):
+                hour="13:00"
+            else:
+                hour="16:00"
+            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', ['maria.anna.mamica@gmail.com',
+                                                                                     'kartytko@gmail.com', 'agapekala1@wp.pl']
+            html_content = render_to_string('admin_app/mail_deliver.html',
+                                            {'email': email, 'date': date, 'hour': hour})  # render with dynamic value
+            text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
+
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+
+
+@csrf_exempt
+def runUpdate(request):
+    body_unicode = request.body.decode('utf-8')
+    pattern = r'array=(.*)&id=(\d*)&array2=(.*)&id2=(\d*)'
+    print(body_unicode)
+    r = re.compile(pattern)
+    m = r.match(body_unicode)
+    array = m.group(1)
+    id = m.group(2)
+    array2=m.group(3)
+    id2=m.group(4)
+    print(body_unicode)
+    if(array!=''):
+        list = array.split('%2C')
+        if (Route.objects.get(id_route=id).client):
+            route = Route.objects.get(id_route=id).products_list.split(',')
+            client=int(route[1])
+            list.insert(0,client)
+
+        for x in range(len(list)):
+            list[x]=int(list[x])
+
+        list.insert(0,'m')
+        list.append('m')
+        r=Route.objects.get(id_route=id)
+        r.products_list=list
+        r.save()
+    elif(array2!=''):
+        list = array2.split('%2C')
+        if (Route.objects.get(id_route=id2).client):
+            route = Route.objects.get(id_route=id2).products_list.split(',')
+            client = int(route[1])
+            list.insert(0, client)
+
+        for x in range(len(list)):
+            list[x] = int(list[x])
+
+        list.insert(0, 'm')
+        list.append('m')
+        r = Route.objects.get(id_route=id2)
+        r.products_list = list
+        r.save()
+    date2=date.today()+timedelta(2)
+    date2=str(date2)
+    calculateHour(date2)
+    return HttpResponse()

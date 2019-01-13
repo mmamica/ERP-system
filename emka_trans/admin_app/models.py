@@ -20,6 +20,7 @@ class Route(models.Model):
     client=models.BooleanField(default=False)
     colour = models.CharField(max_length=10)
     hour=models.IntegerField(default=0)
+    time=models.FloatField(default=0)
 
 
 
@@ -35,6 +36,16 @@ class Route(models.Model):
                 return_list.append((int(list[i]), int(list[i + 1])))
         return return_list
 
+    def routes_as_list_noclient(self):
+        list = self.products_list.split(', ')
+        return_list=[]
+        if(self.client==True):
+            for i in range(2,len(list)-1):
+                return_list.append(int(list[i]))
+        else:
+            for i in range(1,len(list)-1):
+                return_list.append(int(list[i]))
+        return return_list
 
 
 class Magazine(models.Model):

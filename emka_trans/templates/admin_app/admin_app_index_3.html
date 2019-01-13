@@ -132,6 +132,16 @@ document.write(today);
 <h1>DOSTAWCY</h1>
 
 
+{%for t in trucks%}
+
+
+<h1>Tir {{t.id_truck}}</h1>
+{% for r in routes_today %}
+    {%if r.id_truck == t and r.hour == 3%}
+    <h3>{{r.time}} h</h3>
+    {%endif%}
+{%endfor%}
+
 <table class="table">
   <thead>
     <tr>
@@ -144,39 +154,43 @@ document.write(today);
     </tr>
   </thead>
 
+
   <tbody>
+
+    {% for r in routes_today %}
+    {%if r.hour == 3 and r.id_truck == t%}
+    {% for ri in r.routes_as_list_noclient %}
     {% for o in ordered_products %}
-        {% if o.id_checkout.date == date_ordered%}
-            {%for r in routes_today%}
-            {%ifequal r.id_route o.id_route%}
-            {%if r.hour == 3%}
+    {% if o.id == ri%}
+
 
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=o.name_deliver%}">{{o.name_deliver}}</a></td>
       <td>{{o.name_product}}</td>
       <td>{{o.amount}}kg</td>
       <td>{{o.id_route}}</td>
-        {% for r in routes_today%}
-        {% ifequal r.id_route o.id_route %}
-      <td>{{r.id_truck.id_truck}}</td>
-        {%endifequal%}
-        {%endfor%}
+      <td>{{t.id_truck}}</td>
       <td>{{o.id}}</td>
 
     </tr>
 
     {%endif%}
-    {%endifequal%}
+    {%endfor%}
     {%endfor%}
     {%endif%}
-    {% endfor %}
-
+    {%endfor%}
 
   </tbody>
 </table>
 
+{%endfor%}
+
 
 <h1>KLIENCI</h1>
+
+{%for t in trucks%}
+
+<h1>Tir {{t.id_truck}}</h1>
 
 
 <table class="table">
@@ -196,12 +210,14 @@ document.write(today);
 
   <tbody>
     {% for c in checkout %}
-            {% if c.hour == 3%}
+    {% for p in profile %}
+
+    {% if c.hour == 3 and c.name_client == p.user and t == p.id_cluster %}
 
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=c.name_client%}">{{c.name_client}}</a></td>
       <td>{{c.price}}</td>
-      <td>{{c.weight}}kg</td>
+      <td>{{c.weigth}}kg</td>
         {% for r in routes_today%}
         {% for ri in r.routes_as_list%}
         {% if r.client and ri.1 == c.id%}
@@ -216,10 +232,11 @@ document.write(today);
     </tr>
     {%endif%}
     {% endfor %}
-
+    {%endfor%}
 
   </tbody>
 </table>
+{%endfor%}
 
 
     

@@ -12,9 +12,10 @@ urlpatterns = [
    url(r'^dashboard21/$', views.IndexView21.as_view(), name='index21'),
    url(r'^dashboard22/$', views.IndexView22.as_view(), name='index22'),
    url(r'^dashboard23/$', views.IndexView23.as_view(), name='index23'),
-    url(r'^manual/$', views.Manual.as_view(), name='manual'),
    url(r'^orders/$',views.AdminCheckoutListView.as_view(),name='order_list'),
    url(r'^orders/(?P<pk>\d+)/$',views.AdminCheckoutDetailView.as_view(),name='order_detail'),
    url(r'^products/$',views.AdminProductListView.as_view(),name='product_list'),
    url(r'^runClarkeWright/$', views.runClarkeWright, name='runClarkeWright'),
+    url(r'^runUpdate/$', views.runUpdate, name='runUpdate'),
+
 ]
