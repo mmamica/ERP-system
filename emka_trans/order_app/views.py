@@ -51,6 +51,9 @@ class CheckoutDetailView(DetailView):
 
 @method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
+    """
+
+    """
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
 
