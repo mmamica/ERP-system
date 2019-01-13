@@ -4,20 +4,21 @@ from django.shortcuts import render
 from accounts.forms import UserForm, UserProfileInfoForm, EditUserForm, LoginForm, EditProfileForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from accounts.models import UserProfileInfo
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-import json
 import requests
-# Create your views here.
 from admin_app.models import Magazine,Truck
 
+
+
+"""
+
+"""
 
 @method_decorator(login_required, name='dispatch')
 class ChangePasswordView(View):

@@ -145,16 +145,17 @@ document.write(today);
   </thead>
 
   <tbody>
-    {% for o in ordered_products %}
+
+      {% for o in ordered_products %}
         {% ifequal o.id_checkout.date date_ordered %}
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=o.name_deliver%}">{{o.name_deliver}}</a></td>
       <td>{{o.name_product}}</td>
       <td>{{o.amount}}kg</td>
       <td>{{o.id_route}}</td>
-        {% for r in routes_today%}
-        {% ifequal r.id_route o.id_route %}
-      <td>{{r.id_truck.id_truck}}</td>
+        {% for p in profile%}
+        {% ifequal p.user o.name_deliver %}
+      <td>{{p.id_cluster.id_truck}}</td>
         {%endifequal%}
         {%endfor%}
       <td>{{o.id}}</td>
@@ -190,16 +191,25 @@ document.write(today);
     <tr>
       <td><a href="{% url 'accounts:show_profile' username=c.name_client%}">{{c.name_client}}</a></td>
       <td>{{c.price}}</td>
-      <td>{{c.weight}}kg</td>
+      <td>{{c.weigth}}kg</td>
+        {% if routes_today|length == 0 %}
+        <td>0</td>
+        {% else %}
         {% for r in routes_today%}
         {% for ri in r.routes_as_list%}
         {% if r.client and ri.1 == c.id%}
       <td>{{r.id_route}}</td>
-      <td>{{r.id_truck.id_truck}}</td>
-
         {%endif%}
         {%endfor%}
         {%endfor%}
+        {%endif%}
+
+        {% for p in profile%}
+        {% ifequal p.user c.name_client %}
+      <td>{{p.id_cluster.id_truck}}</td>
+        {%endifequal%}
+        {%endfor%}
+
       <td>{{c.id}}</td>
 
     </tr>
