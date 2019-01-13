@@ -15,11 +15,6 @@ import requests
 from admin_app.models import Magazine,Truck
 
 
-
-"""
-
-"""
-
 @method_decorator(login_required, name='dispatch')
 class ChangePasswordView(View):
 
@@ -27,7 +22,7 @@ class ChangePasswordView(View):
         Changes the user's password.
 
         ``form``
-            An instance of `accounts.PasswordChangeForm`.
+            An instance of :model:`accounts.PasswordChangeForm`.
 
         :template: `accounts/change_password.html`
         :template: `accounts/my_account.html`
@@ -101,8 +96,8 @@ def get_user_profile(request, username):
     """
     Displays the profile of selected user
 
-    :param request: request
-    :param username: username of selected user
+    :param request: HttpRequest
+    :param username: string
     :template:`accounts/profile.html`
     """
     user = User.objects.get(username=username)
@@ -317,10 +312,12 @@ class LoginView(TemplateView):
 
 def checkDiv(latitude, longitude):
     """
+        Calculates the quarter in the coordinate system.
+        The center of the coordinate system is the location of the warehouse.
 
-    :param latitude:
-    :param longitude:
-    :return:
+    :param latitude: float
+    :param longitude: float
+    :return: int
     """
     if latitude > Magazine.objects.get(id_magazine=1).latitude:
         if longitude < Magazine.objects.get(id_magazine=1).longitude:
@@ -335,6 +332,15 @@ def checkDiv(latitude, longitude):
 
 
 def isBigger(latitude, longitude,latitude_point, longitude_point):
+    """
+        Calculates if point with coordinates (latitude, longitude) is above the radius vector.
+
+    :param latitude: float
+    :param longitude: float
+    :param latitude_point: float
+    :param longitude_point: float
+    :return: boolean
+    """
     ya=latitude
     yb=float(Magazine.objects.get(id_magazine=1).latitude)
     xa=longitude
