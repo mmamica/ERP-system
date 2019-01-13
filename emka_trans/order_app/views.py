@@ -182,9 +182,11 @@ class ConfirmCheckoutView(View):
 
 def load_genres(request):
     """
-        Loads the genres of the product
-    :param request:
-    :return:
+        Loads genres based on the selected product.
+
+    :param request: HttpRequest
+    :return: HttpResponse
+
     """
     product = request.GET.get('product')
     cluster = UserProfileInfo.objects.get(user=request.user).id_cluster
@@ -202,6 +204,14 @@ class CheckoutUpdateView(UpdateView):
     model = models.Checkout
 
 class ProductUpdateView(UpdateView):
+    """
+        Allows the user to update the amount of the selected product :model:`order_app.OrderedProducts`.
+
+        **Template:**
+        :template:`order_app:orderedproducts_form.html`
+        :template:`order_app:order_detail.html`
+
+    """
     fields = ("amount",)
     model = models.OrderedProducts
 
@@ -232,6 +242,16 @@ class ProductUpdateView(UpdateView):
         return super(ProductUpdateView, self).form_valid(form)
 
 class ProductDeleteView(DeleteView):
+
+    """
+        Allows the user to delete product from order.
+        **Context**
+        `order`
+            An instance of :model:`order_app.Product`
+        **Template:**
+        :template:`order_app/orderedproducts_confirm_delete.html`
+        :template:`order_app/order_detail.html`
+    """
     context_object_name = "order"
     model = models.OrderedProducts
 
@@ -247,11 +267,22 @@ class ProductDeleteView(DeleteView):
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
 class CheckoutDeleteView(DeleteView):
+    """
+        Allows the user to delete order.
+
+        **Context**
+        `order`
+            An instance of :model:`order_app.Checkout`
+        **Template:**
+        :template:`order_app/checkout_confirm_delete.html`
+        :template:`order_app/checkout_list.html`
+    """
     context_object_name="order"
     model = models.Checkout
     success_url = reverse_lazy("order_app:list")
 
 class OrderedProductsListView(ListView):
+
     context_object_name = 'orderedproducts_list'
     model = models.OrderedProducts
 
@@ -261,6 +292,16 @@ class OrderedProductsDetailView(DetailView):
     template_name = 'order_app/order_detail.html'
 
 class AllProductsView(View):
+    """
+        Allows the user browse available products.
+
+        **Context**
+        `products`
+            A list of :model:`order_app.OrderedProducts`.
+
+        **Template:**
+        :template:`order_app/all_products_list.html`
+    """
     def get(self,request):
         user=self.request.user
         cluster=UserProfileInfo.objects.get(user=user).id_cluster

@@ -122,10 +122,10 @@ h1{
 
 /* my_account */
 /* Crops image into circle. */
-img .profilePic{
+.profilePic{
 	object-fit: cover;
-	width:230px;
-	height:230px;
+	width: 230px;
+	height: 230px;
 	border-radius: 50%;
 }
 
