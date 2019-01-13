@@ -2,13 +2,14 @@
 {% load staticfiles %}
 {% block body_block %}
 
-<div class="centeredDiv plainBackground ">
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
 <!--<div class="jumbotron">-->
 	
 
 
 	<h1>My profile</h1>
 	<div id="leftDivRegister">
+	</br></br></br>
 		<table style="width:100%">
 			<tr>
 		    	<td>Username:</td>
@@ -50,24 +51,26 @@
 			<img src="{% static 'img/nouser.jpg'%}" alt="Logo" class="profilePic"> 
 		{% endif %}
 	</div>
-	<div style="clear: left;"></div>		
+	
 	<div style="clear: right;"></div>
+	<div style="clear: left;"></div>		
+	
 	</br>
 	
 	<div class="horizontalDivs">
-		<a href="{% url 'accounts:edit_my_profile' %}" class="editProfileBtn btn btn-info">Edytuj profil</a><br><br>
+		<a href="{% url 'accounts:edit_my_profile' %}" class="editProfileBtn btn btn-info">Edit profile</a><br><br>
 	</div>
 	
 	<div class="horizontalDivs">
 		{#{% if user_profile.is_client %}#}
-			{#<a href="{% url 'orders:order_list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>#}
+			{#<a href="{% url 'orders:order_list' %}" class="editProfileBtn btn btn-info">Browse orders</a><br><br>#}
 		{#{% endif %}#}
 	</div>
 	<div class="horizontalDivs">
 		{% if user_profile.is_client == False %}
-	    	<a href="{% url 'products_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj produkty</a><br><br>
+	    	<a href="{% url 'products_app:list' %}" class="editProfileBtn btn btn-info">Browse products</a><br><br>
 	    {% else %}
-	    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>
+	    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Browse orders</a><br><br>
 		{% endif %}
 	</div>
 	</br>
