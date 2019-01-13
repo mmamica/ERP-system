@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Admin Page
+      {# Title Extensions go inside the block#}
+      {% block title_block %}
+      {% endblock %}
+    </title>
+
+
+    <style>
+      #loading_bar{
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("http://i.stack.imgur.com/FhHRx.gif");
+        background-position: 50% 50%;
+        background-color: rgba(255,255,255, 0.8);
+        background-repeat: no-repeat ;
+      }
+    </style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.0.min.js"
+  integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js" crossorigin></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js" crossorigin></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js" crossorigin></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js" crossorigin></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      {% csrf_token %}
+
+
+
+      <script type="text/javascript">
+            function call_alg() {
+                $('#loading_bar').show();
+                $.ajax({
+                type: 'POST',
+                url: '/admin_app/runClarkeWright/',
+                success: function () {
+                    $('#loading_bar').hide();
+                    alert("wygenerowano");
+                    window.location.reload();
+                },
+                error: function() {
+                    $('#loading_bar').hide();
+                    alert("nie wygenerowano");
+                }
+    });}
+        </script>
+
+
+    <script>
+      function table() {
+          var Array=[];
+          var id=null;
+          var Array2=[];
+          var id2=null;
+
+          for(var i = 1; i < document.getElementById("1").rows.length; i++)
+            {
+                var x = document.getElementById("1").rows[i].cells[5].innerHTML;
+                Array.push(parseInt(x));
+                id=document.getElementById("1").rows[i].cells[3].innerHTML;
+            }
+          for(var i = 1; i < document.getElementById("2").rows.length; i++)
+            {
+                var x = document.getElementById("2").rows[i].cells[5].innerHTML;
+                Array2.push(parseInt(x));
+                id2=document.getElementById("2").rows[i].cells[3].innerHTML;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/admin_app/runUpdate/',
+                data: {
+                        'array': Array.toString(),
+                        'id': id,
+                        'array2': Array2.toString(),
+                        'id2': id2,
+                        },
+                success: function () {
+                    alert("zaktualizowano");
+                    window.location.reload();
+                },
+                error: function() {
+                    alert("aktualizacja nie powiodła się");
+
+
+      }});}
+
+
+
+    </script>
+
+
+</head>
+  <body>
+
+  <div id="loading_bar">
+   </div>
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'index' %}">Index</a></li>
+          <li><a class="navbar-brand" href="{% url 'admin_app:index' %}">Dashboard</a></li>
+          <li><a class="navbar-brand" href="{% url 'admin_app:index' %}">Dziś</a></li>
+          <li><a class="navbar-brand" href="{% url 'admin_app:index20' %}">Jutro</a></li>
+          <li><a class="navbar-link" href="{% url 'admin_app:order_list' %}">Zamówienia</a></li>
+          <li><a class="navbar-link" href="{% url 'admin_app:product_list' %}">Produkty</a></li>
+          <li><a class="navbar-link" href="{% url 'admin_app:product_list' %}">Produkty</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+      {% block body_block %}
+      <h1> LO L</h1>
+      {% endblock %}
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      $('tbody').sortable();
+    </script>
+
+
+  </body>
+
+
+  <!-- Latest compiled and minified JavaScript -->
+
+</html>

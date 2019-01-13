@@ -1,0 +1,39 @@
+{% extends "order_app/order_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+
+    <h1>Dostępne produkty</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Produkt</th>
+      <th scope="col">Gatunek</th>
+      <th scope="col">Cena</th>
+      <th scope="col">Ilość</th>
+      <th scope="col">Waga</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for product in product_list %}
+
+    <tr>
+      <th>{{product.name}}</th>
+      <td>{{product.genre}}</td>
+      <td>{{product.price}}zł</td>
+      <td>{{product.amount}}kg</td>
+      <td>{{ product.weight }}</td>
+    </tr>
+        {% endfor %}
+
+
+  </tbody>
+</table>
+
+  </div>
+
+
+{% endblock %}

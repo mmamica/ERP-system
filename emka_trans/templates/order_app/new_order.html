@@ -1,0 +1,13 @@
+{% extends "order_app/order_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+
+    <h1>Utwórz zamówienie</h1>
+    <form method="POST">
+      {% csrf_token %}
+    <input type="submit" class='btn btn-primary' value="Utwórz">
+
+  </form>
+  </div>
+
+{% endblock %}
