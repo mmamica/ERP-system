@@ -15,11 +15,6 @@ import requests
 from admin_app.models import Magazine,Truck
 
 
-
-"""
-
-"""
-
 @method_decorator(login_required, name='dispatch')
 class ChangePasswordView(View):
 
@@ -27,7 +22,7 @@ class ChangePasswordView(View):
         Changes the user's password.
 
         ``form``
-            An instance of `accounts.PasswordChangeForm`.
+            An instance of :model:`accounts.PasswordChangeForm`.
 
         :template: `accounts/change_password.html`
         :template: `accounts/my_account.html`
@@ -57,7 +52,11 @@ class EditProfileView(View):
         Allows the user to edit selected profile elements.
 
         ``profile_form``
-            An instance of `EditProfileForm`.
+            An instance of `accounts.EditProfileForm`.
+        ``user_form``
+            An instance of `accounts.EditUserForm`.
+
+        :template:`accounts/edit_my_profile.html`
 
     """
 
@@ -93,6 +92,14 @@ class EditProfileView(View):
 
 
 def get_user_profile(request, username):
+
+    """
+    Displays the profile of selected user
+
+    :param request: HttpRequest
+    :param username: string
+    :template:`accounts/profile.html`
+    """
     user = User.objects.get(username=username)
     status = False
     user_id = user.id
@@ -104,32 +111,25 @@ def get_user_profile(request, username):
     return render(request, 'accounts/profile.html', {"user": user, "user_profile": user_profile, "status": status})
 
 
-#
-# class ShowProfileView(View):
-# 	template_name = 'accounts/profile.html'
-#
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		user = self.request.user
-# 		status = False
-# 		user_id = user.id
-# 		user_profile = UserProfileInfo.objects.get(user=user_id)
-#
-# 		if user_profile.is_client:
-# 			status = True
-#
-# 		context['status'] = status
-# 		context['user'] = user
-# 		context['user_profile'] = user_profile
-# 		return context
-
-
 class IndexView(TemplateView):
+    """
+        Displays index page.
+
+        :template:`accounts/index.html`
+    """
+
     template_name = 'accounts/index.html'
 
 
 @method_decorator(login_required, name='dispatch')
 class MyProfileView(TemplateView):
+
+    """
+        Displays the profile of the logged in user.
+
+        :template:`accounts/my_account.html`
+    """
+
     template_name = 'accounts/my_account.html'
 
     def get_context_data(self, **kwargs):
@@ -147,12 +147,35 @@ class MyProfileView(TemplateView):
 
 @method_decorator(login_required, name='dispatch')
 class LogoutView(View):
+
+    """
+        Logs out the user.
+
+        :template:`accounts/index.html`
+    """
+
     def get(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect(reverse('index'))
 
 
 class RegisterView(View):
+    """
+        Registers new user.
+        Coordinates are calculated based on the address given by the user
+
+        **Context**
+
+        ``user_form``
+            An instance of `accounts.UserForm`.
+
+        ``registered``
+            Boolean determining whether the registration was successful.
+
+        **Template:**
+        :template: `accounts/register_user.html`
+    """
+
     template_name = 'accounts/register_user.html'
     registered = False
 
@@ -239,7 +262,6 @@ class RegisterView(View):
 
             self.registered = True
         else:
-
             print(user_form.errors, profile_form.errors)
         return render(request, self.template_name,
                       {'user_form': user_form, 'profile_form': profile_form,
@@ -256,6 +278,19 @@ class RegisterView(View):
 
 
 class LoginView(TemplateView):
+
+    """
+        Allows the user to log in.
+
+        **Context**
+            ``form``
+                An instance of `accounts.LoginForm`.
+
+        **Template:**
+            :template:`accounts/login.html`
+            :template:`accounts/index.html`
+
+    """
     template_name = 'accounts/login.html'
 
     def post(self, request):
@@ -275,8 +310,15 @@ class LoginView(TemplateView):
             return render(request, self.template_name, {'form': form})
 
 
-
 def checkDiv(latitude, longitude):
+    """
+        Calculates the quarter in the coordinate system.
+        The center of the coordinate system is the location of the warehouse.
+
+    :param latitude: float
+    :param longitude: float
+    :return: int
+    """
     if latitude > Magazine.objects.get(id_magazine=1).latitude:
         if longitude < Magazine.objects.get(id_magazine=1).longitude:
             return 1
@@ -288,7 +330,17 @@ def checkDiv(latitude, longitude):
         if longitude > Magazine.objects.get(id_magazine=1).longitude:
             return 3
 
+
 def isBigger(latitude, longitude,latitude_point, longitude_point):
+    """
+        Calculates if point with coordinates (latitude, longitude) is above the radius vector.
+
+    :param latitude: float
+    :param longitude: float
+    :param latitude_point: float
+    :param longitude_point: float
+    :return: boolean
+    """
     ya=latitude
     yb=float(Magazine.objects.get(id_magazine=1).latitude)
     xa=longitude
