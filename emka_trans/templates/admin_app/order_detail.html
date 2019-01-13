@@ -1,0 +1,39 @@
+{% extends "admin_app/admin_app_base.html" %}
+
+{% block body_block %}
+  <div class="jumbotron">
+    <h2>Zamówienie {{ order_details.id }} szczegóły:</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produkt</th>
+          <th scope="col">Ilość</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Klient</th>
+            <th scope="col">Wybrany dostawca</th>
+        </tr>
+      </thead>
+     
+    {% for product in order_details.products.all %}
+    <tr>
+        <th>{{ product.name_product }}</th>
+    <th>{{ product.amount}}</th>
+      <th>{{ product.name_product.price }}zł</th>
+      <th><a href="{% url 'accounts:show_profile' username=product.id_checkout.name_client%}" >{{ product.id_checkout.name_client }}</a></th>
+        <th><a href="{% url 'accounts:show_profile' username=product.name_deliver %}"> {{ product.name_deliver}}</a></th>
+
+    </tr>
+    {% endfor %}
+
+    </table>
+  </div>
+
+    {% if checkout_details.confirmed == False %}
+     <p><a class='btn btn-warning' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Dodaj produkt</a></p>
+    <p><a class='btn btn-success' href="{% url 'order_app:confirm' pk=checkout_details.id %}">Zatwierdź</a></p>
+    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=checkout_details.id %}">Usuń zamówienie</a></p>
+    {% endif %}
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+
+{% block body_block %}
+
+
+<!--<div class="jumbotron">-->
+<div class="centeredDiv plainBackground">
+	
+	<h1>LOGIN</h1>
+    {% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+	{% endif %}
+	<form action="{% url 'accounts:user_login' %}" method=post>
+		{% csrf_token %}
+		<label for="username">Username: </label>
+		<input type="test" name="username">
+		</br></br>
+		<label for="password">Password: </label> 
+		<input type="password" name="password">
+		</br> </br>
+		<div class="okButtonWrapper">
+			<input type="submit" class="okButton" name="" value="OK">
+		</div>
+	</form>	
+
+</div>
+<!--</div>-->
+{% endblock %}
