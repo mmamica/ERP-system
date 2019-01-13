@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="calendar, fixing bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/emka_trans/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/templates/order_app/orderedproducts_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/order_app/orderedproducts_form.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+            <state relative-caret-position="58">
+              <caret line="319" column="20" selection-start-line="319" selection-start-column="20" selection-end-line="319" selection-end-column="20" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -336,7 +330,7 @@
       <workItem from="1546517772085" duration="29971000" />
       <workItem from="1546550863998" duration="6498000" />
       <workItem from="1547071315356" duration="724000" />
-      <workItem from="1547234516147" duration="1648000" />
+      <workItem from="1547234516147" duration="4609000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1544371411596</created>
@@ -436,11 +430,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546443400272</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="updating orders">
+      <created>1547236206578</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1547236206579</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156543000" />
+    <option name="totallyTimeSpent" value="159504000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -453,7 +454,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.27045456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -492,16 +492,10 @@
     <MESSAGE value="tests" />
     <MESSAGE value="error location message" />
     <MESSAGE value="calendar, fixing bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="calendar, fixing bugs" />
+    <MESSAGE value="updating orders" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating orders" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -637,16 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -869,20 +853,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="210">
+          <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+        <state relative-caret-position="58">
+          <caret line="319" column="20" selection-start-line="319" selection-start-column="20" selection-end-line="319" selection-end-column="20" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
