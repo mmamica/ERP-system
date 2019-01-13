@@ -22,6 +22,13 @@ class CheckoutView(ListView):
 
 @method_decorator(login_required, name='dispatch')
 class CheckoutListView(ListView):
+    """
+        Displays a list of checkouts :model:`order_app.Checkout`.
+
+        **Template:**
+
+        :template:`order_app/checkout_list.html`
+    """
     model = models.Checkout
 
     def get_queryset(self):
@@ -29,6 +36,12 @@ class CheckoutListView(ListView):
 
 @method_decorator(login_required, name='dispatch')
 class CheckoutDetailView(DetailView):
+    """
+        Displays checkout details :model:`order_app.Checkout`.
+
+        **Template:**
+        :template:`order_app/order_detail.html`
+    """
     context_object_name = 'checkout_details'
     model=models.Checkout
     template_name = 'order_app/order_detail.html'

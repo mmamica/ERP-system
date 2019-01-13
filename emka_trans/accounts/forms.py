@@ -15,6 +15,12 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = "Nazwa użytkownika"
+        self.fields['first_name'].label = "Imię"
+        self.fields['last_name'].label = "Nazwisko"
+        self.fields['password'].label = "Hasło"
 
 class UserProfileInfoForm(forms.ModelForm):
     city = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id': 'city'}))

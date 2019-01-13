@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="calendar, fixing bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/order_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/order_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emka_trans/templates/order_app/orderedproducts_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/order_app/orderedproducts_form.html" afterDir="false" />
-    </list>
+    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="calendar, fixing bugs" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +26,12 @@
     <favorites_list name="ERP-system" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+            <state relative-caret-position="136">
+              <caret line="295" column="21" lean-forward="true" selection-start-line="295" selection-start-column="21" selection-end-line="295" selection-end-column="21" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -174,106 +166,35 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="admin_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="order_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="order_app" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="products_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="order_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ERP-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERP-system" type="462c0819:PsiDirectoryNode" />
-              <item name="emka_trans" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="products_app" type="462c0819:PsiDirectoryNode" />
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="accounts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -440,7 +361,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156543000" />
+    <option name="totallyTimeSpent" value="156745000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -453,9 +374,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.27045456" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.275" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50127226" side_tool="true" weight="0.23787878" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -469,7 +389,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49893278" weight="0.3279483" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.4719697" side_tool="true" weight="0.365105" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.5280303" visible="true" weight="0.36187398" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.5272727" visible="true" weight="0.36187398" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4994664" weight="0.32903227" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -881,8 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+        <state relative-caret-position="136">
+          <caret line="295" column="21" lean-forward="true" selection-start-line="295" selection-start-column="21" selection-end-line="295" selection-end-column="21" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
