@@ -1,0 +1,46 @@
+{% extends "order_app/order_app_base.html" %}
+
+{% block body_block %}
+<h1>
+  {% if not form.instance.pk %}
+  Dodaj produkt
+  {% else %}
+  Edytuj produkt
+  <p><a class='btn btn-danger' href="{% url 'order_app:delete_product' pk=form.instance.pk %}">Usuń zamówienie</a></p>
+  {% endif %}
+</h1>
+  <form method="POST" id="productForm" data-genres-url="{% url 'order_app:ajax_load_genres' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    <input type="submit" class='btn btn-primary' value="Submit">
+
+  </form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_name").change(function () {
+      var url = $("#productForm").attr("data-genres-url");  // get the url of the `load_cities` view
+        document.getElementById("id_genre").style.display = "";
+      var productId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'product': productId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_genre").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+
+{% endblock %}

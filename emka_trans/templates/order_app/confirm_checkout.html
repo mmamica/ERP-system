@@ -1,0 +1,21 @@
+{% extends "order_app/order_app_base.html" %}
+
+{% block body_block %}
+<h1>
+  Czy chcesz zatwierdzić to zamówienie?
+</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class='btn btn-primary' value="Zatwierdź">
+  </form>
+
+{% if missing_products %}
+  <script>
+    alert("Wybrane produkty już niedostępne w bazie!\n\n{% for prod in missing_products%}{{prod.name}}\n {% endfor %}\n" +
+        "Edytuj swoje zamówienie");
+    window.location.href = "{% url 'order_app:detail' pk=checkout %}";
+  </script>
+{% endif %}
+
+{% endblock %}

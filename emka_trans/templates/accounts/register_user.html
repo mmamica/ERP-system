@@ -1,0 +1,31 @@
+{% extends "accounts/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<div class="jumbotron">
+	{% if registered %}
+		<h1>Thank you</h1>
+	{% else %}
+		<h1>Register here!</h1>	
+		<h2>Fill out the form:</h2>
+
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+			<input type="submit" name="" value="Register">
+
+		</form>
+
+
+
+	<!--<input id="location" type="text" maxlength="30"/>-->
+	<!--<button onclick="geocode(platform)">Click me!</button>-->
+
+	<div id="map" style="position:absolute; width:49%; height:80%; background:grey" ></div>
+  <div id="panel" style="position:absolute; width:49%; left:51%; height:80%; background:inherit" ></div>
+	{% endif %}
+	<script  src='{% static "js/registration_map.js" %}' type="text/javascript" charset="UTF-8" ></script>
+
+</div>
+{% endblock %}
