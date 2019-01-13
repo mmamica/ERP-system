@@ -11,15 +11,35 @@ import openpyxl
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-#przeglądanie własnych produktów
+
 class ProductListView(ListView):
+    """
+    Display a list of products :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_list.html`
+    """
     template_name = 'products_app/product_list.html'
 
     def get_queryset(self):
+        """
+        Return the list of items for this view.
+        """
         return models.Product.objects.filter(name_deliver=self.request.user)
 
-
 class ProductDetailView(DetailView):
+    """
+    Detail information about object :model:`products_app.Product`.
+
+    ``Product``
+        An instance of :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_detail.html`
+    """
+
     context_object_name = 'product_details'
     model = models.Product
     template_name = 'products_app/product_detail.html'
@@ -27,36 +47,52 @@ class ProductDetailView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         user = request.user
-
         try:
             models.Product.objects.get(id=pk, name_deliver=user)
             return super(ProductDetailView, self).dispatch(request, *args, **kwargs)
         except models.Product.DoesNotExist:
             return HttpResponseForbidden()
 
-
 class ProductCreateView(CreateView):
+    """
+    View for creating a new object, with a response rendered by a template :model:`products_app.Product`.
+    
+    ``Product``
+        An instance of :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_list.html`
+    """
     fields = ("name","genre","price","amount","weight")
     model = models.Product
     success_url = reverse_lazy("products_app:list")
 
-
-    #domyślna wartość dostwacy
     def form_valid(self, form):
+        """If the form is valid, save the associated model. Default value of deliever"""
         form.instance.name_deliver = self.request.user
         return super(ProductCreateView, self).form_valid(form)
 
 
 class ProductUpdateView(UpdateView):
+    """
+    View for updating an object, with a response rendered by a template. :model:`products_app.Product`.
+    
+    ``Product``
+        An instance of :model:`products_app.Product`.
+
+    **Template:**
+    
+    :template:`products_app/product_list.html`
+    """
+
     fields = ("name","genre","amount","price","weight")
     model = models.Product
     success_url = reverse_lazy("products_app:list")
 
-    #można updateować tylko swoje produkty
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  # example
-        # Take user from request
-        user = request.user
+        user = request.user  # Take user from request
 
         try:
             models.Product.objects.get(id=pk, name_deliver=user)
@@ -66,14 +102,20 @@ class ProductUpdateView(UpdateView):
 
 
 class ProductDeleteView(DeleteView):
+    """
+    View for deleting an object retrieved with self.get_object(), with a 
+    response rendered by a template.
+
+    ``Product``
+        :model:`products_app.Product`.
+    """
+
     model = models.Product
     success_url = reverse_lazy("products_app:list")
 
-    #można usuwać product tylko należący do cb
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  # example
-        # Take user from request
-        user = request.user
+        user = request.user 
 
         try:
             models.Product.objects.get(id=pk, name_deliver=user)
@@ -81,9 +123,16 @@ class ProductDeleteView(DeleteView):
         except models.Product.DoesNotExist:
             return HttpResponseForbidden()
 
-
 @method_decorator(login_required, name='dispatch')
 class UploadXlsView(View):
+    """
+    View for uploading an excel file.
+
+    **Template:**
+    
+    :template:`products_app/xls.html`
+    """
+
     template_name = 'products_app/xls.html'
 
     def get(self,request):
@@ -91,14 +140,10 @@ class UploadXlsView(View):
 
     def post(self,request):
         excel_file = request.FILES["excel_file"]
-
         # you may put validations here to check extension or file size
-
         wb = openpyxl.load_workbook(excel_file)
-
         # getting a particular sheet by name out of many sheets
         worksheet = wb["Sheet1"]
-
         first_row = worksheet[1]
         name=0
         genre=0
@@ -141,8 +186,3 @@ class UploadXlsView(View):
                                                 price=int(str(row[price].value)),weight=int(str(row[weight].value)))
                     success = True
         return render(request, self.template_name , {'success':success})
-
-
-class CBView(View):
-    def get(self,request):
-        return HttpResponse('Class Based Views are Cool!')

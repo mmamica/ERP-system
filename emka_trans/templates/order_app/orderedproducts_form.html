@@ -12,9 +12,15 @@
   <form method="POST" id="productForm" data-genres-url="{% url 'order_app:ajax_load_genres' %}">
     {% csrf_token %}
     {{ form.as_p }}
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
     <input type="submit" class='btn btn-primary' value="Submit">
 
   </form>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>

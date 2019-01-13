@@ -22,6 +22,18 @@ from admin_app.models import Magazine,Truck
 
 @method_decorator(login_required, name='dispatch')
 class ChangePasswordView(View):
+
+    """
+        Changes the user's password.
+
+        ``form``
+            An instance of `accounts.PasswordChangeForm`.
+
+        :template: `accounts/change_password.html`
+        :template: `accounts/my_account.html`
+
+    """
+
     template_name = 'accounts/change_password.html'
     form_class = PasswordChangeForm
 
@@ -41,6 +53,14 @@ class ChangePasswordView(View):
 
 @method_decorator(login_required, name='dispatch')
 class EditProfileView(View):
+    """
+        Allows the user to edit selected profile elements.
+
+        ``profile_form``
+            An instance of `EditProfileForm`.
+
+    """
+
     template_name = 'accounts/edit_my_profile.html'
     profile_form_class = EditProfileForm
     user_form_class = EditUserForm
