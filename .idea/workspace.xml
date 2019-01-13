@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8947fc31-6b43-403e-a9c4-5f6634eba549" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/emka_trans/accounts/migrations/0004_userprofileinfo_id_cluster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/accounts/migrations/0005_auto_20181213_1749.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/accounts/migrations/0006_auto_20181214_0946.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/accounts/migrations/0007_auto_20181214_1034.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/admin_app/migrations/0002_auto_20181217_1145.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/admin_app/migrations/0003_auto_20181220_0831.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/media/profile_pics/kon2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/order_app/migrations/0010_checkout_hour.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/order_app/migrations/0011_auto_20181217_1234.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/order_app/migrations/0012_auto_20181220_0831.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/order_app/migrations/0013_auto_20190102_1512.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/products_app/migrations/0003_auto_20181214_1234.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emka_trans/products_app/migrations/0004_product_weight.py" afterDir="false" />
-    </list>
+    <list default="true" id="8947fc31-6b43-403e-a9c4-5f6634eba549" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,12 +24,27 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="RunDashboard">
@@ -90,21 +91,21 @@
       <workItem from="1546550863998" duration="6498000" />
       <workItem from="1547071315356" duration="724000" />
       <workItem from="1547234516147" duration="4609000" />
-      <workItem from="1547412649217" duration="2148000" />
+      <workItem from="1547412649217" duration="2390000" />
     </task>
-    <task id="LOCAL-00001" summary="first commit">
-      <created>1544371411596</created>
+    <task id="LOCAL-00001" summary="adding comments to account">
+      <created>1547414841373</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1544371411597</updated>
+      <updated>1547414841373</updated>
     </task>
-    <task id="LOCAL-00002" summary="adding order">
-      <created>1544387148032</created>
+    <task id="LOCAL-00002" summary="adding comments to account">
+      <created>1547415037568</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1544387148032</updated>
+      <updated>1547415037568</updated>
     </task>
     <task id="LOCAL-00003" summary="adding order">
       <created>1544390886185</created>
@@ -211,15 +212,16 @@
       <option name="project" value="LOCAL" />
       <updated>1547414543909</updated>
     </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109000" />
+    <option name="totallyTimeSpent" value="351000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.275" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.275" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50127226" side_tool="true" weight="0.23787878" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -232,7 +234,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49893278" weight="0.3279483" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.47272727" side_tool="true" visible="true" weight="0.36187398" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.47272727" side_tool="true" visible="true" weight="0.36187398" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.5272727" visible="true" weight="0.36187398" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4994664" weight="0.32903227" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -257,5 +259,18 @@
     <MESSAGE value="adding comments to accounts" />
     <MESSAGE value="adding comments to account" />
     <option name="LAST_COMMIT_MESSAGE" value="adding comments to account" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
   </component>
 </project>
