@@ -52,7 +52,10 @@ class CheckoutDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
     """
+        Allows the user to create a new order :model:`order_app.Checkout`.
 
+        **Template:**
+        :template:`order_app/checkout_form.html`
     """
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
@@ -83,7 +86,14 @@ class CheckoutCreateView(CreateView):
 
         return super(CheckoutCreateView, self).form_valid(form)
 
+
 class ProductAddView(CreateView):
+    """
+        Allows the user to add a new product to the order :model:`order_app:OrderedProducts`.
+
+        **Template:**
+        :template:`order_app/orderedproducts_form.html`
+    """
     form_class = forms.OrderedProductsForm
     model = models.OrderedProducts
 
@@ -128,7 +138,18 @@ class ProductAddView(CreateView):
 
         return super(ProductAddView, self).form_valid(form)
 
+
 class ConfirmCheckoutView(View):
+    """
+        Allows the user to confirm the order.
+        Confirmed orders can not be edited.
+        If the amount of ordered products is not available, the user can edit or delete the order.
+
+        **Template:**
+        :template:`order_app/confirm_checkout.html`
+        :template:`order_app/checkout_list.html`
+
+    """
     def get(self,request,pk):
         if  models.Checkout.objects.filter(id=pk):
             return render(request,'order_app/confirm_checkout.html')
@@ -160,6 +181,11 @@ class ConfirmCheckoutView(View):
             return render(request, 'order_app/confirm_checkout.html',context={'missing_products':missing_products, 'checkout':id})
 
 def load_genres(request):
+    """
+        Loads the genres of the product
+    :param request:
+    :return:
+    """
     product = request.GET.get('product')
     cluster = UserProfileInfo.objects.get(user=request.user).id_cluster
     delivers = UserProfileInfo.objects.filter(id_cluster=cluster, is_client=False)
