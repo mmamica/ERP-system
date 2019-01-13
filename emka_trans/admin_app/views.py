@@ -545,7 +545,7 @@ def MatchClients(date, claster, routes):
             routes[r].reverse()
             route = Route.objects.create(products_list=str(route), date=client_date,
                                          id_truck=Truck.objects.get(id_truck=claster),
-                                         client=True, colour='#273244', hour=int(Checkout.objects.get(id=routes[r][1])))
+                                         client=True, colour='#273244', hour=int(Checkout.objects.get(id=routes[r][1]).hour))
             route.save()
             for i in range(2, len(routes[r]) - 1):
                 o = OrderedProducts.objects.get(id=routes[r][i])

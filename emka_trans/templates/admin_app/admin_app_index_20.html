@@ -28,10 +28,13 @@ document.write(today);
 
 <p id = 'date'></p>
 
+
+{% if routes_tomorrow|length == 0 %}
           <button onclick="call_alg();">
             {%csrf_token%}
             Generuj nowe trasy automatycznie
         </button>
+{% endif %}
 
 
     </div>
