@@ -1,37 +1,116 @@
 {% extends "accounts/base.html" %}
+{% load staticfiles %}
 {% block body_block %}
 
-<div class="jumbotron">
-	<h1>Twój profil</h1>
-<a href="{% url 'accounts:edit_my_profile' %}" class="btn btn-info">Edytuj profil</a><br><br>
-{#{% if user_profile.is_client %}#}
-{#<a href="{% url 'orders:order_list' %}" class="btn btn-info">Przeglądaj zamówienia</a><br><br>#}
-{#{% endif %}#}
+<div class="centeredDiv plainBackground ">
+<!--<div class="jumbotron">-->
+	
 
-{% if user_profile.is_client == False %}
-    <a href="{% url 'products_app:list' %}" class="btn btn-info">Przeglądaj produkty</a><br><br>
+
+	<h1>My profile</h1>
+	<!-- Those are horizontal buttons that lets user navigate over the dashboards. -->
+	<!--
+	<div class="horizontalDivs">
+		<a href="{% url 'accounts:edit_my_profile' %}" class="editProfileBtn btn btn-info">Edytuj profil</a><br><br>
+	</div>
+
+	<div class="horizontalDivs">
+		{#{% if user_profile.is_client %}#}
+			{#<a href="{% url 'orders:order_list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>#}
+		{#{% endif %}#}
+	</div>
+	
+	<div class="horizontalDivs">
+	{% if user_profile.is_client == False %}
+    	<a href="{% url 'products_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj produkty</a><br><br>
     {% else %}
-    <a href="{% url 'order_app:list' %}" class="btn btn-info">Przeglądaj zamówienia</a><br><br>
-{% endif %}
-	{% if user_profile.profile_pic %}
-<img src="{{ user_profile.profile_pic.url }}" alt="image" /> 
+    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>
 	{% endif %}
-<h2>Username:</h2>
-{{ user.username }} <br>
-<h2>First Name:</h2><br>
-{{ user.first_name }}<br>
-<h2>Last Name:</h2><br>
-{{ user.last_name}}<br>
-<h2>Email:</h2><br>
-{{ user.email }}<br>
-<h2>Company:</h2>
-{{ user_profile.company_name }} <br>
-<h2>Phone number:</h2>
-{{ user_profile.phone_number }}<br>
-<h2>Location:</h2>
-{{ user_profile.latitude }}<br>
-{{ user_profile.longitude }}
+	</div>
+	-->
+	<div id="leftDivRegister">
+		<table style="width:100%">
+			<tr>
+		    	<td>Username:</td>
+		    	<td>{{ user.username }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>First Name:</td>
+		    	<td>{{ user.first_name }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Last Name:</td>
+		    	<td>{{ user.last_name}}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Email:</td>
+		    	<td>{{ user.email }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Company:</td>
+		    	<td>{{ user_profile.company_name }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Phone number:</td>
+		    	<td>{{ user_profile.phone_number }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Location: </td>
+		    	<td>{{ user_profile.latitude }} N, </br>{{ user_profile.longitude }} E</td>
+		  	</tr>
+		</table>
+	</div>
 
+
+
+	<div class="rightDivRegister" style="float:right;">
+		{% if user_profile.profile_pic %}
+			<img src="{{ user_profile.profile_pic.url }}" alt="image" class="profilePic"/> 
+		{% else %}
+			<img src="{% static 'img/nouser.jpg'%}" alt="Logo" class="profilePic"> 
+		{% endif %}
+	</div>
+	<div style="clear: left;"></div>		
+	<div style="clear: right;"></div>
+	</br>
+	
+	<div class="horizontalDivs">
+		<a href="{% url 'accounts:edit_my_profile' %}" class="editProfileBtn btn btn-info">Edytuj profil</a><br><br>
+	</div>
+	
+	<div class="horizontalDivs">
+		{#{% if user_profile.is_client %}#}
+			{#<a href="{% url 'orders:order_list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>#}
+		{#{% endif %}#}
+	</div>
+	<div class="horizontalDivs">
+		{% if user_profile.is_client == False %}
+	    	<a href="{% url 'products_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj produkty</a><br><br>
+	    {% else %}
+	    	<a href="{% url 'order_app:list' %}" class="editProfileBtn btn btn-info">Przeglądaj zamówienia</a><br><br>
+		{% endif %}
+	</div>
+	
+
+	
+
+	</br>
+
+	
+		
+	
+
+	
+
+<!--
+	Username: {{ user.username }} <br>
+	First Name: {{ user.first_name }}<br>
+	Last Name: {{ user.last_name}}<br>
+	Email: {{ user.email }}<br>
+	Company: {{ user_profile.company_name }} <br>
+	Phone number: {{ user_profile.phone_number }}<br>
+	Location: {{ user_profile.latitude }} N, {{ user_profile.longitude }} E
+-->
 </div>
 
 {% endblock %}

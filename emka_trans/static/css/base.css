@@ -22,9 +22,14 @@ h1{
 }
 
 #rightDivRegister{
-	float: left;
+	float: right;
 	width: 50%;
 }
+
+.horizontalDivs{
+	float: left;
+}
+
 .helptext{
 	clear: left;
 	display: none;
@@ -112,4 +117,20 @@ h1{
 .minFiftyPercentContainer{
 	min-width: 50%;
 	min-width: 800px;
+}
+
+
+/* my_account */
+/* Crops image into circle. */
+.profilePic{
+	object-fit: cover;
+	width:230px;
+	height:230px;
+	border-radius: 50%;
+}
+
+.editProfileBtn{
+	margin-right: 5px;
+	margin-left: 5px;
+	background-color: #79AFBC;
 }
