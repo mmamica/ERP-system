@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 	<title></title>
@@ -13,26 +14,36 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 
 
+	<!-- Static css import -->
+	 <link href="{% static 'css/base.css'%}" rel="stylesheet"/>
+	<!-- Logo font from GoogleFonts-->
+	<link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet"> 
+ 	<link href="https://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet"> 
+ 	<!-- Title font from GoogleFonts-->
+ 	<link href="https://fonts.googleapis.com/css?family=Prata" rel="stylesheet"> 
+ 	<!-- Pictograms from FontAwesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-static-top">
+	<nav class="	" id="top">
+	<!--<nav class="navbar navbar-default navbar-static-top">-->
 		<div class="container">
 			<ul class="nav navbar-nav">
 				<li><a class="navbar-brand" href="{% url 'index' %}">INDEX</a></li>
-				<li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+				<li><a class="navbar-link" href="{% url 'admin:index' %}">ADMIN</a></li>
 
 				{% if user.is_authenticated %}
-					<li><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
+					<li><a class="navbar-link" href="{% url 'logout' %}">LOGOUT</a></li>
 				{% else %}
-				<li><a class="navbar-link" href="{% url 'accounts:register_user' %}">Register</a></li>
-					<li><a class="navbar-link" href="{% url 'accounts:user_login' %}">Login</a></li>
+				<li><a class="navbar-link" href="{% url 'accounts:register_user' %}">REGISTER</a></li>
+					<li><a class="navbar-link" href="{% url 'accounts:user_login' %}">LOGIN</a></li>
 				{% endif %}
 				{% if user.is_authenticated %}
 					{% if user.is_superuser %}
-						<li><a class="navbar-link" href="{% url 'admin_app:index' %}">Mój Profil</a></li>
+						<li><a class="navbar-link" href="{% url 'admin_app:index' %}">MY PROFILE</a></li>
 					{% else %}
-						<li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">Mój Profil</a></li>
+						<li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">MY PROFILE</a></li>
 					{% endif %}
 				{% endif %}
 			</ul>

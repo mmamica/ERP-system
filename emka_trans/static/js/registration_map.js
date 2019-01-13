@@ -92,13 +92,15 @@ function addLocationsToPanel(locations){
      var li = document.createElement('li'),
         divLabel = document.createElement('div'),
         address = locations[i].location.address,
-        content =  '<strong style="font-size: large;">' + address.label  + '</strong></br>';
+//        content =  '<strong style="font-size: large;">' + address.label  + '</strong></br>';
+        content = address.label;
         position = {
           lat: locations[i].location.displayPosition.latitude,
           lng: locations[i].location.displayPosition.longitude
         };
 
-      content += '<strong>houseNumber:</strong> ' + address.houseNumber + '<br/>';
+// This part describes chosen location. Currently, it's not necessery to display this data.
+/*      content += '<strong>houseNumber:</strong> ' + address.houseNumber + '<br/>';
       content += '<strong>street:</strong> '  + address.street + '<br/>';
       content += '<strong>district:</strong> '  + address.district + '<br/>';
       content += '<strong>city:</strong> ' + address.city + '<br/>';
@@ -108,7 +110,7 @@ function addLocationsToPanel(locations){
       content += '<br/><strong>position:</strong> ' +
         Math.abs(position.lat.toFixed(4)) + ((position.lat > 0) ? 'N' : 'S') +
         ' ' + Math.abs(position.lng.toFixed(4)) + ((position.lng > 0) ? 'E' : 'W');
-
+*/
       divLabel.innerHTML = content;
       li.appendChild(divLabel);
 
