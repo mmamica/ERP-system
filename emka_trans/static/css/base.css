@@ -16,6 +16,11 @@ h1{
 	color: #474F54;
 }
 
+h3{
+	font-family: 'Teko', sans-serif;
+	color: #474F54;
+}
+
 #leftDivRegister {
 	float: left;
 	width: 50%;

@@ -2,10 +2,15 @@
 {% load staticfiles %}
 
   {% block body_block %}
+<div class="centeredDiv plainBackground minFiftyPercentContainer scrollStyle">
     <h1>Welcome to Admin Page</h1>
-    <div style="width: 640px; height: 480px" id="mapContainer"></div>
+    <div style="display: block; margin-left: auto; margin-right: auto">
+    <div style="width: 640px; height: 480px;display: block; margin-left: auto; margin-right: auto" id="mapContainer"></div>
+    </div>
 
-<h1>Trasy na dzień:</h1>
+<h1>Routes for date:</h1>
+    <div>
+        <h3>
 <script type="text/javascript">
     var today = new Date();
     var dd = today.getDate();
@@ -27,15 +32,14 @@ document.write(today);
     document.getElementById('date').innerHTML = today.toDateString(); </script>
 
 <p id = 'date'></p>
-
-
-    </div>
+            </h3>
+</div>
     <script src='{% static "js/map.js" %}' type="text/javascript">
     </script>
 
-        <a href="{% url 'admin_app:index' %}">Wszystko</a>
-        <a href="{% url 'admin_app:index2' %}">Godzina 13</a>
-        <a href="{% url 'admin_app:index3' %}">Godzina 16</a>
+        <a href="{% url 'admin_app:index' %}" class="editProfileBtn btn btn-info">All</a>
+        <a href="{% url 'admin_app:index2' %}" class="editProfileBtn btn btn-info">13:00</a>
+        <a href="{% url 'admin_app:index3' %}" class="editProfileBtn btn btn-info">16:00</a>
 
 
 {% block content2 %}
@@ -128,12 +132,12 @@ document.write(today);
 	{% endfor %}
 {% endblock %}
 
-<h1>DOSTAWCY</h1>
+<h1>SUPLIERS</h1>
 
 
 {%for t in trucks%}
 
-<h1>Tir {{t.id_truck}}</h1>
+<h1>Truck {{t.id_truck}}</h1>
 {% for r in routes_today %}
     {%if r.id_truck == t and r.hour == 1%}
     <h3>{{r.time}} h</h3>
@@ -144,11 +148,11 @@ document.write(today);
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Dostawca</th>
-      <th scope="col">Produkt</th>
-      <th scope="col">Ilość</th>
-      <th scope="col">Trasa</th>
-      <th scope="col">Tir</th>
+      <th scope="col">Suplier</th>
+      <th scope="col">Product</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Route</th>
+      <th scope="col">Truck</th>
       <th scope="col">Id</th>
     </tr>
   </thead>
@@ -185,21 +189,21 @@ document.write(today);
 {%endfor%}
 
 
-<h1>KLIENCI</h1>
+<h1>CLIENTS</h1>
 
 {%for t in trucks%}
 
-<h1>Tir {{t.id_truck}}</h1>
+<h1>Truck {{t.id_truck}}</h1>
 
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Klient</th>
-      <th scope="col">Produkt</th>
-      <th scope="col">Ilość</th>
-      <th scope="col">Trasa</th>
-      <th scope="col">Tir</th>
+      <th scope="col">Client</th>
+      <th scope="col">Product</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Route</th>
+      <th scope="col">Truck</th>
         <th scope="col">Id</th>
 
 
@@ -235,8 +239,9 @@ document.write(today);
 
   </tbody>
 </table>
-{%endfor%}
 
+{%endfor%}
+</div>
 
 
     
