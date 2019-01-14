@@ -15,18 +15,13 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
-    def __init__(self, *args, **kwargs):
-        super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['username'].label = "Nazwa użytkownika"
-        self.fields['first_name'].label = "Imię"
-        self.fields['last_name'].label = "Nazwisko"
-        self.fields['password'].label = "Hasło"
 
 class UserProfileInfoForm(forms.ModelForm):
     city = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id': 'city'}))
     street = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id': 'street'}))
     house_number = forms.IntegerField(
         widget=forms.TextInput(attrs={'id': 'house_number', 'onchange': 'geocode(platform)'}))
+
 
     def clean(self):
         city = self.cleaned_data.get('city')
@@ -68,10 +63,12 @@ class UserProfileInfoForm(forms.ModelForm):
                   'is_client')
 
 
+
 class EditUserForm(UserChangeForm):
     class Meta():
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
 
 class EditProfileForm(forms.ModelForm):
     class Meta():

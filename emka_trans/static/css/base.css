@@ -124,8 +124,8 @@ h1{
 /* Crops image into circle. */
 .profilePic{
 	object-fit: cover;
-	width:230px;
-	height:230px;
+	width: 230px;
+	height: 230px;
 	border-radius: 50%;
 }
 
