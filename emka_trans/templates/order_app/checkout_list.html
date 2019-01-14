@@ -1,41 +1,48 @@
 {% extends "order_app/order_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
+  <!--<div class="jumbotron">-->
 
-    <h1>Lista zamówień</h1>
-
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
+    <h1>Your orders</h1>
+    <div class="scrollStyle">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Order ID</th>
-          <th scope="col">Data</th>
-          <th scope="col">Godzina</th>
-          <th scope="col">Cena</th>
-          <th scope="col">Waga</th>
+          <th scope="col">Date</th> 
+          <th scope="col">Hour</th>
+          <th scope="col">Price</th>
+          <th scope="col">Weight</th>
         </tr>
       </thead>
-
+      
+      
       <tbody>
+      
         {% for order in checkout_list %}
+          <tr>
+            <th>  <a href="{{order.id}}/">{{order.id}}</a></th>
+            {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
 
-        <tr>
-          <th>  <a href="{{order.id}}/">{{order.id}}</a></th>
-          {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
-
-          <td>{{order.date}}</td>
-          <td>{{ order.hour }}</td>
-          <td>{{order.price}}</td>
-          <td>{{ order.weigth }}</td>
-
-        </tr>
-            {% endfor %}
-
+            <td>{{order.date}}</td>
+            <td>{{ order.hour }}</td>
+            <td>{{order.price}}</td>
+            <td>{{ order.weigth }}</td>
+          </tr>   
+        {% endfor %}
+             
       </tbody>
+     
     </table>
-
-    <a href="{% url 'order_app:create' %}" class="btn btn-default">Dodaj zamówienie</a><br>
-    <a href="{% url 'order_app:all_products' %}" class="btn btn-default">Przeglądaj produkty</a>
-
+    </div>
+    
+    <div class="horizontalDivs">
+      <a href="{% url 'order_app:create' %}" class="editProfileBtn btn btn-info">Add new order</a><br>
+    </div>
+    <div class="horizontalDivs">
+      <a href="{% url 'order_app:all_products' %}" class="editProfileBtn btn btn-info">Browse products</a>
+     </div>
+    <div style="clear: left;">
   </div>
 
 
