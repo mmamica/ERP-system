@@ -1,22 +1,21 @@
 {% extends "admin_app/admin_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
-
-    <h1>Lista zamównień</h1>
-
+<div class="centeredDiv plainBackground minFiftyPercentContainer ">
+  <!--<div class="jumbotron">-->
+  <div class="scrollStyle">
+    <h1>Orders</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Numer zamównienia</th>
-          <th scope="col">Data</th>
-          <th scope="col">Cena</th>
-          <th scope="col">Kto zamawia?</th>
+          <th scope="col">Order id</th>
+          <th scope="col">Date</th>
+          <th scope="col">Price</th>
+          <th scope="col">Client</th>
         </tr>
       </thead>
 
       <tbody>
         {% for order in checkout_list %}
-
         <tr>
           <th>  <a href="{{order.id}}/">{{order.id}}</a></th>
           {% comment %} <th>  {{order.id_checkout}} </th> {% endcomment %}
@@ -30,8 +29,8 @@
 
       </tbody>
     </table>
-
   </div>
+</div>
 
 
 {% endblock %}

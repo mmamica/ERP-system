@@ -1,7 +1,8 @@
 {% extends "products_app/products_app_base.html" %}
 {% block body_block %}
-
-    <div class="jumbotron">
+<div class="centeredDiv plainBackground" style="min-width: 300px;">
+<!--    <div class="jumbotron">-->
+		<h1>Upload .xls file</h1>
         <form action="{% url "products_app:xls" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file"
@@ -10,16 +11,19 @@
                    style="border: 1px solid black; padding: 5px;"
                    required="required">
             <p>
-            <input type="submit"
+            <!--<input type="submit"
                    value="Upload"
-                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;"> -->
+            </br>
+            <div class="okButtonWrapper">
+            	<input type="submit" class='editProfileBtn btn btn-info' value="Submit">
+        	</div>
         </form>
 
         <p></p>
         <hr>
-
         {% if success %}
-            <h2>Zaktualizowano</h2>
+            <h1>Database has been updated.</h1>
         {% endif %}
 
      </div>

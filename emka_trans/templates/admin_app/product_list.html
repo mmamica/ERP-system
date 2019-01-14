@@ -1,38 +1,37 @@
 {% extends "admin_app/admin_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
+<div class="centeredDiv plainBackground minFiftyPercentContainer ">
+<!--  <div class="jumbotron">-->
+    <h1>Available Products</h1>
+    <div class="scrollStyle">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Price</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Supplier</th>
+          
 
-    <h1>Lista dostępnych Produktów</h1>
+        </tr>
+      </thead>
 
+      <tbody>
+        {% for product in product_list %}
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Produkt</th>
-      <th scope="col">Gatunek</th>
-      <th scope="col">Cena</th>
-      <th scope="col">Ilość</th>
-      <th scope="col">Dostawca</th>
-      
-
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for product in product_list %}
-
-    <tr>
-      <th> {{product.name}}</a></th>
-      <td>{{product.genre}}</td>
-      <td>{{product.price}}zł</td>
-      <td>{{product.amount}}kg</td>
-      <td><a href="{% url 'accounts:show_profile' username=product.name_deliver%}">{{product.name_deliver}}</a></td>
-    </tr>
-    {% endfor %}
-
-
-  </tbody>
-</table>
+        <tr>
+          <th> {{product.name}}</a></th>
+          <td>{{product.genre}}</td>
+          <td>{{product.price}}zł</td>
+          <td>{{product.amount}}kg</td>
+          <td><a href="{% url 'accounts:show_profile' username=product.name_deliver%}">{{product.name_deliver}}</a></td>
+        </tr>
+        {% endfor %}
 
 
+      </tbody>
+    </table>
+  </div>
+</div>
   {% endblock %}

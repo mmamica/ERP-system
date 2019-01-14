@@ -5,17 +5,15 @@
 <!--<div class="jumbotron">-->
 <div class="centeredDiv plainBackground minFiftyPercentContainer">
 	{% if registered %}
-		<h1>Thank you</h1>
+		<h1 style="text-align: center;">You have registered successfully.</h1>
 	{% else %}
 		<h1>REGISTER</h1>	
-		
-		
 		<div id="leftDivRegister">
-		Fill out the form:
 		<form method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			<table>
 			{{ user_form.as_table }}
+
 			{{ profile_form.as_table }}
 			</table>
 			<div class="okButtonWrapper">

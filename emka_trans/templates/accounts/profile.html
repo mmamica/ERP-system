@@ -1,22 +1,55 @@
 {% extends "accounts/base.html" %}
+{% load staticfiles %}
 {% block body_block %}
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
+<!--<div class="jumbotron">-->
+	<h1>Profile of 
+	{% if status %}
+		client
+	{% else %}
+		supplier
+	{% endif %}
+	</h3>
+	<div id="leftDivRegister">
+	</br></br></br>
+		<table style="width:100%">
+			<tr>
+		    	<td>Username:</td>
+		    	<td>{{ user.username }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>First Name:</td>
+		    	<td>{{ user.first_name }}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Last Name:</td>
+		    	<td>{{ user.last_name}}</td>
+		  	</tr>
+		  	<tr>
+		    	<td>Email:</td>
+		    	<td>{{ user.email }}</td>
+		  	</tr>
+		</table>
+	</div>
 
-<div class="jumbotron">
-	<h1>Your profile</h1>
-{% if status %}
-	<h3>Klient</h3>
-{% else %}
-	<h3>Dostawca</h3>
-{% endif %}
-{% if user_profile.profile_pic %}
-<img src="{{ user_profile.profile_pic.url }}" alt="image" /> 
-{% endif %}
+	<div class="rightDivRegister" style="float:right;">
+		{% if user_profile.profile_pic %}
+			<img src="{{ user_profile.profile_pic.url }}" alt="image" /> 
+		{% else %}
+			<img src="{% static 'img/nouser.jpg'%}" alt="Logo" class="profilePic"> 
+		{% endif %}
+	</div>
+	
+	<div style="clear: right;"></div>
+	<div style="clear: left;"></div>
+
 <br>
-{{ user.username }} <br>
-{{ user.email }} <br>
-{{ user.first_name }} <br> 
-{{ user.last_name }} <br>
-
+<!--
+	{{ user.username }} <br>
+	{{ user.email }} <br>
+	{{ user.first_name }} <br> 
+	{{ user.last_name }} <br>
+-->
 </div>
 
 

@@ -51,6 +51,12 @@ class CheckoutDetailView(DetailView):
 
 @method_decorator(login_required, name='dispatch')
 class CheckoutCreateView(CreateView):
+    """
+        Allows the user to create a new order :model:`order_app.Checkout`.
+
+        **Template:**
+        :template:`order_app/checkout_form.html`
+    """
     form_class = forms.CheckoutCreateForm
     model=models.Checkout
 
@@ -80,7 +86,14 @@ class CheckoutCreateView(CreateView):
 
         return super(CheckoutCreateView, self).form_valid(form)
 
+
 class ProductAddView(CreateView):
+    """
+        Allows the user to add a new product to the order :model:`order_app:OrderedProducts`.
+
+        **Template:**
+        :template:`order_app/orderedproducts_form.html`
+    """
     form_class = forms.OrderedProductsForm
     model = models.OrderedProducts
 
@@ -125,7 +138,18 @@ class ProductAddView(CreateView):
 
         return super(ProductAddView, self).form_valid(form)
 
+
 class ConfirmCheckoutView(View):
+    """
+        Allows the user to confirm the order.
+        Confirmed orders can not be edited.
+        If the amount of ordered products is not available, the user can edit or delete the order.
+
+        **Template:**
+        :template:`order_app/confirm_checkout.html`
+        :template:`order_app/checkout_list.html`
+
+    """
     def get(self,request,pk):
         if  models.Checkout.objects.filter(id=pk):
             return render(request,'order_app/confirm_checkout.html')
@@ -157,6 +181,13 @@ class ConfirmCheckoutView(View):
             return render(request, 'order_app/confirm_checkout.html',context={'missing_products':missing_products, 'checkout':id})
 
 def load_genres(request):
+    """
+        Loads genres based on the selected product.
+
+    :param request: HttpRequest
+    :return: HttpResponse
+
+    """
     product = request.GET.get('product')
     cluster = UserProfileInfo.objects.get(user=request.user).id_cluster
     delivers = UserProfileInfo.objects.filter(id_cluster=cluster, is_client=False)
@@ -173,6 +204,14 @@ class CheckoutUpdateView(UpdateView):
     model = models.Checkout
 
 class ProductUpdateView(UpdateView):
+    """
+        Allows the user to update the amount of the selected product :model:`order_app.OrderedProducts`.
+
+        **Template:**
+        :template:`order_app:orderedproducts_form.html`
+        :template:`order_app:order_detail.html`
+
+    """
     fields = ("amount",)
     model = models.OrderedProducts
 
@@ -203,6 +242,16 @@ class ProductUpdateView(UpdateView):
         return super(ProductUpdateView, self).form_valid(form)
 
 class ProductDeleteView(DeleteView):
+
+    """
+        Allows the user to delete product from order.
+        **Context**
+        `order`
+            An instance of :model:`order_app.Product`
+        **Template:**
+        :template:`order_app/orderedproducts_confirm_delete.html`
+        :template:`order_app/order_detail.html`
+    """
     context_object_name = "order"
     model = models.OrderedProducts
 
@@ -218,11 +267,22 @@ class ProductDeleteView(DeleteView):
         return reverse_lazy("order_app:detail", kwargs={'pk': checkout})
 
 class CheckoutDeleteView(DeleteView):
+    """
+        Allows the user to delete order.
+
+        **Context**
+        `order`
+            An instance of :model:`order_app.Checkout`
+        **Template:**
+        :template:`order_app/checkout_confirm_delete.html`
+        :template:`order_app/checkout_list.html`
+    """
     context_object_name="order"
     model = models.Checkout
     success_url = reverse_lazy("order_app:list")
 
 class OrderedProductsListView(ListView):
+
     context_object_name = 'orderedproducts_list'
     model = models.OrderedProducts
 
@@ -232,6 +292,16 @@ class OrderedProductsDetailView(DetailView):
     template_name = 'order_app/order_detail.html'
 
 class AllProductsView(View):
+    """
+        Allows the user browse available products.
+
+        **Context**
+        `products`
+            A list of :model:`order_app.OrderedProducts`.
+
+        **Template:**
+        :template:`order_app/all_products_list.html`
+    """
     def get(self,request):
         user=self.request.user
         cluster=UserProfileInfo.objects.get(user=user).id_cluster

@@ -1,17 +1,20 @@
 {% extends "accounts/base.html" %}
 {% block body_block %}
 
-<div class="jumbotron">
-	<h1>Edytuj profil</h1>
-	<form method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-			<input type="submit" name="" value="Zapisz">
-
-		</form>
-
-
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
+	<!--<div class="jumbotron">-->
+		<h1>Edit profile</h1>
+		<form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+				<table>
+					{{ user_form.as_table }}
+					{{ profile_form.as_table }}
+				</table>
+				<div class="okButtonWrapper">
+					<input type="submit" name="" value="Save" class="okButton">
+				</div>
+			</form>
+	
 </div>
 
 {% endblock %}

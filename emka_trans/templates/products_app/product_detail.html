@@ -1,20 +1,41 @@
 {% extends "products_app/products_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
-    <h2>Product Details:</h2>
-    <p>Id_num: {{product_details.id}}</p>
-    <p>Name: {{product_details.name}}</p>
-    <p>Genre: {{product_details.genre}}</p>
-    <p>Price: {{product_details.price}}</p>
-    <p>Amount: {{product_details.amount}}</p>
 
+<div class="centeredDiv plainBackground" style="min-width: 300px;">
+<!--  <div class="jumbotron"> -->
+   <h1>Product Details:</h1>
 
+    <table style="width:100%">
+      <tr>
+          <td>Id_num: </td>
+          <td>{{product_details.id}}</td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td>{{product_details.name}}</td>
+        </tr>
+        <tr>
+          <td>Genre:</td>
+          <td>{{product_details.genre}}</td>
+        </tr>
+        <tr>
+          <td>Price:</td>
+          <td>{{product_details.price}}</td>
+        </tr>
+        <tr>
+          <td>Amount:</td>
+          <td>{{product_details.amount}}</td>
+        </tr>
+    </table>
 
-  </div>
-  <div class="container">
-    <p><a class='btn btn-warning' href="{% url 'products_app:update' pk=product_details.pk %}">Update</a></p>
-    <p><a class='btn btn-danger' href="{% url 'products_app:delete' pk=product_details.pk %}">Delete</a></p>
+    </br>
+    <div class="horizontalDivs">
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'products_app:update' pk=product_details.pk %}">Update</a></p>
+    </div>
+    <dic class="horizontalDivs">
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'products_app:delete' pk=product_details.pk %}">Delete</a></p>
+    </div>
+    <div style="clear: left;"></div>
 
-  </div>
-
+</div>
 {% endblock %}

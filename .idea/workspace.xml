@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="calendar, fixing bugs" />
+    <list default="true" id="c4098dbe-d8cb-442f-8425-bf17dba338f4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_1.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_20.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_20.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_21.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_21.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_22.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_22.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_23.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_23.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_3.html" beforeDir="false" afterPath="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_3.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,14 +37,46 @@
     <favorites_list name="ERP-system" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/emka_trans/static/css/base.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="295" column="21" lean-forward="true" selection-start-line="295" selection-start-column="21" selection-end-line="295" selection-end-column="21" />
+            <state relative-caret-position="404">
+              <caret line="140" column="1" lean-forward="true" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/my_account.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="34" lean-forward="true" selection-start-column="34" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_22.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="221" column="31" lean-forward="true" selection-start-line="216" selection-start-column="4" selection-end-line="221" selection-end-column="31" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#218#279#0" expanded="true" />
+                <element signature="e#290#379#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_23.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="221" column="31" selection-start-line="221" selection-start-column="31" selection-end-line="221" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,19 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rever</find>
-      <find>new_ord</find>
-      <find>update</find>
-      <find>errors</find>
-      <find>err</find>
-      <find>clean</find>
-      <find>date</find>
-      <find>magazine</find>
-      <find>regi</find>
-      <find>logout</find>
-      <find>reverse</find>
-      <find>confirm</find>
-      <find>change</find>
       <find>refres</find>
       <find>delete</find>
       <find>UTH_TEM</find>
@@ -76,6 +106,25 @@
       <find>pk</find>
       <find>redire</find>
       <find>detail</find>
+      <find>change</find>
+      <find>loading</find>
+      <find>loadin</find>
+      <find>map</find>
+      <find>h1</find>
+      <find>style</find>
+      <find>godzin</find>
+      <find>--&gt;</find>
+      <find>cent</find>
+      <find>wr</find>
+      <find>righ</find>
+      <find>trasy</find>
+      <find>tab</find>
+      <find>cen</find>
+      <find>dos</find>
+      <find>tir</find>
+      <find>--</find>
+      <find>dost</find>
+      <find>supli</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -90,23 +139,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/emka_trans/admin_app/models.py" />
-        <option value="$PROJECT_DIR$/emka_trans/templates/accounts/register_user.html" />
-        <option value="$PROJECT_DIR$/emka_trans/templates/accounts/my_account.html" />
-        <option value="$PROJECT_DIR$/emka_trans/accounts/test1.py" />
-        <option value="$PROJECT_DIR$/emka_trans/templates/order_app/orderedproducts_confirm_delete.html" />
-        <option value="$PROJECT_DIR$/emka_trans/order_app/tests.py" />
-        <option value="$PROJECT_DIR$/emka_trans/accounts/tests.py" />
-        <option value="$PROJECT_DIR$/emka_trans/products_app/tests.py" />
-        <option value="$PROJECT_DIR$/emka_trans/accounts/tests/tests.py" />
         <option value="$PROJECT_DIR$/emka_trans/products_app/tests/tests_view.py" />
         <option value="$PROJECT_DIR$/emka_trans/admin_app/urls.py" />
         <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/order_detail.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/order_list.html" />
         <option value="$PROJECT_DIR$/emka_trans/admin_app/views.py" />
         <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/product_list.html" />
-        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html" />
-        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/accounts/base.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/products_app/products_app_base.html" />
         <option value="$PROJECT_DIR$/emka_trans/order_app/tests/tests_view.py" />
@@ -124,7 +162,6 @@
         <option value="$PROJECT_DIR$/emka_trans/products_app/views.py" />
         <option value="$PROJECT_DIR$/emka_trans/products_app/urls.py" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/checkout_list.html" />
-        <option value="$PROJECT_DIR$/emka_trans/accounts/forms.py" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/new_order.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/order_form.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/tmp.html" />
@@ -139,8 +176,20 @@
         <option value="$PROJECT_DIR$/emka_trans/order_app/models.py" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/order_detail.html" />
         <option value="$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html" />
-        <option value="$PROJECT_DIR$/emka_trans/order_app/views.py" />
         <option value="$PROJECT_DIR$/emka_trans/accounts/views.py" />
+        <option value="$PROJECT_DIR$/emka_trans/accounts/forms.py" />
+        <option value="$PROJECT_DIR$/emka_trans/order_app/views.py" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/accounts/my_account.html" />
+        <option value="$PROJECT_DIR$/emka_trans/static/css/base.css" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_3.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_2.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_1.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_20.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_22.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_21.html" />
+        <option value="$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_23.html" />
       </list>
     </option>
   </component>
@@ -189,7 +238,67 @@
               <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="order_app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="order_app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="products_app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="css" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="img" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="accounts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="admin_app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ERP-system" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="emka_trans" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="order_app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -258,6 +367,7 @@
       <workItem from="1546550863998" duration="6498000" />
       <workItem from="1547071315356" duration="724000" />
       <workItem from="1547234516147" duration="1648000" />
+      <workItem from="1547415441494" duration="16663000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1544371411596</created>
@@ -357,11 +467,53 @@
       <option name="project" value="LOCAL" />
       <updated>1546443400272</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="comments, updating forms">
+      <created>1547418478321</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1547418478321</updated>
+    </task>
+    <task id="LOCAL-00016" summary="comments, updating forms">
+      <created>1547420450605</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1547420450605</updated>
+    </task>
+    <task id="LOCAL-00017" summary="comments, updating forms">
+      <created>1547420546151</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1547420546151</updated>
+    </task>
+    <task id="LOCAL-00018" summary="comments">
+      <created>1547422304185</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1547422304185</updated>
+    </task>
+    <task id="LOCAL-00019" summary="comments order_app">
+      <created>1547423668808</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1547423668808</updated>
+    </task>
+    <task id="LOCAL-00020" summary="front admin">
+      <created>1547429276285</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1547429276285</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156745000" />
+    <option name="totallyTimeSpent" value="173408000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -374,8 +526,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.275" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49872774" visible="true" weight="0.27954546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50127226" side_tool="true" weight="0.23787878" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -388,8 +541,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49893278" weight="0.3279483" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.4719697" side_tool="true" weight="0.365105" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.5272727" visible="true" weight="0.36187398" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.47272727" side_tool="true" weight="0.36187398" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.5272727" visible="true" weight="0.36187398" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4994664" weight="0.32903227" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -412,137 +565,13 @@
     <MESSAGE value="tests" />
     <MESSAGE value="error location message" />
     <MESSAGE value="calendar, fixing bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="calendar, fixing bugs" />
+    <MESSAGE value="comments, updating forms" />
+    <MESSAGE value="comments" />
+    <MESSAGE value="comments order_app" />
+    <MESSAGE value="front admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="front admin" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/emka_trans/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="25" column="72" lean-forward="true" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="72" />
-          <folding>
-            <element signature="e#634#666#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/products_app/tests/tests_view.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/accounts/tests/tests_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="33" column="70" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/accounts/tests/tests_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="79" column="31" lean-forward="true" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/tests/tests_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="96" selection-start-line="20" selection-start-column="96" selection-end-line="20" selection-end-column="96" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/tests/tests_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/products_app/tests/tests_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/products_app/tests/tests_form.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/products_app/products_app_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="20" selection-start-line="20" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/tests/tests_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/tests/tests_form.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/order_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="61" lean-forward="true" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/order_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/product_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="28" column="83" selection-start-line="28" selection-start-column="83" selection-end-line="28" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/admin_app/tests/tests_view.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
@@ -611,16 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/edit_my_profile.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/accounts/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/new_order.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -636,13 +655,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/tmp.html" />
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="65" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/static/js/registration_map.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -671,20 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/order_app_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/checkout_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/all_products_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -708,26 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/products_app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2115">
-          <caret line="141" column="34" selection-start-line="141" selection-start-column="34" selection-end-line="141" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-466">
-          <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -758,34 +736,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/confirm_checkout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="119" selection-start-line="14" selection-start-column="119" selection-end-line="14" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/tests/tests_view.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/order_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -799,12 +753,222 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/tests/tests_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-942">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/order_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/emka_trans/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="295" column="21" lean-forward="true" selection-start-line="295" selection-start-column="21" selection-end-line="295" selection-end-column="21" />
+        <state relative-caret-position="209">
+          <caret line="75" column="77" lean-forward="true" selection-start-line="75" selection-start-column="77" selection-end-line="75" selection-end-column="77" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/accounts/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/profile.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/checkout_confirm_delete.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/products_app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="35" column="53" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/test.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/order_app_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/edit_my_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/order_app/checkout_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/order_app/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="69" column="34" lean-forward="true" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="196" column="9" selection-start-line="196" selection-start-column="9" selection-end-line="196" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="142" column="9" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="44" column="86" selection-start-line="44" selection-start-column="86" selection-end-line="44" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="27" column="6" lean-forward="true" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/register_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="42" column="82" lean-forward="true" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_20.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="236" column="16" lean-forward="true" selection-start-line="236" selection-start-column="16" selection-end-line="236" selection-end-column="16" />
+          <folding>
+            <element signature="e#218#279#0" expanded="true" />
+            <element signature="e#290#379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="39" column="81" lean-forward="true" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="81" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_21.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="207" column="16" lean-forward="true" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
+          <folding>
+            <element signature="e#218#279#0" expanded="true" />
+            <element signature="e#290#379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/accounts/my_account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="34" lean-forward="true" selection-start-column="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/static/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="140" column="1" lean-forward="true" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_22.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="221" column="31" lean-forward="true" selection-start-line="216" selection-start-column="4" selection-end-line="221" selection-end-column="31" />
+          <folding>
+            <element signature="e#218#279#0" expanded="true" />
+            <element signature="e#290#379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emka_trans/templates/admin_app/admin_app_index_23.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="221" column="31" selection-start-line="221" selection-start-column="31" selection-end-line="221" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

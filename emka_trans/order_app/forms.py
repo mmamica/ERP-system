@@ -73,18 +73,18 @@ class CheckoutCreateForm(forms.ModelForm):
         slots=Checkout.objects.filter(date=chosen_date, hour=chosen_hour)
         times=checkouts.count()
         if (times>=3):
-            self.add_error('date', "Wyczerpano limit zamówień na ten dzień!")
+            self.add_error('date', "The limit for this day is over.")
 
         elif(cd.get('date')<datetime.date.today()):
-            self.add_error('date', "Wybierz przyszłą datę!")
+            self.add_error('date', "Choose future date.")
 
         elif(slots.count()>0):
-            self.add_error('hour',"Ten slot jest już zajety!")
+            self.add_error('hour',"This slot is already taken.")
 
         return cd
 
     def __init__(self, *args, **kwargs):
         super(CheckoutCreateForm, self).__init__(*args, **kwargs)
-        self.fields['hour'].label = "Preferowana godzina"
-        self.fields['date'].label = "Data dostarczenia"
+        self.fields['hour'].label = "Preferred delivery hour"
+        self.fields['date'].label = "Delivery date"
 

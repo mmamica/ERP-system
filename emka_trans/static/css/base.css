@@ -7,11 +7,16 @@ body{
 	background-size: cover;
 	font-family: Helvetica;
 	color: #474F54;
-	font-size: 16px;
+	font-size: 12px;
 	height: 100vh;
 }
 
 h1{
+	font-family: 'Teko', sans-serif;
+	color: #474F54;
+}
+
+h3{
 	font-family: 'Teko', sans-serif;
 	color: #474F54;
 }
@@ -22,9 +27,14 @@ h1{
 }
 
 #rightDivRegister{
-	float: left;
+	float: right;
 	width: 50%;
 }
+
+.horizontalDivs{
+	float: left;
+}
+
 .helptext{
 	clear: left;
 	display: none;
@@ -85,7 +95,7 @@ h1{
 
 .plainBackground{
 	background-color: #FFFFFF;
-	padding: 50px;
+	padding: 20px;
 	border-radius: 2%;
 	width: auto;
 }
@@ -112,4 +122,25 @@ h1{
 .minFiftyPercentContainer{
 	min-width: 50%;
 	min-width: 800px;
+}
+
+
+/* my_account */
+/* Crops image into circle. */
+.profilePic{
+	object-fit: cover;
+	width: 230px;
+	height: 230px;
+	border-radius: 50%;
+}
+
+.editProfileBtn{
+	margin-right: 5px;
+	margin-left: 5px;
+	background-color: #79AFBC;
+}
+
+.scrollStyle{
+    height: 500px;
+    overflow-y: scroll;
 }
