@@ -1,39 +1,39 @@
 {% extends "order_app/order_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
 
-    <h1>Dostępne produkty</h1>
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
+<!--  <div class="jumbotron">-->
+
+  <h1>Available products</h1>
+  <div class="scrollStyle">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Price</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Weight</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for product in product_list %}
+        <tr>
+          <th>{{product.name}}</th>
+          <td>{{product.genre}}</td>
+          <td>{{product.price}}zł</td>
+          <td>{{product.amount}}kg</td>
+          <td>{{ product.weight }}</td>
+        </tr>
+            {% endfor %}
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Produkt</th>
-      <th scope="col">Gatunek</th>
-      <th scope="col">Cena</th>
-      <th scope="col">Ilość</th>
-      <th scope="col">Waga</th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for product in product_list %}
-
-    <tr>
-      <th>{{product.name}}</th>
-      <td>{{product.genre}}</td>
-      <td>{{product.price}}zł</td>
-      <td>{{product.amount}}kg</td>
-      <td>{{ product.weight }}</td>
-    </tr>
-        {% endfor %}
-
-
-  </tbody>
-</table>
-
+      </tbody>
+    </table>
   </div>
+</div>
 
 
 {% endblock %}

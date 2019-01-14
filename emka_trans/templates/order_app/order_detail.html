@@ -2,7 +2,7 @@
 {% block body_block %}
   <div class="centeredDiv plainBackground minFiftyPercentContainer">
   <!--<div class="jumbotron">-->
-    <h2>Zamówienie {{ checkout_details.id }} szczegóły:</h2>
+    <h1>Order {{ checkout_details.id }} details:</h1>
     <div class="scrollStyle">
       <table class="table">
         <thead>
@@ -47,7 +47,7 @@
       <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:delete' pk=checkout_details.id %}">Delete order</a></p>
     </div>
     {% else %}
-    <h2>To zamówienie jest zatwierdzone i czeka na realizację</h2>
+    <h1>This order has been confirmed. Please wait for the delivery.</h1>
     {% endif %}
   </div>
 
