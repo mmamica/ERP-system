@@ -19,20 +19,36 @@ import requests
 import re
 
 
-"""
-
-A view for displaying a form and rendering a template response.
-
-"""
-
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView(TemplateView):
+    """
+
+     Allows the admin to see all the checkouts and routes for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index.html`
+
+    """
     template_name = 'admin_app/admin_app_index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -50,11 +66,33 @@ class IndexView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView1(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the first slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_1.html`
+
+    """
     template_name = 'admin_app/admin_app_index_1.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -72,11 +110,33 @@ class IndexView1(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView2(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the second slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_2.html`
+
+    """
     template_name = 'admin_app/admin_app_index_2.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -94,11 +154,33 @@ class IndexView2(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView3(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the third slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_3.html`
+
+    """
     template_name = 'admin_app/admin_app_index_3.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -116,11 +198,33 @@ class IndexView3(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView20(TemplateView):
+    """
+
+     Allows the admin to see all the checkouts and routes for for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_20.html`
+
+    """
     template_name = 'admin_app/admin_app_index_20.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -138,11 +242,33 @@ class IndexView20(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView21(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the first slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_21.html`
+
+    """
     template_name = 'admin_app/admin_app_index_21.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -160,11 +286,33 @@ class IndexView21(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView22(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the second slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_22.html`
+
+    """
     template_name = 'admin_app/admin_app_index_22.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -183,11 +331,33 @@ class IndexView22(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView23(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the third slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_23.html`
+
+    """
     template_name = 'admin_app/admin_app_index_23.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -205,6 +375,12 @@ class IndexView23(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminCheckoutListView(ListView):
+    """
+     Allows the admin to see the list of the checkout details.
+
+        **Template:**
+            :template:`admin_app/order_list.html`
+    """
     model = Checkout
     template_name = 'admin_app/order_list.html'
 
@@ -215,6 +391,12 @@ class AdminCheckoutListView(ListView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminCheckoutDetailView(DetailView):
+    """
+     Allows the admin to see the checkout details.
+
+        **Template:**
+            :template:`admin_app/order_detail.html`
+    """
     context_object_name = 'order_details'
     model = Checkout
     template_name = 'admin_app/order_detail.html'
@@ -224,12 +406,23 @@ class AdminCheckoutDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminProductListView(ListView):
+    """
+     Allows the admin to see the list of whole available products.
+
+        **Template:**
+            :template:`admin_app/product_list.html`
+    """
     template_name = 'admin_app/product_list.html'
     model = Product
 
 
 @csrf_exempt
 def areAllConsidered(tab):
+    """
+    Checks if all elements in a list are None.
+    :param tab: List
+    :return: Boolean
+    """
     for i in range(0, len(tab)):
         if (tab[i] is not None):
             return False
@@ -238,6 +431,11 @@ def areAllConsidered(tab):
 
 @csrf_exempt
 def onNotConsidered(tab):
+    """
+    Checks if there is only one not None value in a list.
+    :param tab: List
+    :return: Boolean
+    """
     iter = 0
     for i in range(0, len(tab)):
         if (tab[i] is not None):
@@ -252,8 +450,8 @@ def onNotConsidered(tab):
 def maxCell(tab):
     """
     Finds the cell with the biggest value
-    :param tab:
-    :return:
+    :param tab: 2D-Array
+    :return: Tuple
     """
     max = 0
     imax = None
