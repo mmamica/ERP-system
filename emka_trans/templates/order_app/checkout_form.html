@@ -1,18 +1,24 @@
 {% extends "order_app/order_app_base.html" %}
 
 {% block body_block %}
-<h1>
-  {% if not form.instance.pk %}
-  Utwórz zamówienie
-  {% else %}
-  Update order
-  {% endif %}
-</h1>
+<div class="centeredDiv plainBackground">
+  <h1>
+    {% if not form.instance.pk %}
+    Add new order
+    {% else %}
+    Update order
+    {% endif %}
+  </h1>
+  
   <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class='btn btn-primary' value="Submit">
-
+    <table>
+      {% csrf_token %}
+      {{ form.as_table }}
+    </table>
+    </br>
+    <div class="okButtonWrapper">
+      <input type="submit" class='editProfileBtn btn btn-info' value="Submit">
+    </div>
   </form>
-
+</div>
 {% endblock %}

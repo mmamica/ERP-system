@@ -1,43 +1,51 @@
 {% extends "order_app/order_app_base.html" %}
 {% block body_block %}
-  <div class="jumbotron">
+  <div class="centeredDiv plainBackground minFiftyPercentContainer">
+  <!--<div class="jumbotron">-->
     <h2>Zamówienie {{ checkout_details.id }} szczegóły:</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Produkt</th>
-          <th scope="col">Gatunek</th>
-          <th scope="col">Ilość</th>
-          <th scope="col">Cena</th>
-          <th scope="col">Waga</th>
-            <th scope="col">Nazwa dostawcy</th>
-        </tr>
-      </thead>
-     
-    {% for product in checkout_details.products.all %}
-    <tr>
-        {% if checkout_details.confirmed == False %}
-    <th> <a href="{% url 'order_app:update_product' pk=product.id %}">{{ product.name_product }}</a></th>
-        {% else %}
-        <th>{{ product.name_product }}</th>
-        {% endif %}
-      <th>{{ product.name_product.genre }}</th>
-    <th>{{ product.amount}}</th>
-      <th>{{ product.name_product.price }}</th>
-      <th>{{ product.name_product.weight }}</th>
-        <th>{{ product.name_deliver}}</th>
+    <div class="scrollStyle">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Price</th>
+            <th scope="col">Weight</th>
+              <th scope="col">Supplier</th>
+          </tr>
+        </thead>
+       
+      {% for product in checkout_details.products.all %}
+      <tr>
+          {% if checkout_details.confirmed == False %}
+            <th> <a href="{% url 'order_app:update_product' pk=product.id %}">{{ product.name_product }}</a></th>
+          {% else %}
+            <th>{{ product.name_product }}</th>
+          {% endif %}
+          <th>{{ product.name_product.genre }}</th>
+          <th>{{ product.amount}}</th>
+          <th>{{ product.name_product.price }}</th>
+          <th>{{ product.name_product.weight }}</th>
+          <th>{{ product.name_deliver}}</th>
 
-    </tr>
-    {% endfor %}
+      </tr>
+      {% endfor %}
 
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
 
     {% if checkout_details.confirmed == False %}
-     <p><a class='btn btn-warning' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Dodaj produkt</a></p>
-    <p><a class='btn btn-success' href="{% url 'order_app:confirm' pk=checkout_details.id %}">Zatwierdź</a></p>
-    <p><a class='btn btn-danger' href="{% url 'order_app:delete' pk=checkout_details.id %}">Usuń zamówienie</a></p>
+    <div class="horizontalDivs">
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Add product</a></p>
+    </div>
+    <div class="horizontalDivs">
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:confirm' pk=checkout_details.id %}">Confirm</a></p>
+    </div>
+    <div class="horizontalDivs">
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:delete' pk=checkout_details.id %}">Delete order</a></p>
+    </div>
     {% else %}
     <h2>To zamówienie jest zatwierdzone i czeka na realizację</h2>
     {% endif %}

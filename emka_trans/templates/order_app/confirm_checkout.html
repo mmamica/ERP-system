@@ -1,15 +1,16 @@
 {% extends "order_app/order_app_base.html" %}
 
 {% block body_block %}
-<h1>
-  Czy chcesz zatwierdzić to zamówienie?
-</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class='btn btn-primary' value="Zatwierdź">
-  </form>
-
+<div class="centeredDiv plainBackground" style="min-width: 300px;">
+  <h1>
+    Do you want to confirm the order?
+  </h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class='editProfileBtn btn btn-info' value="Confirm">
+    </form>
+</div>
 {% if missing_products %}
   <script>
     alert("Wybrane produkty już niedostępne w bazie!\n\n{% for prod in missing_products%}{{prod.name}}\n {% endfor %}\n" +
