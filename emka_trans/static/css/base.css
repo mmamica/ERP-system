@@ -139,3 +139,8 @@ h3{
 	margin-left: 5px;
 	background-color: #79AFBC;
 }
+
+.scrollStyle{
+    height: 300px;
+    overflow-y: scroll;
+}
