@@ -1,7 +1,8 @@
 {% extends "products_app/products_app_base.html" %}
 
 {% block body_block %}
-<h1>Delete {{product.name }}?</h1>
+<div class="centeredDiv plainBackground" style="min-width: 300px;">
+	<h1>Are you sure you want to delete {{product.name }}?</h1>
 
 <form method="post">
   {% csrf_token %}
@@ -10,4 +11,5 @@
 
 </form>
 
+</div>
 {% endblock %}
