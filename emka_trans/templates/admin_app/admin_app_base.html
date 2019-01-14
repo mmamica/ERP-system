@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>
+         <title>
       Admin Page
       {# Title Extensions go inside the block#}
       {% block title_block %}
@@ -43,11 +43,20 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
+    <!--<link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+       <!-- Static css import -->
+      <link href="{% static 'css/base.css'%}" rel="stylesheet"/>
+      <!-- Logo font from GoogleFonts-->
+      <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet">
+      <!-- Title font from GoogleFonts-->
+      <link href="https://fonts.googleapis.com/css?family=Prata" rel="stylesheet">
+      <!-- Pictograms from FontAwesome-->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       {% csrf_token %}
-
 
 
       <script type="text/javascript">
@@ -118,7 +127,9 @@
   <div id="loading_bar">
    </div>
 
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="	" id="top">
+        <div class="container">
+    <!--<nav class="navbar navbar-default navbar-static-top">-->
         <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="{% url 'index' %}">Index</a></li>
           <li><a class="navbar-brand" href="{% url 'admin_app:index' %}">Dashboard</a></li>
@@ -128,11 +139,13 @@
           <li><a class="navbar-link" href="{% url 'admin_app:product_list' %}">Produkty</a></li>
           <li><a class="navbar-link" href="{% url 'admin_app:product_list' %}">Produkty</a></li>
         </ul>
+        </div>
     </nav>
+
 
     <div class="container">
       {% block body_block %}
-      <h1> LO L</h1>
+      <!--<h1> LO L</h1>-->
       {% endblock %}
     </div>
 

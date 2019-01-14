@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
   {% block body_block %}
+<div class="centeredDiv plainBackground minFiftyPercentContainer">
     <h1>Welcome to Admin Page</h1>
     <div style="width: 640px; height: 480px" id="mapContainer"></div>
 
@@ -29,7 +30,7 @@ document.write(today);
 <p id = 'date'></p>
 
 
-    </div>
+
     <script src='{% static "js/map.js" %}' type="text/javascript">
     </script>
 
@@ -235,6 +236,7 @@ document.write(today);
 
   </tbody>
 </table>
+    </div>
 {%endfor%}
 
 
