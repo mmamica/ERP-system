@@ -29,10 +29,10 @@
 <nav class="  " id="top">
         <div class="container">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'index' %}">INDEX</a></li>
-          <li><a class="navbar-link" href="{% url 'products_app:list' %}">PRODUCTS</a></li>
-          <li><a class="navbar-link" href="{% url 'products_app:create' %}">ADD PRODUCT</a></li>
-          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">MY PROFILE</a></li>
+          <li><a class="navbar-brand" href="{% url 'index' %}" name="index">INDEX</a></li>
+          <li><a class="navbar-link" href="{% url 'products_app:list' %}" name="products">PRODUCTS</a></li>
+          <li><a class="navbar-link" href="{% url 'products_app:create' %}" name="add_product">ADD PRODUCT</a></li>
+          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}" name="my_profile">MY PROFILE</a></li>
         </ul>
     </div>
     </nav>

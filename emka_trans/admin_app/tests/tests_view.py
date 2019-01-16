@@ -7,7 +7,9 @@ from django.test import Client
 from django.test import TestCase
 from order_app.models import Checkout, OrderedProducts
 from products_app.models import Product
-
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
+from django.test import LiveServerTestCase
 
 
 class AdminAppTestCase(TestCase):
@@ -262,3 +264,56 @@ class IndexView3Test(AdminAppTestCase):
         response = self.c.get(reverse('admin_app:index3'))
 
         self.assertEqual(response.status_code, 302)
+
+
+# views (uses selenium)
+class LoginSetUp(TestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        self.selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        self.selenium.find_element_by_name('username').send_keys('Maria')
+        self.selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        self.selenium.find_element_by_name('login').click()
+
+class TestViews(LiveServerTestCase, LoginSetUp):
+    def setUp(self):
+        super().setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestViews, self).tearDown()
+
+    def test_index_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('index').click()
+        assert 'LOGOUT' in selenium.page_source
+
+    def test_dashboard_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('dashboard').click()
+        assert 'Admin\'s dashboard' in selenium.page_source
+    def test_today_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('today').click()
+        assert 'Routes for date:' in selenium.page_source
+
+    def test_tomorrow_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('tomorrow').click()
+        assert 'Admin\'s dashboard' in selenium.page_source
+
+    def test_orders_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('orders').click()
+        assert 'Order id' in selenium.page_source
+
+    def test_orders_view(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/admin_app/dashboard/')
+        selenium.find_element_by_name('products').click()
+        assert 'Available Products' in selenium.page_source

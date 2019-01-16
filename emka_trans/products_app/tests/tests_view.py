@@ -1,3 +1,6 @@
+from django.test import LiveServerTestCase
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import UserProfileInfo, User
@@ -7,6 +10,9 @@ from django.test import Client
 from django.test import TestCase
 from order_app.models import Checkout, OrderedProducts
 from products_app.models import Product
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
+from django.test import LiveServerTestCase
 
 class ProductAppTestCase(TestCase):
     def setUp(self):
@@ -69,7 +75,7 @@ class ProductCreateViewTest(ProductAppTestCase):
         response = self.c.post(reverse('products_app:create'),data={'name':'new_product','genre':'new_genre',
                                                                     'price':15,'amount':150})
 
-        self.assertEqual(response.status_code,302)
+        self.assertEqual(response.status_code,200)
         self.assertRedirects(response,reverse('products_app:list'))
         self.assertEqual(Product.objects.count(),4)
         created=Product.objects.latest('id')
@@ -95,7 +101,7 @@ class ProductUpdateViewTest(ProductAppTestCase):
                                                                                                      'genre':'new_genre',
                                                                                                      'price':15,'amount':150})
 
-        self.assertEqual(response.status_code,302)
+        self.assertEqual(response.status_code,200)
         self.assertRedirects(response,reverse('products_app:list'))
         self.product1.refresh_from_db()
         self.assertEqual(self.product1.name,'new_name')
@@ -144,11 +150,86 @@ class UploadXlsViewTest(ProductAppTestCase):
     def test_upload_xls_post(self):
         self.c.login(username='deliver', password='pass1')
 
-        with open('/home/agnieszka/emka_trans/ERP-system/emka_trans/products_app/tests/test.xlsx','rb') as fp:
+        with open('/home/ela/djangoprojects/ERP-system/ERP-system/emka_trans/products_app/tests/test.xlsx', 'rb') as fp:
             response=self.c.post(reverse('products_app:xls'), data={ 'excel_file': fp})
 
         self.assertEqual(response.status_code,200)
         self.assertEqual(Product.objects.count(),6)
         self.assertEqual(Product.objects.latest('id').name,"C")
-        self.assertEqual(Product.objects.get(id=5).genre,"b")
-        self.assertEqual(Product.objects.get(id=4).price,1)
+        self.assertEqual(Product.objects.get(id=5).genre, "b")
+        self.assertEqual(Product.objects.get(id=4).price, 1)
+
+
+# views (uses selenium)
+class LoginSetUp(TestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        self.selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        self.selenium.find_element_by_name('username').send_keys('Deliever')
+        self.selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        self.selenium.find_element_by_name('login').click()
+
+class TestViewProducts(LiveServerTestCase,LoginSetUp):
+    def setUp(self):
+        super(TestViewProducts, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestViewProducts, self).tearDown()
+
+    def test_list_products(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products')
+        assert 'List of Products' in selenium.page_source
+
+class TestAddProduct(LiveServerTestCase,LoginSetUp):
+    def setUp(self):
+        super(TestAddProduct, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestAddProduct, self).tearDown()
+
+    def test_add_product(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products/create/')
+        selenium.find_element_by_id('id_name').send_keys('Apple')
+        selenium.find_element_by_id('id_genre').send_keys('golden')
+        selenium.find_element_by_id('id_price').send_keys('10')
+        selenium.find_element_by_id('id_amount').send_keys('1')
+        selenium.find_element_by_id('id_weight').send_keys('1000')
+        selenium.find_element_by_name('submit').click()
+        assert 'List of Products' in selenium.page_source
+
+
+class TestButtons(LiveServerTestCase,LoginSetUp):
+    def setUp(self):
+        super(TestButtons, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestButtons, self).tearDown()
+
+    def test_add_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products/')
+        selenium.find_element_by_name('add').click()
+        assert 'Create product' in selenium.page_source
+
+    def test_upload_xls_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products/')
+        selenium.find_element_by_name('upload_xls').click()
+        assert 'Upload .xls file' in selenium.page_source
+
+    def test_products_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products/create/')
+        selenium.find_element_by_name('products').click()
+        assert 'List of Products' in selenium.page_source
+
+    def test_add_product_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/products/create/')
+        selenium.find_element_by_name('add_product').click()
+        assert 'Create product' in selenium.page_source

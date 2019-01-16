@@ -1,3 +1,6 @@
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
+from django.test import LiveServerTestCase
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import UserProfileInfo, User
@@ -5,6 +8,7 @@ from admin_app.models import Magazine, Truck
 from accounts.forms import UserForm, UserProfileInfoForm
 from django.test import Client
 from django.contrib.auth.hashers import check_password
+from random_word import RandomWords
 
 class RegistrationTestCase(TestCase):
 
@@ -204,6 +208,162 @@ class ShowProfileTestView(TestCase):
     def test_show_profile(self):
         response=self.c.get(reverse("accounts:show_profile",  kwargs={'username': 'user1'}))
         self.assertEqual(response.status_code,200)
-        self.assertEqual(response.context['user'],self.user1)
-        self.assertEqual(response.context['user_profile'],self.user1_info)
+        self.assertEqual(response.context['user'], self.user1)
+        self.assertEqual(response.context['user_profile'], self.user1_info)
 
+
+# views (uses selenium)
+
+class TestRegister(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        super(TestRegister, self).setUp()
+        self.randomUsernameClient = RandomWords().get_random_word()
+        self.randomUsernameDriver = RandomWords().get_random_word()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestRegister, self).tearDown()
+
+    def test_register_deliever_success(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/register_user/')
+
+        selenium.find_element_by_id('id_username').send_keys(self.randomUsernameDriver)
+        selenium.find_element_by_id('id_first_name').send_keys('testtest')
+        selenium.find_element_by_id('id_last_name').send_keys('test')
+        selenium.find_element_by_id('id_email').send_keys('test@g.com')
+        selenium.find_element_by_id('id_password').send_keys('pass')
+        selenium.find_element_by_id('id_company_name').send_keys('tmp')
+        selenium.find_element_by_id('id_phone_number').send_keys('123456789')
+        selenium.find_element_by_id('city').send_keys('Krakow')
+        selenium.find_element_by_id('street').send_keys('al.Mickiewicza')
+        selenium.find_element_by_id('house_number').send_keys('1')
+        selenium.find_element_by_id('id_is_client')
+        selenium.find_element_by_name('register').click()
+        selenium.implicitly_wait(40)
+        assert 'You have registered successfully' in selenium.page_source
+
+    def test_register_client_success(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/register_user/')
+        selenium.find_element_by_id('id_username').send_keys(
+            self.randomUsernameClient)
+        selenium.find_element_by_id('id_first_name').send_keys('testtest')
+        selenium.find_element_by_id('id_last_name').send_keys('test')
+        selenium.find_element_by_id('id_email').send_keys('test@g.com')
+        selenium.find_element_by_id('id_password').send_keys('pass')
+        selenium.find_element_by_id('id_company_name').send_keys('tmp')
+        selenium.find_element_by_id('id_phone_number').send_keys('123456789')
+        selenium.find_element_by_id('city').send_keys('Krakow')
+        selenium.find_element_by_id('street').send_keys('al.Mickiewicza')
+        selenium.find_element_by_id('house_number').send_keys('1')
+        selenium.find_element_by_id('id_is_client').click()
+        selenium.find_element_by_name('register').click()
+        selenium.implicitly_wait(20)
+        assert 'You have registered successfully' in selenium.page_source
+
+class TestLogin(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        super(TestLogin, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestLogin, self).tearDown()
+
+    def test_login_success(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        selenium.find_element_by_name('username').send_keys('testClient')
+        selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        selenium.find_element_by_name('login').click()
+        selenium.implicitly_wait(20)
+        assert 'LOGOUT' in selenium.page_source
+
+    def test_login_wrong_password_error(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        selenium.find_element_by_name('username').send_keys('testtest')
+        selenium.find_element_by_name('password').send_keys('badpass')
+        selenium.find_element_by_name('login').click()
+        selenium.implicitly_wait(20)
+        assert 'LOGIN' in selenium.page_source
+
+    def test_login_user_not_exists_error(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        selenium.find_element_by_name('username').send_keys(
+            RandomWords().get_random_word())
+        selenium.find_element_by_name('password').send_keys('badpass')
+        selenium.find_element_by_name('login').click()
+        assert 'LOGIN' in selenium.page_source
+
+class TestLogout(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        super(TestLogout, self).setUp()
+        self.selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        self.selenium.find_element_by_name('username').send_keys('testClient')
+        self.selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        self.selenium.find_element_by_name('login').click()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestLogout, self).tearDown()
+
+    def test_logout(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000')
+        self.selenium.find_element_by_name('logout_nav').click()
+        assert 'LOGIN' in selenium.page_source
+
+class TestEditProfile(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        super(TestEditProfile, self).setUp()
+        self.selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        self.selenium.find_element_by_name('username').send_keys('Deliever')
+        self.selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        self.selenium.find_element_by_name('login').click()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestEditProfile, self).tearDown()
+
+    def test_edit_profile_info_success(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/accounts/profile/edit/')
+        selenium.find_element_by_id('id_first_name').send_keys('testtest')
+        selenium.find_element_by_id('id_last_name').send_keys('test')
+        selenium.find_element_by_id('id_company_name').send_keys('test')
+        selenium.find_element_by_id('id_phone_number').send_keys('123456789')
+        selenium.find_element_by_name('zapisz').click()
+        assert 'My profile' in selenium.page_source
+
+class TestButtons(LiveServerTestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        super(TestButtons, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestButtons, self).tearDown()
+
+    def test_index_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/')
+        selenium.find_element_by_name('index').click()
+        assert 'INDEX' in selenium.page_source
+
+    def test_admin_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/')
+        selenium.find_element_by_name('admin').click()
+        assert 'Django administration' in selenium.page_source
+
+    def test_login_button(self):
+        selenium = self.selenium
+        selenium.get('http://127.0.0.1:8000/')
+        selenium.find_element_by_name('login_nav').click()
+        assert 'Username:' in selenium.page_source

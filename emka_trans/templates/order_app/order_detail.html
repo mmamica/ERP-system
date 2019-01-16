@@ -38,13 +38,13 @@
 
     {% if checkout_details.confirmed == False %}
     <div class="horizontalDivs">
-      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:add_product' pk=checkout_details.id %}">Add product</a></p>
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:add_product' pk=checkout_details.id %}" name="add_product">Add product</a></p>
     </div>
     <div class="horizontalDivs">
-      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:confirm' pk=checkout_details.id %}">Confirm</a></p>
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:confirm' pk=checkout_details.id %}" name="confirm">Confirm</a></p>
     </div>
     <div class="horizontalDivs">
-      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:delete' pk=checkout_details.id %}">Delete order</a></p>
+      <p><a class='editProfileBtn btn btn-info' href="{% url 'order_app:delete' pk=checkout_details.id %}" name="delete_order">Delete order</a></p>
     </div>
     {% else %}
     <h1>This order has been confirmed. Please wait for the delivery.</h1>
