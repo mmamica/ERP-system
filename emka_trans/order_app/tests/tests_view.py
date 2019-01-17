@@ -26,10 +26,10 @@ class OrderAppTestCase(TestCase):
                                                          phone_number="123456789",
                                                          longitude=50.064824, latitude=19.923944, is_client=True)
         self.checkout=Checkout.objects.create(name_client=self.user1,price=0,weigth=150,route_client=False,
-                                              date='2018-12-20',hour=1,magazine=False,confirmed=False)
+                                              date='2020-12-20',hour=1,magazine=False,confirmed=False)
 
         self.checkout2=Checkout.objects.create(name_client=self.user2,price=200,weigth=50,route_client=False,
-                                              date='2018-12-25',hour=2,magazine=False,confirmed=False)
+                                              date='2020-12-25',hour=2,magazine=False,confirmed=False)
 
         self.user3 = User.objects.create_user(username="user3", first_name="Name1", last_name="Last1",
                                               email="email1@g.pl", password='pass1')
@@ -41,7 +41,7 @@ class OrderAppTestCase(TestCase):
         self.product=Product.objects.create(name='jabłko',genre='nwm',name_deliver=self.user3,amount=100,price=10)
 
         self.checkout3 = Checkout.objects.create(name_client=self.user1, price=200, weigth=50, route_client=False,
-                                                 date='2018-12-25', hour=2, magazine=False, confirmed=False)
+                                                 date='2020-12-25', hour=2, magazine=False, confirmed=False)
 
         self.ordered_product = OrderedProducts.objects.create(id_checkout=self.checkout3, name_deliver=self.user3,
                                                               name_product=self.product, amount=20, route=False,
@@ -89,11 +89,10 @@ class CheckoutCreateViewTest(OrderAppTestCase):
         self.c.login(username='user1', password='pass1')
         #res=self.c.post(reverse('order_app:create'))
 
-        response=self.c.post(reverse('order_app:create'),data={'date':'2018-12-25','hour':'3'})
+        response=self.c.post(reverse('order_app:create'),data={'date':'2020-12-25','hour':'1'})
 
-        #print(res.contrxt['form'])
         new_checkout=Checkout.objects.latest('id')
-        self.assertEqual(response.status_code,302)
+        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,reverse('order_app:detail',kwargs={'pk':new_checkout.id}))
         self.assertEqual(new_checkout.name_client,self.user1)
         self.assertEqual(Checkout.objects.count(),4)
@@ -110,21 +109,21 @@ class CheckoutCreateViewTest(OrderAppTestCase):
         response = self.c.post(reverse('order_app:create'), data={'date': '2018-12-25', 'hour': '3'})
 
         self.assertEqual(response.status_code,200)
-        self.assertFormError(response,'form',field='date',errors='Wyczerpano limit zamówień na ten dzień!')
+        self.assertFormError(response,'form',field='date',errors='The limit for this day is over.')
 
     def test_create_checkout_old_date(self):
         self.c.login(username='user1', password='pass1')
         response = self.c.post(reverse('order_app:create'), data={'date': '2017-12-25', 'hour': '3'})
 
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form', field='date', errors='Wybierz przyszłą datę!')
+        self.assertFormError(response, 'form', field='date', errors='Choose future date.')
 
     def test_create_checkout_no_free_slot(self):
         self.c.login(username='user1', password='pass1')
-        response = self.c.post(reverse('order_app:create'), data={'date': '2018-12-25', 'hour': '2'})
+        response = self.c.post(reverse('order_app:create'), data={'date': '2020-12-25', 'hour': '2'})
 
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form', field='hour', errors='Ten slot jest już zajety!')
+        self.assertFormError(response, 'form', field='hour', errors='This slot is already taken.')
 
 class ProductAddViewTest(OrderAppTestCase):
 

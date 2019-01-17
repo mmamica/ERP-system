@@ -67,7 +67,7 @@ class ProductCreateViewTest(ProductAppTestCase):
     def test_create_product_post(self):
         self.c.login(username='deliver', password='pass1')
         response = self.c.post(reverse('products_app:create'),data={'name':'new_product','genre':'new_genre',
-                                                                    'price':15,'amount':150})
+                                                                    'price':15,'amount':150,'weight':10})
 
         self.assertEqual(response.status_code,302)
         self.assertRedirects(response,reverse('products_app:list'))
@@ -93,7 +93,8 @@ class ProductUpdateViewTest(ProductAppTestCase):
         self.c.login(username='deliver', password='pass1')
         response = self.c.post(reverse('products_app:update', kwargs={'pk': self.product1.id}),data={'name':'new_name',
                                                                                                      'genre':'new_genre',
-                                                                                                     'price':15,'amount':150})
+                                                                                                     'price':15,'amount':150,
+                                                                                                     'weight':10})
 
         self.assertEqual(response.status_code,302)
         self.assertRedirects(response,reverse('products_app:list'))
@@ -152,3 +153,16 @@ class UploadXlsViewTest(ProductAppTestCase):
         self.assertEqual(Product.objects.latest('id').name,"C")
         self.assertEqual(Product.objects.get(id=5).genre,"b")
         self.assertEqual(Product.objects.get(id=4).price,1)
+
+    def test_upload_xls_update(self):
+        self.c.login(username='deliver', password='pass1')
+
+        with open('/home/agnieszka/emka_trans/ERP-system/emka_trans/products_app/tests/test_update.xlsx','rb') as fp:
+            response=self.c.post(reverse('products_app:xls'), data={ 'excel_file': fp})
+
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(Product.objects.count(),3)
+        self.assertEqual(Product.objects.get(name='prod1').price,30)
+        self.assertEqual(Product.objects.get(name='prod1').amount, 10)
+        self.assertEqual(Product.objects.get(name='prod2').amount, 20)
+        self.assertEqual(Product.objects.get(name='prod2').price, 40)
