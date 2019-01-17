@@ -36,10 +36,10 @@
     <nav class="  " id="top">
         <div class="container">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'index' %}">INDEX</a></li>
-          <li><a class="navbar-link" href="{% url 'order_app:list' %}">ORDERS</a></li>
-          <li><a class="navbar-link" href="{% url 'order_app:create' %}">ADD ORDER</a></li>
-          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}">MY PROFILE</a></li>
+          <li><a class="navbar-brand" href="{% url 'index' %}" name="index">INDEX</a></li>
+          <li><a class="navbar-link" href="{% url 'order_app:list' %}" name="orders">ORDERS</a></li>
+          <li><a class="navbar-link" href="{% url 'order_app:create' %}" name="add_order">ADD ORDER</a></li>
+          <li><a class="navbar-link" href="{% url 'accounts:my_profile' %}" name="my_profile">MY PROFILE</a></li>
         </ul>
         </div>
     </nav>

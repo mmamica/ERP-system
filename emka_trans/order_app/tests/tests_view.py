@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import UserProfileInfo, User
@@ -7,8 +8,10 @@ from django.test import Client
 from django.test import TestCase
 from order_app.models import Checkout, OrderedProducts
 from products_app.models import Product
-
-# Create your tests here.
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
+from django.test import LiveServerTestCase
+import random
 
 class OrderAppTestCase(TestCase):
     def setUp(self):
@@ -234,3 +237,82 @@ class ProductDeleteViewTest(OrderAppTestCase):
 
         self.checkout3.refresh_from_db()
         self.assertEqual(self.checkout3.price,0)
+
+
+# views (uses selenium)
+class LoginSetUp(TestCase):
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        self.selenium.get('http://127.0.0.1:8000/accounts/user_login/')
+        self.selenium.find_element_by_name('username').send_keys('Client')
+        self.selenium.find_element_by_name('password').send_keys('qwertyuiop')
+        self.selenium.find_element_by_name('login').click()
+
+class TestAddOrder(LiveServerTestCase, LoginSetUp):
+    def setUp(self):
+        super().setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestAddOrder, self).tearDown()
+
+    def test_add_order(self):
+        selenium=self.selenium
+        date = str(random.randint(1, 12))+'/'+str(random.randint(1, 30))+'/2019'
+        selenium.get('http://127.0.0.1:8000/orders/create')
+        selenium.find_element_by_name('date').send_keys(date)
+        selenium.find_element_by_id(
+            'id_hour').send_keys(random.randint(1, 24))
+        submit=selenium.find_element_by_id('submit_btn').click()
+        assert 'Product' in selenium.page_source
+
+
+class TestOrderDetail(LiveServerTestCase, LoginSetUp):
+    def setUp(self):
+       
+        super().setUp()
+        date = str(random.randint(1, 12))+'/' + \
+            str(random.randint(1, 30))+'/2019'
+        self.selenium.get('http://127.0.0.1:8000/orders/create')
+        self.selenium.find_element_by_name('date').send_keys(date)
+        self.selenium.find_element_by_id(
+            'id_hour').send_keys(random.randint(1, 24))
+        self.selenium.find_element_by_id('submit_btn').click()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(TestOrderDetail, self).tearDown()
+
+    def test_add_product(self):
+        selenium = self.selenium
+        selenium.get(selenium.current_url)
+        selenium.find_element_by_name('add_product').click()
+        selenium.find_element_by_id('id_name').send_keys('Apple')
+        selenium.find_element_by_id('id_genre').send_keys('golden')
+        selenium.find_element_by_id('id_amount').send_keys('1')
+        selenium.find_element_by_name('submit').click()
+        assert 'Product' in selenium.page_source
+
+    def test_confirm(self):
+        selenium = self.selenium
+        selenium.get(selenium.current_url)
+        selenium.find_element_by_name('confirm').click()
+        selenium.implicitly_wait(10)
+        selenium.find_element_by_name('confirm').click()
+        assert 'Your orders' in selenium.page_source
+
+    def test_delete_delete(self):
+        selenium = self.selenium
+        selenium.get(selenium.current_url)
+        selenium.find_element_by_name('delete_order').click()
+        selenium.implicitly_wait(10)
+        selenium.find_element_by_name('delete').click()
+        assert 'Your orders' in selenium.page_source
+
+    def test_delete_cancel(self):
+        selenium = self.selenium
+        selenium.get(selenium.current_url)
+        selenium.find_element_by_name('delete_order').click()
+        selenium.implicitly_wait(10)
+        selenium.find_element_by_name('cancel').click()
+        assert 'details:' in selenium.page_source

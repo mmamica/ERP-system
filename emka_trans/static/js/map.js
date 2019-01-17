@@ -126,7 +126,7 @@ var svgMarkupClient = '<svg width="24" height="24" ' +
             // language=HTML
 
 
-            startMarker.setData('<div><a href=\'{% url accounts:profile username:Elka %}\' ><div id="name">'+String(name)+'</div></a>' +
+            startMarker.setData('<div><div id="name">'+String(name)+'</div>' +
                                     '</div><div >'+ String(startPoint.latitude) +'<br><div id="param1">'+String(startPoint.longitude)+'</div></div>');
             startMarker.addEventListener('tap', function (evt) {
 

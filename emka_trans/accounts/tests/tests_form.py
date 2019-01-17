@@ -1,7 +1,8 @@
 from django.test import TestCase
 from accounts.forms import (UserForm,
                             UserProfileInfoForm,
-                            EditUserProfileForm,
+                            EditUserForm,
+                            EditProfileForm,
                             LoginForm)
 from model_mommy import mommy
 from django.contrib.auth.models import User
@@ -10,18 +11,13 @@ from django.contrib.auth.forms import UserChangeForm
 from accounts.models import UserProfileInfo
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate
-#from emka_trans.settings import AUTH_TEMPLATES
-#from django_forms_test import field, cleaned, FormTest
-
-#from django.test import LiveServerTestCase
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
 
 
 class TestDataMixin:
     @classmethod
     def setUpTestData(cls):
-        cls.u1 = User.objects.create_user(username='testclient', password='password', email='testclient@example.com')
+        cls.u1 = User.objects.create_user(
+            username='testclient', password='password', email='testclient@example.com')
 
 
 class UserFormTest(TestCase):
@@ -41,7 +37,8 @@ class UserFormTest(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_UserForm_blank_invalid(self):
-        form = UserForm(data={'username': "", 'first_name': "", 'email': "", 'password': ""})
+        form = UserForm(
+            data={'username': "", 'first_name': "", 'email': "", 'password': ""})
         self.assertFalse(form.is_valid())
 
     def test_UserForm_blank_username(self):
@@ -72,21 +69,6 @@ class UserFormTest(TestCase):
         self.assertFalse(form.is_valid())
 
 
-class UserProfileInfoFormTest(TestCase):
-    def steUp(self):
-        self.image = tempfile.NamedTemporaryFile(suffix=".jpg").name
-
-    def test_UserProfileInfoForm_valid(self):
-        form = UserProfileInfoForm(data={'company_name': "AGH",
-                                         'phone_number': 123456789,
-                                         'city': "Kraków",
-                                         'street': "Mickiewicz",
-                                         'house_number': 2,
-                                         'profile_pic': "",
-                                         'is_client': "1"})
-        self.assertTrue(form.is_valid())
-
-
 class EditUserProfileFormTest(TestDataMixin, TestCase):
     def setUp(self):
         self.user = mommy.make(User)
@@ -96,7 +78,8 @@ class EditUserProfileFormTest(TestDataMixin, TestCase):
         data = {'username': 'not valid'}
         form = UserChangeForm(data, instance=user)
         self.assertFalse(form.is_valid())
-        validator = next(v for v in User._meta.get_field('username').validators if v.code == 'invalid')
+        validator = next(v for v in User._meta.get_field(
+            'username').validators if v.code == 'invalid')
         self.assertEqual(form["username"].errors, [str(validator.message)])
 
 
@@ -116,15 +99,3 @@ class LoginFormTest(TestDataMixin, TestCase):
         }
         form = LoginForm(data)
         self.assertTrue(form.is_valid())
-
-        #  SELENIUM
-        #
-        # class UserFormTestCase(LiveServerTestCase):
-        #
-        #     def setUp(self):
-        #         self.selenium = webdriver.Firefox()
-        #         super(UserFormTestCase, self).setUp()
-        #
-        #     def tearDown(self):
-        #         self.selenium.quit()
-        #         super(UserFormTestCase, self).tearDown()

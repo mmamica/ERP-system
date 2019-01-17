@@ -19,20 +19,36 @@ import requests
 import re
 
 
-"""
-
-A view for displaying a form and rendering a template response.
-
-"""
-
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView(TemplateView):
+    """
+
+     Allows the admin to see all the checkouts and routes for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index.html`
+
+    """
     template_name = 'admin_app/admin_app_index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -50,11 +66,33 @@ class IndexView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView1(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the first slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_1.html`
+
+    """
     template_name = 'admin_app/admin_app_index_1.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -72,11 +110,33 @@ class IndexView1(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView2(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the second slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_2.html`
+
+    """
     template_name = 'admin_app/admin_app_index_2.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -94,11 +154,33 @@ class IndexView2(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView3(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the third slot for today.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_today``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_3.html`
+
+    """
     template_name = 'admin_app/admin_app_index_3.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -116,11 +198,33 @@ class IndexView3(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView20(TemplateView):
+    """
+
+     Allows the admin to see all the checkouts and routes for for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_20.html`
+
+    """
     template_name = 'admin_app/admin_app_index_20.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -138,11 +242,33 @@ class IndexView20(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView21(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the first slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_21.html`
+
+    """
     template_name = 'admin_app/admin_app_index_21.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -160,11 +286,33 @@ class IndexView21(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView22(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the second slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_22.html`
+
+    """
     template_name = 'admin_app/admin_app_index_22.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -183,11 +331,33 @@ class IndexView22(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class IndexView23(TemplateView):
+    """
+
+     Allows the admin to see the checkouts and routes for the third slot for tomorrow.
+
+        **Context**
+            ``magazine``
+                A String with Here maps request with magazine coordinates.
+            ``checkout``
+                Instances of :model:`order_app.Checkout`
+            ``ordered_products``
+                Instances of :model:`order_app.OrderedProducts`
+            ``profile``
+                Instances of :model:`accounts.UserProfileInfo`
+            ``routes_tomorrow``
+                Instances of :model:`admin_app.Route`
+            ``date_ordered``
+                A date equal to a date after tomorrow. (taking a server date)
+            ``trucks``
+                Instances of :model:`admin_app.Truck`
+        **Template:**
+            :template:`admin_app/admin_app_index_23.html`
+
+    """
     template_name = 'admin_app/admin_app_index_23.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = "admin_app"
         context['magazine'] = 'geo!' + str(Magazine.objects.get(id_magazine=1).latitude) + ',' + str(
             Magazine.objects.get(id_magazine=1).longitude)
         context['checkout'] = Checkout.objects.filter(
@@ -205,6 +375,12 @@ class IndexView23(TemplateView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminCheckoutListView(ListView):
+    """
+     Allows the admin to see the list of the checkout details.
+
+        **Template:**
+            :template:`admin_app/order_list.html`
+    """
     model = Checkout
     template_name = 'admin_app/order_list.html'
 
@@ -215,6 +391,12 @@ class AdminCheckoutListView(ListView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminCheckoutDetailView(DetailView):
+    """
+     Allows the admin to see the checkout details.
+
+        **Template:**
+            :template:`admin_app/order_detail.html`
+    """
     context_object_name = 'order_details'
     model = Checkout
     template_name = 'admin_app/order_detail.html'
@@ -224,12 +406,23 @@ class AdminCheckoutDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(staff_member_required(), name='dispatch')
 class AdminProductListView(ListView):
+    """
+     Allows the admin to see the list of whole available products.
+
+        **Template:**
+            :template:`admin_app/product_list.html`
+    """
     template_name = 'admin_app/product_list.html'
     model = Product
 
 
 @csrf_exempt
 def areAllConsidered(tab):
+    """
+    Checks if all elements in a list are None.
+    :param tab: List
+    :return: Boolean
+    """
     for i in range(0, len(tab)):
         if (tab[i] is not None):
             return False
@@ -238,6 +431,11 @@ def areAllConsidered(tab):
 
 @csrf_exempt
 def onNotConsidered(tab):
+    """
+    Checks if there is only one not None value in a list.
+    :param tab: List
+    :return: Boolean
+    """
     iter = 0
     for i in range(0, len(tab)):
         if (tab[i] is not None):
@@ -250,6 +448,11 @@ def onNotConsidered(tab):
 
 @csrf_exempt
 def maxCell(tab):
+    """
+    Finds the cell with the biggest value
+    :param tab: 2D-Array
+    :return: Tuple
+    """
     max = 0
     imax = None
     jmax = None
@@ -266,10 +469,10 @@ def maxCell(tab):
 @csrf_exempt
 def maxFromI(tab, i):
     """
-    Finds the biggest value in the matrix from the row i.
-    :param tab: A saving matrix from Clarke and Wright algorithm.
-    :param i: A column in which we look for the biggest value.
-    :return: The biggest value from the row i in matrix tab.
+    Finds the index of the biggest value in the matrix from the row i.
+    :param tab: 2D-Array
+    :param i: integer
+    :return: integer
     """
     max = 0
     jmax = None
@@ -283,10 +486,10 @@ def maxFromI(tab, i):
 @csrf_exempt
 def maxFromJ(tab, j):
     """
-    Finds the biggest value in the matrix from the column j.
-    :param tab: A saving matrix from Clarke and Wright algorithm.
-    :param j: A row in which we look for the biggest value.
-    :return: The biggest value from the column j in matrix tab.
+    Finds the index of the biggest value in the matrix from the column j.
+    :param tab: 2D-Array
+    :param j: integer
+    :return: integer
     """
     max = 0
     imax = None
@@ -300,9 +503,9 @@ def maxFromJ(tab, j):
 @csrf_exempt
 def deleteAllFromIndex(tab, index):
     """
-    Deletes all cells where a number of row or a column is equal to index.
-    :param tab: A saving matrix from Clarke and Wright algorithm.
-    :param index: A number of row / column we want to delete.
+    Deletes all cells from a row number index anf from the column number index.
+    :param tab: 2D-Array
+    :param index: integer
     :return:
     """
     for i in range(0, len(tab)):
@@ -312,11 +515,11 @@ def deleteAllFromIndex(tab, index):
 
 
 @csrf_exempt
-def ClarkeWright(date, claster):
+def clarkeWright(date, claster):
     """
-    For each claster it finds optimized routes using Clarke and Wright algorithm.
-    :param date: A date of the checkout for which we plan the routes.
-    :param claster: A claster for which we calculate the routes.
+    For each cluster it finds optimized routes using Clarke and Wright algorithm.
+    :param date: string (%Y-%m-%d)
+    :param claster: integer
     :return:
     """
     ordersOryg = None
@@ -449,19 +652,19 @@ def ClarkeWright(date, claster):
                         allRoutes.append(route)
                         ordersConsidered[i] = None
                         break
-        MatchClients(date, claster, allRoutes)
+        matchClients(date, claster, allRoutes)
         addHour(date)
         calculateHour(date)
         sendMail(date)
 
 
 @csrf_exempt
-def MatchClients(date, claster, routes):
+def matchClients(date, claster, routes):
     """
-    Matches routes for the date given as an attribute to the checkouts, with the date as the given one.
-    :param date: A date of the routes which we match with the checkouts.
-    :param claster: A claster of the clients and routes for which we do the matching.
-    :param routes:A list of routes for the day given as an attribute.
+    Matches routes with the date given as an attribute to the checkouts.
+    :param date: string (%Y-%m-%d)
+    :param claster: integer
+    :param routes: List
     :return:
     """
     client_date = datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1)
@@ -556,13 +759,14 @@ def MatchClients(date, claster, routes):
 @csrf_exempt
 def runClarkeWright(request):
     """
-    :param request: Ajax request
-    :return: Http Response
+    It runs a clarkeWright function for each cluster.
+    :param request: HttpRequest
+    :return: HttpResponse
     """
     date = datetime.today() + timedelta(2)  # moje testowe dane są na 20.12.2018 dlatego tak to robię
     date = str(date.strftime('%Y-%m-%d'))
     for t in Truck.objects.all():
-        ClarkeWright(date, t.id_truck)
+        clarkeWright(date, t.id_truck)
     return HttpResponse()
 
 
@@ -570,7 +774,7 @@ def runClarkeWright(request):
 def addHour(date):
     """
     Adds an hour to automatically generated routes for the day given as an attribute of the function
-    :param date: A date of the routes we add an hour to
+    :param date: string (%Y-%m-%d)
     :return:
     """
 
@@ -590,6 +794,11 @@ def addHour(date):
 
 @csrf_exempt
 def calculateHour(date):
+    """
+    Calculates the time route time. It adds the time needed to repack the truck.
+    :param date: string (%Y-%m-%d)
+    :return:
+    """
 
     date = (datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1))
     hours=0
@@ -678,6 +887,11 @@ def calculateHour(date):
 
 @csrf_exempt
 def sendMail(date):
+    """
+    Sends mails to clients and suppliers about the delivery or pickup date and hour after generating routes.
+    :param date: string (%Y-%m-%d)
+    :return:
+    """
 
     date = (datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1))
     mails=set()
@@ -737,6 +951,11 @@ def sendMail(date):
 
 @csrf_exempt
 def runUpdate(request):
+    """
+    Updates the route if it was manually edited.
+    :param request: HttpRequest
+    :return: HttpResponse
+    """
     body_unicode = request.body.decode('utf-8')
     pattern = r'array=(.*)&id=(\d*)&array2=(.*)&id2=(\d*)'
     print(body_unicode)
