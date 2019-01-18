@@ -4,6 +4,7 @@ certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
 Django==2.0.9
+docutils==0.14
 et-xmlfile==1.0.1
 idna==2.8
 jdcal==1.4
