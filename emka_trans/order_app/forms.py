@@ -8,9 +8,10 @@ import datetime
 
 class OrderedProductsForm(forms.ModelForm):
     name = forms.ChoiceField(widget=forms.Select())
-    iquery2=Product.objects.values_list('genre',flat=True).distinct()
-    iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
-    genre=forms.ChoiceField(choices=iquery_choices2, widget=forms.Select(attrs={'style': 'display:none;'}))
+    #iquery2=Product.objects.values_list('genre',flat=True).distinct()
+    #iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
+    #genre=forms.ChoiceField(choices=iquery_choices2, widget=forms.Select(attrs={'style': 'display:none;'}))
+    genre = forms.ChoiceField(widget=forms.Select(attrs={'style': 'display:none;'}))
 
     class Meta():
         model=OrderedProducts
@@ -52,11 +53,19 @@ class OrderedProductsForm(forms.ModelForm):
             iquery=list(set(iquery))
             iquery_choices=[('', '')] + [(id, id) for id in iquery]
             self.fields['name'].choices = iquery_choices
+
+            iquery2=Product.objects.values_list('genre',flat=True).distinct()
+            iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
+            self.fields['genre'].choices=iquery_choices2
         else:
             self.ajax=False
             iquery = Product.objects.values_list('name',flat=True).distinct()
             iquery_choices = [('', '')] + [(id, id) for id in iquery]
             self.fields['name'].choices = iquery_choices
+
+            iquery2 = Product.objects.values_list('genre', flat=True).distinct()
+            iquery_choices2 = [('', '')] + [(id, id) for id in iquery2]
+            self.fields['genre'].choices = iquery_choices2
 
 
 class CheckoutCreateForm(forms.ModelForm):
