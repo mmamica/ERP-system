@@ -909,15 +909,14 @@ def sendMail(date):
                 hour="13:00"
             else:
                 hour="16:00"
-            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', ['maria.anna.mamica@gmail.com',
-                                                                                     'kartytko@gmail.com', 'agapekala1@wp.pl']
+            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', email
             html_content = render_to_string('admin_app/mail.html',
                                             {'user': username, 'email': email, 'date': date, 'hour': hour})  # render with dynamic value
             text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, to)
             msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            #msg.send() #commented not to send an email while checking test data
 
         else:
             mail=UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[1])).name_deliver).user.email
@@ -937,15 +936,14 @@ def sendMail(date):
                 hour="13:00"
             else:
                 hour="16:00"
-            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', ['maria.anna.mamica@gmail.com',
-                                                                                     'kartytko@gmail.com', 'agapekala1@wp.pl']
+            subject, from_email, to = 'Subject', 'pacman.package.sender@gmail.com', email
             html_content = render_to_string('admin_app/mail_deliver.html',
                                             {'email': email, 'date': date, 'hour': hour})  # render with dynamic value
             text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, to)
             msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            #msg.send() #commented not to send an email while checking test data
 
 
 
