@@ -10,6 +10,11 @@
 					{{ user_form.as_table }}
 					{{ profile_form.as_table }}
 				</table>
+			<div class="horizontalDivs">
+			<label style="margin-right:30px;">Password: </label>
+	    	<a href="{% url 'accounts:change_password' %}">Change Password</a>
+	</div>
+			<div style="clear: left;"></div>
 				<div class="okButtonWrapper">
 					<input type="submit" name="zapisz" value="Save" class="okButton">
 				</div>

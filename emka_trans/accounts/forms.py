@@ -64,10 +64,10 @@ class UserProfileInfoForm(forms.ModelForm):
 
 
 
-class EditUserForm(UserChangeForm):
+class EditUserForm(forms.ModelForm):
     class Meta():
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class EditProfileForm(forms.ModelForm):
@@ -85,7 +85,7 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         if not user or not user.is_active:
-            raise forms.ValidationError("Błąd logowania! Spróbuj ponownie")
+            raise forms.ValidationError("Incorrect login or password")
         return self.cleaned_data
 
     def login(self, request):

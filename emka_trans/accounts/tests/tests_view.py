@@ -125,7 +125,7 @@ class ChangePasswordViewTest(TestCase):
                                                                         'new_password2':'new_pass'})
 
         self.assertEqual(login,True)
-        self.assertRedirects(response, reverse('accounts:my_profile'), status_code=302)
+        self.assertRedirects(response, reverse('accounts:edit_my_profile'), status_code=302)
         self.user1.refresh_from_db()
         self.assertTrue(check_password('new_pass', self.user1.password))
 
