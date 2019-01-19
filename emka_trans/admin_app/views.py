@@ -916,7 +916,7 @@ def sendMail(date):
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, to)
             msg.attach_alternative(html_content, "text/html")
-            #msg.send()
+            #msg.send() #commented not to send an email while checking test data
 
         else:
             mail=UserProfileInfo.objects.get(user_id=OrderedProducts.objects.get(id=int(list[1])).name_deliver).user.email
@@ -943,7 +943,7 @@ def sendMail(date):
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, to)
             msg.attach_alternative(html_content, "text/html")
-            #msg.send()
+            #msg.send() #commented not to send an email while checking test data
 
 
 
