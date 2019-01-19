@@ -32,13 +32,6 @@
 			<ul class="nav navbar-nav">
 				<li><a class="navbar-brand" href="{% url 'index' %}" name="index">INDEX</a></li>
 				<li><a class="navbar-link" href="{% url 'admin:index' %}" name="admin">ADMIN</a></li>
-
-				{% if user.is_authenticated %}
-					<li><a class="navbar-link" href="{% url 'logout' %} " name="logout_nav" >LOGOUT</a></li>
-				{% else %}
-				<li><a class="navbar-link" href="{% url 'accounts:register_user'  %}"  name="register_nav"  >REGISTER</a></li>
-					<li><a class="navbar-link" href="{% url 'accounts:user_login'%} " name="login_nav" >LOGIN</a></li>
-				{% endif %}
 				{% if user.is_authenticated %}
 					{% if user.is_superuser %}
 						<li><a class="navbar-link" href="{% url 'admin_app:index' %}"  name="my_profile"  >MY PROFILE</a></li>
@@ -46,6 +39,14 @@
 						<li><a class="navbar-link" href="{% url 'accounts:my_profile' %}"  name="my_profile"  >MY PROFILE</a></li>
 					{% endif %}
 				{% endif %}
+
+				{% if user.is_authenticated %}
+					<li><a class="navbar-link" href="{% url 'logout' %} " name="logout_nav" >LOGOUT</a></li>
+				{% else %}
+				<li><a class="navbar-link" href="{% url 'accounts:register_user'  %}"  name="register_nav"  >REGISTER</a></li>
+					<li><a class="navbar-link" href="{% url 'accounts:user_login'%} " name="login_nav" >LOGIN</a></li>
+				{% endif %}
+
 			</ul>
 		</div>
 	</nav>

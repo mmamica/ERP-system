@@ -41,7 +41,7 @@ class ChangePasswordView(View):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return HttpResponseRedirect(reverse('accounts:my_profile'))
+            return HttpResponseRedirect(reverse('accounts:edit_my_profile'))
         else:
             return HttpResponseRedirect(reverse('accounts:change_password'))
 
