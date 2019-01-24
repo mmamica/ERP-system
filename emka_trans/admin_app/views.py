@@ -914,7 +914,7 @@ def sendMail(date):
                                             {'user': username, 'email': email, 'date': date, 'hour': hour})  # render with dynamic value
             text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
 
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             #msg.send() #commented not to send an email while checking test data
 
@@ -941,7 +941,7 @@ def sendMail(date):
                                             {'email': email, 'date': date, 'hour': hour})  # render with dynamic value
             text_content = strip_tags(html_content)  # Strip the html tag. So people can see the pure text at least.
 
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             #msg.send() #commented not to send an email while checking test data
 
