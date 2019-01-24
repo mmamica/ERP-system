@@ -41,9 +41,10 @@ class ChangePasswordView(View):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
+
             return HttpResponseRedirect(reverse('accounts:edit_my_profile'))
         else:
-            return HttpResponseRedirect(reverse('accounts:change_password'))
+            return render(request, self.template_name, {'form': form})
 
 
 @method_decorator(login_required, name='dispatch')
